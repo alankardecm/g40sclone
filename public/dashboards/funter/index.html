@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dash Funter v2</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-content">
+        <div class="brand-lockup">
+          <img src="assets/logo-netturbo-chatgpt.png" alt="NetTurbo Telecom" class="brand-logo">
+        </div>
+        <p class="eyebrow">Carteira Comercial</p>
+        <h1>Dash Funter v2</h1>
+        <p class="hero-copy">
+          Painel standalone para analisar a carteira e cruzar contratos com itens detalhados e conexões, incluindo endereço de instalação.
+        </p>
+        <div class="hero-pills">
+          <span class="hero-pill">Carteira</span>
+          <span class="hero-pill">Contratos</span>
+          <span class="hero-pill">Conexões</span>
+          <span class="hero-pill">Endereço</span>
+          <span class="hero-pill">Vencimentos</span>
+          <span class="hero-pill">Servicos</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <label class="upload-button">
+          Carregar contratos
+          <input id="contractsFileInput" type="file" accept=".csv,text/csv">
+        </label>
+        <label class="upload-button">
+          Carregar itens
+          <input id="itemsFileInput" type="file" accept=".csv,text/csv">
+        </label>
+        <label class="upload-button">
+          Carregar conexões
+          <input id="connectionsFileInput" type="file" accept=".csv,text/csv">
+        </label>
+        <button id="exportFilteredBtn" class="secondary-button" type="button">Exportar filtros</button>
+        <button id="printPdfBtn" class="secondary-button" type="button">Gerar PDF</button>
+        <button id="resetFiltersBtn" class="secondary-button" type="button">Limpar filtros</button>
+      </div>
+    </header>
+
+    <section class="status-bar">
+      <div>
+        <span class="status-label">Base contratos</span>
+        <strong id="contractsDatasetName">Aguardando CSV</strong>
+      </div>
+      <div>
+        <span class="status-label">Base itens</span>
+        <strong id="itemsDatasetName">Aguardando CSV</strong>
+      </div>
+      <div>
+        <span class="status-label">Base conexoes</span>
+        <strong id="connectionsDatasetName">Aguardando CSV</strong>
+      </div>
+      <div>
+        <span class="status-label">Contratos exibidos</span>
+        <strong id="datasetCount">0</strong>
+      </div>
+      <div>
+        <span class="status-label">Ultima carga</span>
+        <strong id="lastLoadedAt">-</strong>
+      </div>
+    </section>
+
+    <section class="filters">
+      <label>
+        <span>Vendedor</span>
+        <select id="sellerFilter"></select>
+      </label>
+      <label>
+        <span>Status</span>
+        <select id="statusFilter"></select>
+      </label>
+      <label>
+        <span>Situacao</span>
+        <select id="situationFilter"></select>
+      </label>
+      <label>
+        <span>Servico</span>
+        <select id="serviceFilter"></select>
+      </label>
+      <label>
+        <span>Cidade</span>
+        <select id="cityFilter"></select>
+      </label>
+      <label>
+        <span>Bairro</span>
+        <select id="districtFilter"></select>
+      </label>
+      <label class="search-field">
+        <span>Busca</span>
+        <input id="searchFilter" type="search" placeholder="Cliente, contrato, servico, bairro, descricao, rua">
+      </label>
+      <label>
+        <span>Cadastro de</span>
+        <input id="createdFromFilter" type="date">
+      </label>
+      <label>
+        <span>Cadastro ate</span>
+        <input id="createdToFilter" type="date">
+      </label>
+      <label>
+        <span>Termino de</span>
+        <input id="endFromFilter" type="date">
+      </label>
+      <label>
+        <span>Termino ate</span>
+        <input id="endToFilter" type="date">
+      </label>
+    </section>
+
+    <section class="cards">
+      <article class="metric-card">
+        <span class="metric-label">Clientes unicos</span>
+        <strong id="metricClients">0</strong>
+        <p class="metric-foot">Base consolidada por contrato ativo</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Contratos ativos</span>
+        <strong id="metricContracts">0</strong>
+        <p class="metric-foot">Situacao validada pela base detalhada</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Valor da carteira</span>
+        <strong id="metricValue">R$ 0,00</strong>
+        <p class="metric-foot">Valor consolidado entre contrato e itens</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Ticket medio</span>
+        <strong id="metricAvg">R$ 0,00</strong>
+        <p class="metric-foot">Media por contrato dentro do filtro atual</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Conexoes ativas</span>
+        <strong id="metricConnections">0</strong>
+        <p class="metric-foot">Total de conexoes vinculadas</p>
+      </article>
+    </section>
+
+    <section class="executive-strip">
+      <article class="insight-card accent">
+        <span class="metric-label">Vendedor lider</span>
+        <strong id="leadSeller">-</strong>
+        <p id="leadSellerMeta">Sem dados</p>
+      </article>
+      <article class="insight-card">
+        <span class="metric-label">Status dominante</span>
+        <strong id="dominantStatus">-</strong>
+        <p id="dominantStatusMeta">Sem dados</p>
+      </article>
+      <article class="insight-card">
+        <span class="metric-label">Proximo vencimento</span>
+        <strong id="nextExpiry">-</strong>
+        <p id="nextExpiryMeta">Sem dados</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Carteira por vendedor</h2>
+          <span id="sellerRankingCaption" class="panel-caption"></span>
+        </div>
+        <div id="sellerRanking" class="ranking-list"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Distribuicao por status</h2>
+          <span class="panel-caption">Base filtrada</span>
+        </div>
+        <div id="statusDistribution" class="distribution-list"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Top servicos</h2>
+          <span class="panel-caption">Servicos mais presentes na base filtrada</span>
+        </div>
+        <div id="serviceRanking" class="ranking-list compact"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Cidades mais atendidas</h2>
+          <span class="panel-caption">Por quantidade de contratos</span>
+        </div>
+        <div id="cityRanking" class="ranking-list compact"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Vencimentos proximos</h2>
+          <span class="panel-caption">Por data de termino</span>
+        </div>
+        <div class="table-wrap small">
+          <table>
+            <thead>
+              <tr>
+                <th>Contrato</th>
+                <th>Cliente</th>
+                <th>Vence em</th>
+                <th>Termino</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="expiringTable"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Mapa de Conexoes</h2>
+          <span id="mapCaption" class="panel-caption">0 ponto(s) geolocalizado(s)</span>
+        </div>
+        <div id="mapContainer" class="map-container"></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Clientes</h2>
+        <span id="clientsTableCaption" class="panel-caption"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cod.</th>
+              <th>Cliente</th>
+              <th>Cidade</th>
+              <th>Bairro</th>
+              <th>Vendedor</th>
+              <th>Contratos</th>
+              <th>Conexoes</th>
+              <th>Valor total</th>
+            </tr>
+          </thead>
+          <tbody id="clientsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Contratos</h2>
+        <span id="contractsTableCaption" class="panel-caption"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cod. Contrato</th>
+              <th>Cliente</th>
+              <th>Servico</th>
+              <th>Tipo</th>
+              <th>Situacao</th>
+              <th>Status</th>
+              <th>Vendedor</th>
+              <th>Cidade</th>
+              <th>Termino</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody id="contractsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel detail-panel">
+      <div class="panel-head">
+        <h2>Detalhe do contrato</h2>
+        <span id="detailCaption" class="panel-caption">Selecione um contrato na tabela</span>
+      </div>
+      <div id="contractDetail" class="contract-detail empty-host"></div>
+    </section>
+  </div>
+
+  <template id="emptyStateTemplate">
+    <div class="empty-state">
+      <strong>Nenhum resultado</strong>
+      <span>Ajuste os filtros ou carregue outro CSV.</span>
+    </div>
+  </template>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app_v2.js"></script>
+</body>
+</html>

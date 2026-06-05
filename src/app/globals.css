@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f5f6f3;
+  --color-foreground: #404040;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #404040;
+
+  --color-primary: #8DC63F;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #edf5da;
+  --color-secondary-foreground: #404040;
+
+  --color-muted: #f3f4f0;
+  --color-muted-foreground: #6b7280;
+
+  --color-accent: #e8f5c8;
+  --color-accent-foreground: #404040;
+
+  --color-border: #e2e5de;
+
+  --color-neon-cyan: #8DC63F;
+  --color-neon-orange: #f59e0b;
+  --color-neon-pink: #bf6f8d;
+  --color-neon-blue: #5b90c7;
+
+  --radius-pill: 2.5rem;
+}
+
+@layer base {
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(141, 198, 63, 0.10), transparent 26%),
+      linear-gradient(180deg, #f8f9f5 0%, #eff1ea 100%);
+    color: #404040;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(64, 64, 64, 0.08);
+    border-radius: 2.5rem;
+  }
+
+  .neon-card {
+    background-color: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(141, 198, 63, 0.18);
+    border-radius: 2.5rem;
+    box-shadow: 0 24px 60px -30px rgba(64, 64, 64, 0.16);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  
+  .rounded-pill {
+    border-radius: 2.5rem;
+  }
+  
+  .pill {
+    border-radius: 2.5rem;
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 18px rgba(141, 198, 63, 0.22), 0 0 40px rgba(141, 198, 63, 0.10);
+  }
+
+  .pop-card-cyan {
+    background-color: #8DC63F;
+    color: #fff !important;
+    box-shadow: 0 15px 30px -5px rgba(141, 198, 63, 0.28);
+  }
+  
+  .pop-card-orange {
+    background-color: #d4a23a;
+    color: #fff !important;
+    box-shadow: 0 15px 30px -5px rgba(212, 162, 58, 0.24);
+  }
+  
+  .pop-card-pink {
+    background-color: #bf6f8d;
+    color: #fff !important;
+    box-shadow: 0 15px 30px -5px rgba(191, 111, 141, 0.24);
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d1d5c8;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b8c0ae;
+  }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+/* Login page — cyber green theme */
+.signin-btn:hover {
+  box-shadow: 0 0 20px rgba(172,208,0,0.2), inset 0 0 20px rgba(172,208,0,0.03);
+  border-color: #ACD000 !important;
+}
