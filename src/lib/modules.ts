@@ -36,7 +36,7 @@ export const modules: OsModule[] = [
 
   { id: 'crm',         label: 'CRM',           href: '/crm',         icon: Users2,        group: 'gestao',    status: 'active',   desc: 'Clientes, funil de vendas e negócios' },
   { id: 'okrs',        label: 'Metas & OKRs',  href: '/em-breve/okrs',        icon: Target,        group: 'gestao',    status: 'soon',   desc: 'Objetivos e resultados-chave da equipe' },
-  { id: 'comunicacao', label: 'Comunicação',   href: '/em-breve/comunicacao', icon: MessagesSquare, group: 'gestao',   status: 'soon',   desc: 'WhatsApp, mensagens e atendimento' },
+  { id: 'comunicacao', label: 'Comunicação',   href: '/comunicacao', icon: MessagesSquare, group: 'gestao',   status: 'active',   desc: 'WhatsApp, mensagens e atendimento' },
   { id: 'financeiro',  label: 'Financeiro',    href: '/em-breve/financeiro',  icon: Wallet,        group: 'gestao',    status: 'soon',   desc: 'Contas a pagar/receber e fluxo de caixa' },
   { id: 'tarefas',     label: 'Tarefas',       href: '/em-breve/tarefas',     icon: CheckSquare,   group: 'gestao',    status: 'soon',   desc: 'Rotinas de gestão e to-dos do time' },
 
