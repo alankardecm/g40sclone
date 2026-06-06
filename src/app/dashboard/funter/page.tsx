@@ -18,15 +18,15 @@ export default function FunterDashboard() {
             className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
           >
             <div className="space-y-2">
-              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.35em] text-stone-500">
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
                 <span>Dashs</span>
-                <span className="text-stone-700">/</span>
+                <span className="text-foreground">/</span>
                 <span className="text-neon-cyan">FUNTER</span>
               </div>
               <h1 className="text-4xl font-[1000] tracking-[-0.08em] uppercase leading-none">
                 Dashboard FUNTER integrada ao hub
               </h1>
-              <p className="max-w-2xl text-sm leading-relaxed text-stone-400">
+              <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                 O painel standalone foi preservado como base visual e agora vive dentro do novo hub,
                 pronto para ser evoluido para dados vindos do DataLake.
               </p>
@@ -35,7 +35,7 @@ export default function FunterDashboard() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 text-[11px] font-black uppercase tracking-[0.25em] transition-colors hover:bg-white/[0.06]"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-card/[0.03] px-5 py-3 text-[11px] font-black uppercase tracking-[0.25em] transition-colors hover:bg-card/[0.06]"
               >
                 <FileSpreadsheet className="w-4 h-4" />
                 Command Center
@@ -61,11 +61,11 @@ export default function FunterDashboard() {
             <div className="flex items-center justify-between gap-4 border-b border-white/5 px-6 py-4">
               <div className="flex items-center gap-3">
                 <Building2 className="w-5 h-5 text-neon-cyan" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                   Conteudo original preservado
                 </span>
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-600">
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">
                 CSV {'->'} DataLake {'->'} HTML
               </span>
             </div>

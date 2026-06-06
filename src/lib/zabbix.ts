@@ -107,7 +107,7 @@ export const SEVERITY_LABEL: Record<string, string> = {
 };
 
 export const SEVERITY_COLOR: Record<string, string> = {
-  '0': 'text-stone-400 bg-stone-500/10 border-stone-500/20',
+  '0': 'text-muted-foreground bg-stone-500/10 border-stone-500/20',
   '1': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
   '2': 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',
   '3': 'text-orange-400 bg-orange-500/10 border-orange-500/20',

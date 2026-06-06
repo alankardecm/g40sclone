@@ -224,7 +224,7 @@ export default function DatalakePage() {
           {/* ── Header ── */}
           <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-stone-700">
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-foreground">
                 <span>Infraestrutura</span>
                 <ChevronRight className="w-3 h-3" />
                 <span className="text-neon-cyan italic">Data Lake MySQL</span>
@@ -232,14 +232,14 @@ export default function DatalakePage() {
               <h1 className="mt-3 text-2xl sm:text-4xl font-black tracking-[-0.04em]">
                 Explorador de Tabelas
               </h1>
-              <p className="mt-1 text-sm text-stone-500">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Veja os dados disponíveis, faça preview e crie dashboards em segundos.
               </p>
             </div>
             <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto sm:shrink-0">
               <button
                 onClick={() => router.push('/dashboards')}
-                className="flex h-10 w-full items-center justify-center gap-2 rounded-2xl bg-white/[0.06] px-5 text-[9px] font-black uppercase tracking-widest text-stone-300 transition-all hover:bg-white/[0.10] sm:w-auto"
+                className="flex h-10 w-full items-center justify-center gap-2 rounded-2xl bg-card/[0.06] px-5 text-[9px] font-black uppercase tracking-widest text-stone-300 transition-all hover:bg-card/[0.10] sm:w-auto"
               >
                 <BarChart2 className="w-3.5 h-3.5" /> Meus Dashboards
               </button>
@@ -269,10 +269,10 @@ export default function DatalakePage() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className={`w-2 h-2 rounded-full ${item.accent}`} />
-                  <span className="text-[9px] font-black text-stone-500 uppercase tracking-widest">{item.label}</span>
+                  <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">{item.label}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <item.Icon className="w-5 h-5 text-stone-600 shrink-0" />
+                  <item.Icon className="w-5 h-5 text-muted-foreground shrink-0" />
                   <strong className="text-lg font-black leading-tight truncate">{item.value}</strong>
                 </div>
               </motion.div>
@@ -289,10 +289,10 @@ export default function DatalakePage() {
               <AlertCircle className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
               <div>
                 <p className="text-sm font-bold text-amber-400">Data Lake não conectado</p>
-                <p className="mt-1 text-xs text-stone-400">
+                <p className="mt-1 text-xs text-muted-foreground">
                   {overview.message || 'Configure as credenciais MySQL no .env para habilitar o Data Lake.'}
                 </p>
-                <code className="mt-2 block text-[10px] text-stone-500 font-mono">
+                <code className="mt-2 block text-[10px] text-muted-foreground font-mono">
                   MYSQL_HOST • MYSQL_DATABASE • MYSQL_USER • MYSQL_PASSWORD
                 </code>
               </div>
@@ -311,31 +311,31 @@ export default function DatalakePage() {
             <section>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-5">
                 <div>
-                  <h2 className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-600">
+                  <h2 className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
                     Tabelas disponíveis
                   </h2>
-                  <p className="mt-1 text-xs text-stone-500">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     Explore qualquer tabela e crie um dashboard com um clique.
                   </p>
                 </div>
                 <div className="flex w-full items-center gap-3 sm:w-auto">
-                  <div className="flex flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2 sm:flex-none">
-                    <Search className="w-3.5 h-3.5 text-stone-500 shrink-0" />
+                  <div className="flex flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-card/[0.04] px-4 py-2 sm:flex-none">
+                    <Search className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                     <input
                       value={catalogSearch}
                       onChange={(e) => setCatalogSearch(e.target.value)}
                       placeholder="Buscar tabela..."
-                      className="w-full bg-transparent text-sm outline-none placeholder:text-stone-600 sm:w-48"
+                      className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground sm:w-48"
                     />
                   </div>
-                  <span className="text-[10px] font-black text-stone-500 bg-white/5 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="text-[10px] font-black text-muted-foreground bg-card/5 px-3 py-1.5 rounded-xl whitespace-nowrap">
                     {filteredTables.length}/{overview.tables.length}
                   </span>
                 </div>
               </div>
 
               {filteredTables.length === 0 ? (
-                <div className="flex items-center justify-center rounded-[24px] border border-white/5 bg-card py-12 text-stone-500 text-sm">
+                <div className="flex items-center justify-center rounded-[24px] border border-white/5 bg-card py-12 text-muted-foreground text-sm">
                   Nenhuma tabela encontrada para &ldquo;{catalogSearch}&rdquo;.
                 </div>
               ) : (
@@ -365,28 +365,28 @@ export default function DatalakePage() {
                               <TrendingUp className="w-5 h-5 text-neon-cyan" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 truncate">
+                              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground truncate">
                                 {table.name}
                               </p>
                               <p className="text-sm font-black mt-0.5 leading-tight">{meta.label}</p>
                             </div>
                           </div>
                           {table.rows !== null && (
-                            <span className="text-[10px] font-mono text-stone-500 bg-white/5 px-2 py-1 rounded-xl shrink-0">
+                            <span className="text-[10px] font-mono text-muted-foreground bg-card/5 px-2 py-1 rounded-xl shrink-0">
                               {table.rows.toLocaleString('pt-BR')} rows
                             </span>
                           )}
                         </div>
 
                         {/* Description */}
-                        <p className="text-xs text-stone-400 leading-relaxed">{meta.description}</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{meta.description}</p>
 
                         {/* Focus tags */}
                         <div className="flex flex-wrap gap-1.5">
                           {meta.focus.slice(0, 4).map((f) => (
                             <span
                               key={f}
-                              className="text-[9px] font-black uppercase tracking-wide text-stone-400 bg-white/5 px-2 py-1 rounded-lg"
+                              className="text-[9px] font-black uppercase tracking-wide text-muted-foreground bg-card/5 px-2 py-1 rounded-lg"
                             >
                               {f}
                             </span>
@@ -403,7 +403,7 @@ export default function DatalakePage() {
                             className={`h-9 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                               selectedTable === table.name && activeTab === 'preview'
                                 ? 'bg-neon-cyan text-black'
-                                : 'bg-white/5 text-stone-400 hover:bg-white/10 hover:text-white'
+                                : 'bg-card/5 text-muted-foreground hover:bg-card/10 hover:text-white'
                             }`}
                           >
                             <Eye className="w-3.5 h-3.5" /> Preview
@@ -431,13 +431,13 @@ export default function DatalakePage() {
 
           {/* ── Tabs ── */}
           <section>
-            <div className="mb-6 flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl bg-white/[0.03] p-1 sm:w-fit">
+            <div className="mb-6 flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl bg-card/[0.03] p-1 sm:w-fit">
               {TABS.map(({ key, label, Icon }) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
                   className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
-                    activeTab === key ? 'bg-white/10 text-white' : 'text-stone-500 hover:text-stone-300'
+                    activeTab === key ? 'bg-card/10 text-white' : 'text-muted-foreground hover:text-stone-300'
                   }`}
                 >
                   <Icon className="w-4 h-4" /> {label}
@@ -464,23 +464,23 @@ export default function DatalakePage() {
                   <table className="w-full min-w-[560px]">
                     <thead>
                       <tr className="border-b border-white/5">
-                        <th className="text-left text-[10px] font-black text-stone-600 uppercase tracking-widest py-4 px-4">Tabela</th>
-                        <th className="text-left text-[10px] font-black text-stone-600 uppercase tracking-widest py-4 px-4">Descrição</th>
-                        <th className="text-right text-[10px] font-black text-stone-600 uppercase tracking-widest py-4 px-4">Linhas</th>
-                        <th className="text-left text-[10px] font-black text-stone-600 uppercase tracking-widest py-4 px-4">Engine</th>
-                        <th className="text-right text-[10px] font-black text-stone-600 uppercase tracking-widest py-4 px-4">Ação</th>
+                        <th className="text-left text-[10px] font-black text-muted-foreground uppercase tracking-widest py-4 px-4">Tabela</th>
+                        <th className="text-left text-[10px] font-black text-muted-foreground uppercase tracking-widest py-4 px-4">Descrição</th>
+                        <th className="text-right text-[10px] font-black text-muted-foreground uppercase tracking-widest py-4 px-4">Linhas</th>
+                        <th className="text-left text-[10px] font-black text-muted-foreground uppercase tracking-widest py-4 px-4">Engine</th>
+                        <th className="text-right text-[10px] font-black text-muted-foreground uppercase tracking-widest py-4 px-4">Ação</th>
                       </tr>
                     </thead>
                     <tbody>
                       {loading ? (
                         <tr>
-                          <td colSpan={5} className="py-10 px-4 text-center text-stone-500 text-sm">
+                          <td colSpan={5} className="py-10 px-4 text-center text-muted-foreground text-sm">
                             <RefreshCcw className="w-4 h-4 animate-spin inline-block mr-2" /> Carregando catálogo...
                           </td>
                         </tr>
                       ) : overview.tables.length === 0 ? (
                         <tr>
-                          <td colSpan={5} className="py-10 px-4 text-center text-stone-500 text-sm">
+                          <td colSpan={5} className="py-10 px-4 text-center text-muted-foreground text-sm">
                             Nenhuma tabela disponível.
                           </td>
                         </tr>
@@ -491,8 +491,8 @@ export default function DatalakePage() {
                             <tr
                               key={table.name}
                               onClick={() => { setSelectedTable(table.name); void loadPreview(table.name); }}
-                              className={`border-b border-white/5 transition-colors cursor-pointer hover:bg-white/[0.02] ${
-                                selectedTable === table.name ? 'bg-white/[0.04]' : ''
+                              className={`border-b border-white/5 transition-colors cursor-pointer hover:bg-card/[0.02] ${
+                                selectedTable === table.name ? 'bg-card/[0.04]' : ''
                               }`}
                             >
                               <td className="py-4 px-4">
@@ -500,17 +500,17 @@ export default function DatalakePage() {
                                   <TrendingUp className="w-4 h-4 shrink-0 text-neon-cyan" />
                                   <div>
                                     <span className="text-sm font-bold block">{table.name}</span>
-                                    <span className="text-[10px] text-stone-500 font-black uppercase tracking-widest">{meta.label}</span>
+                                    <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">{meta.label}</span>
                                   </div>
                                 </div>
                               </td>
-                              <td className="py-4 px-4 text-xs text-stone-400 max-w-[240px]">
+                              <td className="py-4 px-4 text-xs text-muted-foreground max-w-[240px]">
                                 <span className="line-clamp-2">{meta.description}</span>
                               </td>
                               <td className="py-4 px-4 text-right font-mono text-sm">
                                 {table.rows?.toLocaleString('pt-BR') ?? '—'}
                               </td>
-                              <td className="py-4 px-4 text-xs text-stone-400 uppercase">
+                              <td className="py-4 px-4 text-xs text-muted-foreground uppercase">
                                 {table.engine ?? '—'}
                               </td>
                               <td className="py-4 px-4 text-right">
@@ -547,7 +547,7 @@ export default function DatalakePage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-stone-600">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                     Tabela ativa
                   </label>
                   <select
@@ -568,17 +568,17 @@ export default function DatalakePage() {
                 </div>
 
                 {previewLoading ? (
-                  <div className="flex items-center justify-center gap-3 py-12 text-stone-500 text-sm">
+                  <div className="flex items-center justify-center gap-3 py-12 text-muted-foreground text-sm">
                     <RefreshCcw className="w-4 h-4 animate-spin" /> Carregando preview...
                   </div>
                 ) : !preview ? (
-                  <p className="text-sm text-stone-500 py-10 text-center">
+                  <p className="text-sm text-muted-foreground py-10 text-center">
                     Selecione uma tabela para visualizar a amostra de dados.
                   </p>
                 ) : (
                   <div className="space-y-4">
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-xs text-stone-500">
+                      <span className="text-xs text-muted-foreground">
                         Até <strong className="text-white">{preview.limit}</strong> linhas ·{' '}
                         tabela <strong className="text-neon-cyan">{preview.table}</strong> ·{' '}
                         <strong className="text-white">{preview.columns.length}</strong> colunas
@@ -594,17 +594,17 @@ export default function DatalakePage() {
 
                     <div className="overflow-x-auto rounded-2xl border border-white/5">
                       <table className="w-full text-xs min-w-[400px]">
-                        <thead className="bg-white/[0.03]">
+                        <thead className="bg-card/[0.03]">
                           <tr>
                             {preview.columns.map((column) => {
                               const sem = getColumnSemantic(preview.table, column.name);
                               return (
                                 <th
                                   key={column.name}
-                                  className="px-3 py-3 text-left font-black uppercase tracking-wider text-stone-500 whitespace-nowrap"
+                                  className="px-3 py-3 text-left font-black uppercase tracking-wider text-muted-foreground whitespace-nowrap"
                                 >
                                   {sem.label}
-                                  <span className="block font-mono text-[9px] normal-case tracking-normal text-stone-600 mt-0.5">
+                                  <span className="block font-mono text-[9px] normal-case tracking-normal text-muted-foreground mt-0.5">
                                     {column.name}{column.key === 'PRI' ? ' [PK]' : ''}
                                   </span>
                                 </th>
@@ -614,7 +614,7 @@ export default function DatalakePage() {
                         </thead>
                         <tbody>
                           {preview.rows.map((row, index) => (
-                            <tr key={index} className="border-t border-white/5 hover:bg-white/[0.02]">
+                            <tr key={index} className="border-t border-white/5 hover:bg-card/[0.02]">
                               {preview.columns.map((column) => (
                                 <td
                                   key={column.name}
@@ -629,7 +629,7 @@ export default function DatalakePage() {
                       </table>
                     </div>
 
-                    <p className="text-[10px] text-stone-600 uppercase tracking-widest">
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
                       Read-only · Limite: {preview.limit} linhas
                     </p>
                   </div>
@@ -650,7 +650,7 @@ export default function DatalakePage() {
                 </div>
 
                 <div className="mb-5 space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-stone-600">Atalhos rápidos</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Atalhos rápidos</p>
                   <div className="flex flex-wrap gap-2">
                     {DEFAULT_TABLE_PROMPTS.map((p) => (
                       <button
@@ -659,7 +659,7 @@ export default function DatalakePage() {
                         className={`text-[10px] font-bold px-3 py-2 rounded-xl transition-colors text-left ${
                           dashboardPrompt === p
                             ? 'bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30'
-                            : 'bg-white/5 text-stone-400 hover:bg-white/10 hover:text-white border border-transparent'
+                            : 'bg-card/5 text-muted-foreground hover:bg-card/10 hover:text-white border border-transparent'
                         }`}
                       >
                         {p}
@@ -693,14 +693,14 @@ export default function DatalakePage() {
 
                 {dashboardSuggestions && (
                   <div className="mt-6 space-y-4">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-stone-600">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                       Gerado por: {dashboardSuggestions.source === 'ai' ? 'IA' : 'Heuristica'}
                     </p>
                     <div className="grid gap-4 sm:grid-cols-2">
                       {dashboardSuggestions.suggestions.map((suggestion) => (
                         <div
                           key={`${suggestion.title}-${suggestion.table}`}
-                          className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 flex flex-col gap-3"
+                          className="rounded-2xl border border-white/5 bg-card/[0.02] p-5 flex flex-col gap-3"
                         >
                           <div className="flex items-start justify-between gap-3">
                             <h4 className="text-sm font-black leading-tight">{suggestion.title}</h4>
@@ -712,7 +712,7 @@ export default function DatalakePage() {
                             <span className="text-[9px] uppercase tracking-widest font-black text-neon-cyan bg-neon-cyan/10 px-2 py-1 rounded-lg">
                               {suggestion.chartType}
                             </span>
-                            <span className="text-[9px] uppercase tracking-widest font-black text-stone-500 bg-white/5 px-2 py-1 rounded-lg">
+                            <span className="text-[9px] uppercase tracking-widest font-black text-muted-foreground bg-card/5 px-2 py-1 rounded-lg">
                               {suggestion.table}
                             </span>
                             {suggestion.aggregation && (
@@ -721,7 +721,7 @@ export default function DatalakePage() {
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-stone-400 leading-relaxed">{suggestion.rationale}</p>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{suggestion.rationale}</p>
                           <button
                             onClick={() => void createDashboardFromSuggestion(suggestion)}
                             disabled={creatingDash === suggestion.table}

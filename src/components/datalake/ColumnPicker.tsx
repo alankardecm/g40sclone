@@ -100,7 +100,7 @@ export default function ColumnPicker({
         disabled={disabled}
         onClick={() => !disabled && setOpen((o) => !o)}
         className={[
-          'w-full rounded-2xl border px-4 py-3 text-sm text-left flex items-center justify-between gap-3 transition-all bg-white',
+          'w-full rounded-2xl border px-4 py-3 text-sm text-left flex items-center justify-between gap-3 transition-all bg-card',
           open ? 'border-[#379890]/50 ring-1 ring-[#379890]/20' : 'border-[#143230]/10',
           disabled
             ? 'opacity-50 cursor-not-allowed'
@@ -114,13 +114,13 @@ export default function ColumnPicker({
                 {selectedSemantic?.label || value}
               </span>
               {typeTag && (
-                <span className="shrink-0 rounded-full bg-[#143230]/6 px-2 py-0.5 text-[10px] font-black uppercase text-stone-500">
+                <span className="shrink-0 rounded-full bg-[#143230]/6 px-2 py-0.5 text-[10px] font-black uppercase text-muted-foreground">
                   {typeTag}
                 </span>
               )}
             </>
           ) : (
-            <span className="text-stone-400">{placeholder}</span>
+            <span className="text-muted-foreground">{placeholder}</span>
           )}
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
@@ -131,27 +131,27 @@ export default function ColumnPicker({
                 e.stopPropagation();
                 onChange('');
               }}
-              className="rounded-full p-0.5 text-stone-400 hover:bg-[#143230]/8 hover:text-stone-600 transition-colors"
+              className="rounded-full p-0.5 text-muted-foreground hover:bg-[#143230]/8 hover:text-muted-foreground transition-colors"
             >
               <X className="w-3 h-3" />
             </span>
           )}
           <ChevronDown
-            className={`w-4 h-4 text-stone-400 transition-transform ${open ? 'rotate-180' : ''}`}
+            className={`w-4 h-4 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`}
           />
         </div>
       </button>
 
       {open && (
-        <div className="absolute z-50 top-full mt-1.5 left-0 right-0 rounded-2xl border border-[#143230]/10 bg-white shadow-[0_20px_50px_-16px_rgba(20,50,48,0.22)] overflow-hidden">
+        <div className="absolute z-50 top-full mt-1.5 left-0 right-0 rounded-2xl border border-[#143230]/10 bg-card shadow-[0_20px_50px_-16px_rgba(20,50,48,0.22)] overflow-hidden">
           <div className="border-b border-[#143230]/8 px-3 py-2.5 flex items-center gap-2">
-            <Search className="w-4 h-4 text-stone-400 shrink-0" />
+            <Search className="w-4 h-4 text-muted-foreground shrink-0" />
             <input
               autoFocus
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar coluna..."
-              className="w-full text-sm outline-none placeholder:text-stone-400 bg-transparent"
+              className="w-full text-sm outline-none placeholder:text-muted-foreground bg-transparent"
             />
           </div>
 
@@ -168,7 +168,7 @@ export default function ColumnPicker({
                   'w-full px-4 py-2.5 text-left text-sm transition-colors border-b border-[#143230]/5',
                   !value
                     ? 'bg-[#379890]/8 text-[#2c7f78] font-bold'
-                    : 'text-stone-500 hover:bg-[#f7f8f4]',
+                    : 'text-muted-foreground hover:bg-[#f7f8f4]',
                 ].join(' ')}
               >
                 {nullLabel}
@@ -211,14 +211,14 @@ export default function ColumnPicker({
                         >
                           {sem.label}
                         </p>
-                        <p className="font-mono text-[10px] text-stone-400 truncate">{col.name}</p>
+                        <p className="font-mono text-[10px] text-muted-foreground truncate">{col.name}</p>
                       </div>
                       <span
                         className={[
                           'shrink-0 rounded-full px-2 py-0.5 text-[10px] font-black uppercase',
                           active
                             ? 'bg-[#379890]/20 text-[#2c7f78]'
-                            : 'bg-[#143230]/6 text-stone-500',
+                            : 'bg-[#143230]/6 text-muted-foreground',
                         ].join(' ')}
                       >
                         {colType}
@@ -230,7 +230,7 @@ export default function ColumnPicker({
             ))}
 
             {groups.length === 0 && (
-              <div className="px-4 py-8 text-center text-sm text-stone-400">
+              <div className="px-4 py-8 text-center text-sm text-muted-foreground">
                 Nenhuma coluna encontrada
               </div>
             )}

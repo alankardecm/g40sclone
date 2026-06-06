@@ -30,11 +30,11 @@ export default function AIChat() {
            <h2 className="text-xl font-black tracking-tighter text-foreground uppercase flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-neon-cyan" /> Terminal de IA
            </h2>
-           <span className="text-[9px] font-black text-stone-600 uppercase tracking-widest">Base de dados 46k documentos</span>
+           <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Base de dados 46k documentos</span>
         </div>
         <div className="flex items-center gap-3">
            <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-neon-cyan animate-pulse' : 'bg-green-500'}`} />
-           <span className="text-[9px] font-black text-stone-600 uppercase tracking-widest">{isLoading ? 'Processando' : 'Online'}</span>
+           <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">{isLoading ? 'Processando' : 'Online'}</span>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ export default function AIChat() {
       >
         {messages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center opacity-30 px-10">
-             <Bot className="w-12 h-12 text-stone-600 mb-6" strokeWidth={1.5} />
+             <Bot className="w-12 h-12 text-muted-foreground mb-6" strokeWidth={1.5} />
              <p className="text-[11px] font-black uppercase tracking-[0.2em] leading-relaxed">
                 Faça uma pergunta operacional sobre a base Netturbo.<br/> 
                 <span className="text-neon-cyan">Ex: &quot;Quantos contratos em Sumaré?&quot;</span>
@@ -75,7 +75,7 @@ export default function AIChat() {
                   {m.content}
                   {isAi && (
                     <div className="flex items-center gap-3 mt-6 pt-4 border-t border-white/5">
-                      <div className="flex items-center gap-2 text-[8px] font-black text-stone-600 uppercase tracking-widest">
+                      <div className="flex items-center gap-2 text-[8px] font-black text-muted-foreground uppercase tracking-widest">
                          <Database className="w-3.5 h-3.5" /> Consultada em 4ms
                       </div>
                       <div className="flex items-center gap-2 text-[8px] font-black text-neon-cyan/50 uppercase tracking-widest">
@@ -105,7 +105,7 @@ export default function AIChat() {
           value={input}
           onChange={handleInputChange}
           placeholder="Pergunta operacional..."
-          className="w-full h-16 pl-8 pr-16 rounded-pill bg-background border border-white/10 text-sm font-bold text-foreground placeholder:text-stone-700 focus:outline-none focus:border-neon-cyan/40 focus:ring-4 focus:ring-neon-cyan/5 transition-all shadow-inner"
+          className="w-full h-16 pl-8 pr-16 rounded-pill bg-background border border-white/10 text-sm font-bold text-foreground placeholder:text-foreground focus:outline-none focus:border-neon-cyan/40 focus:ring-4 focus:ring-neon-cyan/5 transition-all shadow-inner"
         />
         <button
           type="submit"

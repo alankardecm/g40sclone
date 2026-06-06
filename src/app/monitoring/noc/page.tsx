@@ -181,16 +181,16 @@ export default function Noc360Dashboard() {
         <header className="flex justify-between items-center mb-10">
           <div>
             <h1 className="text-3xl font-black tracking-tight uppercase">
-              {process.env.NEXT_PUBLIC_APP_NAME || 'G4OS'} HUB | <span className="text-blue-400">NOC 360</span>
+              {process.env.NEXT_PUBLIC_APP_NAME || 'AM OS'} HUB | <span className="text-blue-400">NOC 360</span>
             </h1>
-            <p className="text-slate-500 text-sm mt-1 uppercase tracking-widest font-bold">
+            <p className="text-muted-foreground text-sm mt-1 uppercase tracking-widest font-bold">
               Observabilidade Correlacionada (Infra + Social)
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             {lastSync && (
-              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                 Sync: {lastSync.toLocaleTimeString()}
               </span>
             )}
@@ -218,11 +218,11 @@ export default function Noc360Dashboard() {
             <div className="bg-slate-900/50 rounded-3xl border border-slate-800 p-6">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50 text-center">
-                  <p className="text-[9px] font-bold text-slate-500 uppercase mb-1">Alertas Ativos</p>
+                  <p className="text-[9px] font-bold text-muted-foreground uppercase mb-1">Alertas Ativos</p>
                   <p className="text-2xl font-black">{zabbixSummary?.totalProblems ?? '--'}</p>
                 </div>
                 <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50 text-center">
-                  <p className="text-[9px] font-bold text-slate-500 uppercase mb-1">Hosts Down</p>
+                  <p className="text-[9px] font-bold text-muted-foreground uppercase mb-1">Hosts Down</p>
                   <p className={`text-2xl font-black ${zabbixSummary?.hostsDown ? 'text-red-500' : 'text-green-500'}`}>
                     {zabbixSummary?.hostsDown ?? '--'}
                   </p>
@@ -230,7 +230,7 @@ export default function Noc360Dashboard() {
               </div>
 
               <div className="space-y-3">
-                <p className="text-[10px] font-bold text-slate-500 uppercase px-1">Incidentes Graves</p>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase px-1">Incidentes Graves</p>
                 {problems.length === 0 ? (
                   <div className="flex items-center gap-2 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl text-emerald-400 text-xs font-bold">
                     <CheckCircle size={16} /> Sem problemas graves detectados.
@@ -262,13 +262,13 @@ export default function Noc360Dashboard() {
             <div className="bg-slate-900/50 rounded-3xl border border-slate-800 p-6">
                <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50 text-center">
-                  <p className="text-[9px] font-bold text-slate-500 uppercase mb-1">Negatividade</p>
+                  <p className="text-[9px] font-bold text-muted-foreground uppercase mb-1">Negatividade</p>
                   <p className={`text-2xl font-black ${waInsight?.negative ? 'text-red-400' : 'text-green-400'}`}>
                     {waInsight?.negative ?? '--'}
                   </p>
                 </div>
                 <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50 text-center">
-                  <p className="text-[9px] font-bold text-slate-500 uppercase mb-1">Urgências</p>
+                  <p className="text-[9px] font-bold text-muted-foreground uppercase mb-1">Urgências</p>
                   <p className={`text-2xl font-black ${waInsight?.urgent ? 'text-orange-400' : 'text-green-400'}`}>
                     {waInsight?.urgent ?? '--'}
                   </p>
@@ -276,7 +276,7 @@ export default function Noc360Dashboard() {
               </div>
 
               <div className="space-y-3">
-                <p className="text-[10px] font-bold text-slate-500 uppercase px-1">Grupos sob Tensão</p>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase px-1">Grupos sob Tensão</p>
                 {waConversations.filter(c => c.negative_count > 0).length === 0 ? (
                   <div className="flex items-center gap-2 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl text-emerald-400 text-xs font-bold">
                     <CheckCircle size={16} /> Clima operacional positivo.
@@ -337,12 +337,12 @@ export default function Noc360Dashboard() {
               <div className="space-y-6">
                 <div className="bg-slate-900/50 p-5 rounded-3xl border border-slate-800/50">
                   <div className="flex items-center justify-between mb-4">
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Impacto em Clientes (Correlacionado)</p>
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Impacto em Clientes (Correlacionado)</p>
                     <span className="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full font-bold">{correlations.length} incidentes</span>
                   </div>
                   
                   {correlations.length === 0 ? (
-                    <p className="text-sm text-slate-500 italic py-4 text-center">Nenhuma correlação crítica detectada nas últimas 4 horas.</p>
+                    <p className="text-sm text-muted-foreground italic py-4 text-center">Nenhuma correlação crítica detectada nas últimas 4 horas.</p>
                   ) : (
                     <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                       {correlations.map((inc, i) => (
@@ -351,7 +351,7 @@ export default function Noc360Dashboard() {
                             <p className="text-xs font-black text-blue-400 uppercase tracking-tight truncate flex-1">{inc.zabbixProblem.name}</p>
                             <span className="text-[10px] bg-red-500 text-white px-2 py-0.5 rounded-md font-black">{inc.impactScore}%</span>
                           </div>
-                          <p className="text-[10px] text-slate-500 font-bold mb-3">@ {inc.zabbixProblem.hosts?.[0]?.name}</p>
+                          <p className="text-[10px] text-muted-foreground font-bold mb-3">@ {inc.zabbixProblem.hosts?.[0]?.name}</p>
                           
                           <div className="space-y-2">
                             {inc.relatedMessages.slice(0, 2).map((msg, mi) => (
@@ -377,14 +377,14 @@ export default function Noc360Dashboard() {
                   <div className="flex items-center gap-3">
                     <TrendingUp size={16} className="text-green-400" />
                     <div>
-                      <p className="text-[9px] font-bold text-slate-500 uppercase">Uptime</p>
+                      <p className="text-[9px] font-bold text-muted-foreground uppercase">Uptime</p>
                       <p className="text-xs font-bold">99.8%</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <TrendingDown size={16} className="text-red-400" />
                     <div>
-                      <p className="text-[9px] font-bold text-slate-500 uppercase">Latency</p>
+                      <p className="text-[9px] font-bold text-muted-foreground uppercase">Latency</p>
                       <p className="text-xs font-bold">+12ms</p>
                     </div>
                   </div>
@@ -405,7 +405,7 @@ const AlertItem = ({ severity, title, time, host }: AlertItemProps) => (
     <div className="min-w-0">
       <p className="text-xs font-black uppercase tracking-tight truncate">{title}</p>
       <div className="flex items-center gap-2 mt-1">
-        <span className="text-[10px] text-slate-600 font-bold uppercase">{time}</span>
+        <span className="text-[10px] text-muted-foreground font-bold uppercase">{time}</span>
         <span className="text-[10px] text-blue-400/60 font-medium truncate">@ {host}</span>
       </div>
     </div>
@@ -415,7 +415,7 @@ const AlertItem = ({ severity, title, time, host }: AlertItemProps) => (
 const SocialInsight = ({ group, summary, urgency }: SocialInsightProps) => (
   <div className="p-4 bg-slate-950/50 rounded-2xl border border-slate-800/50 transition-hover hover:border-slate-700">
     <div className="flex justify-between items-center mb-2">
-      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 truncate">{group}</span>
+      <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground truncate">{group}</span>
       <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold uppercase ${urgency === 'Alta' ? 'bg-red-500/20 text-red-400' : 'bg-orange-500/20 text-orange-400'}`}>
         {urgency}
       </span>

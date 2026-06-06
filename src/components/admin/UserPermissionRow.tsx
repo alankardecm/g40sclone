@@ -32,7 +32,7 @@ function initials(name: string): string {
 }
 
 const AVATAR_COLORS = [
-  '#8DC63F', '#3b82f6', '#8b5cf6', '#f59e0b',
+  '#3B82F6', '#3b82f6', '#8b5cf6', '#f59e0b',
   '#ec4899', '#14b8a6', '#f97316', '#06b6d4',
 ]
 
@@ -106,7 +106,7 @@ export function UserPermissionRow({ user, isSelf }: Props) {
   const isPreRegistered = !!user.preRegistered
 
   return (
-    <tr className="border-b border-gray-100 hover:bg-[#f9faf7] transition-colors group">
+    <tr className="border-b border-border hover:bg-[#f9faf7] transition-colors group">
 
       {/* Usuário */}
       <td className="py-4 px-5 min-w-[220px]">
@@ -121,8 +121,8 @@ export function UserPermissionRow({ user, isSelf }: Props) {
             }
           </div>
           <div className="min-w-0">
-            <p className="text-[12px] font-bold text-[#404040] truncate">{user.name}</p>
-            <p className="text-[10px] text-gray-400 truncate">{user.email}</p>
+            <p className="text-[12px] font-bold text-[#E6EAF3] truncate">{user.name}</p>
+            <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
           </div>
         </div>
       </td>
@@ -132,7 +132,7 @@ export function UserPermissionRow({ user, isSelf }: Props) {
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-1">
             {isSuperadmin ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#8DC63F]/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-[#7ab030]">
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#3B82F6]/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-[#2563EB]">
                 Owner
               </span>
             ) : currentRole === 'admin' ? (
@@ -140,7 +140,7 @@ export function UserPermissionRow({ user, isSelf }: Props) {
                 Admin
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-gray-500">
+              <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
                 Usuário
               </span>
             )}
@@ -168,8 +168,8 @@ export function UserPermissionRow({ user, isSelf }: Props) {
             <span className="text-[9px] text-amber-500 font-bold">Aguardando 1º login</span>
           ) : (
             <div className="flex items-center gap-1">
-              <span className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${isOnline ? 'bg-[#8DC63F] animate-pulse' : 'bg-gray-300'}`} />
-              <span className="text-[9px] text-gray-400 font-medium">{relativeTime(user.lastLogin)}</span>
+              <span className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${isOnline ? 'bg-[#3B82F6] animate-pulse' : 'bg-gray-300'}`} />
+              <span className="text-[9px] text-muted-foreground font-medium">{relativeTime(user.lastLogin)}</span>
             </div>
           )}
         </div>
@@ -178,10 +178,10 @@ export function UserPermissionRow({ user, isSelf }: Props) {
       {/* Dashboard — 3 estados + botão de tabelas */}
       <td className="py-4 px-3 text-center min-w-[130px]">
         {isSuperadmin ? (
-          <span className="text-[10px] font-black text-[#8DC63F] uppercase tracking-wide">Tudo</span>
+          <span className="text-[10px] font-black text-[#3B82F6] uppercase tracking-wide">Tudo</span>
         ) : (
           <div className="flex flex-col items-center gap-1.5">
-            <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden text-[9px] font-black uppercase tracking-wide">
+            <div className="inline-flex rounded-lg border border-border overflow-hidden text-[9px] font-black uppercase tracking-wide">
               {(['false', 'view', 'edit'] as const).map((val) => {
                 const active = String(pages.dashboards) === val
                 return (
@@ -192,11 +192,11 @@ export function UserPermissionRow({ user, isSelf }: Props) {
                     className={`px-2 py-1.5 transition-colors ${
                       active
                         ? val === 'false'
-                          ? 'bg-gray-200 text-gray-500'
+                          ? 'bg-muted text-muted-foreground'
                           : val === 'view'
                             ? 'bg-blue-500 text-white'
-                            : 'bg-[#8DC63F] text-white'
-                        : 'bg-white text-gray-300 hover:bg-gray-50'
+                            : 'bg-[#3B82F6] text-white'
+                        : 'bg-card text-gray-300 hover:bg-background'
                     } disabled:cursor-not-allowed`}
                   >
                     {val === 'false' ? '—' : val === 'view' ? 'VER' : 'EDI'}
@@ -207,7 +207,7 @@ export function UserPermissionRow({ user, isSelf }: Props) {
             {pages.dashboards && (
               <button
                 onClick={() => setShowTableModal(true)}
-                className="text-[9px] font-black uppercase tracking-wide text-[#8DC63F] hover:underline"
+                className="text-[9px] font-black uppercase tracking-wide text-[#3B82F6] hover:underline"
               >
                 📋 {(pages.dashboardTables ?? []).length} tabela{(pages.dashboardTables ?? []).length !== 1 ? 's' : ''}
               </button>
@@ -235,7 +235,7 @@ export function UserPermissionRow({ user, isSelf }: Props) {
         return (
           <td key={key} className="py-4 px-3 text-center">
             {isSuperadmin ? (
-              <span className="inline-block h-2 w-2 rounded-full bg-[#8DC63F]" />
+              <span className="inline-block h-2 w-2 rounded-full bg-[#3B82F6]" />
             ) : (
               <button
                 disabled={saving === key}
@@ -243,12 +243,12 @@ export function UserPermissionRow({ user, isSelf }: Props) {
                 title={label}
                 className={`relative inline-flex h-7 w-7 items-center justify-center rounded-lg transition-all duration-150 ${
                   enabled
-                    ? 'bg-[#8DC63F]/15 text-[#7ab030] hover:bg-[#8DC63F]/25'
-                    : 'bg-gray-100 text-gray-300 hover:bg-gray-200'
+                    ? 'bg-[#3B82F6]/15 text-[#2563EB] hover:bg-[#3B82F6]/25'
+                    : 'bg-muted text-gray-300 hover:bg-muted'
                 } disabled:cursor-not-allowed`}
               >
                 {saving === key
-                  ? <span className="h-3 w-3 rounded-full border-2 border-gray-300 border-t-[#8DC63F] animate-spin" />
+                  ? <span className="h-3 w-3 rounded-full border-2 border-border border-t-[#3B82F6] animate-spin" />
                   : <Icon className="h-3.5 w-3.5" strokeWidth={enabled ? 2.5 : 1.5} />
                 }
               </button>

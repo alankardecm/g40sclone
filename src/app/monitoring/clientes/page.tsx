@@ -61,7 +61,7 @@ function formatTime(d: Date): string {
 function availLabel(avail: string) {
   if (avail === '1') return { label: 'Online', cls: 'text-green-400 border-green-500/30 bg-green-500/8' };
   if (avail === '2') return { label: 'Offline', cls: 'text-red-400 border-red-500/30 bg-red-500/8' };
-  return { label: 'Desconhecido', cls: 'text-stone-400 border-stone-500/20 bg-stone-500/6' };
+  return { label: 'Desconhecido', cls: 'text-muted-foreground border-stone-500/20 bg-stone-500/6' };
 }
 
 function severityBadgeClass(sev: string) {
@@ -77,7 +77,7 @@ function clientBorderClass(client: TopClient) {
   if (client.available === '2') return 'border-red-500/30 bg-red-500/5';
   if (client.maxSeverity >= 4) return 'border-red-500/20 bg-red-500/4';
   if (client.problems.length > 0) return 'border-orange-500/20 bg-orange-500/4';
-  return 'border-white/6 bg-white/[0.02]';
+  return 'border-white/6 bg-card/[0.02]';
 }
 
 export default function TopClientesPage() {
@@ -130,26 +130,26 @@ export default function TopClientesPage() {
           {/* ── HEADER ─────────────────────────────────────────────────── */}
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-500">
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
                 Monitoramento · Clientes
               </p>
               <h1 className="mt-2 text-3xl font-[950] tracking-[-0.05em] uppercase flex items-center gap-3">
                 <Star className="w-7 h-7 text-amber-400" fill="currentColor" />
                 TOP Corporativo
               </h1>
-              <p className="mt-1 text-sm text-stone-400">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Clientes CLIENTE-TOP-CORPORATIVO — status e alarmes em tempo real.
               </p>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
               {lastUpdate && (
-                <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">
+                <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-card/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                   <Clock className="w-3 h-3" />
                   {formatTime(lastUpdate)}
                 </span>
               )}
-              <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">
+              <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-card/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 <RefreshCw className="w-3 h-3" />
                 Auto · 60s
               </span>
@@ -168,7 +168,7 @@ export default function TopClientesPage() {
 
           {/* ── LOADING ─────────────────────────────────────────────────── */}
           {loading && (
-            <div className="flex items-center gap-3 text-stone-500 text-sm py-8">
+            <div className="flex items-center gap-3 text-muted-foreground text-sm py-8">
               <div className="w-4 h-4 border-2 border-stone-600 border-t-neon-cyan rounded-full animate-spin" />
               Consultando Zabbix...
             </div>
@@ -180,28 +180,28 @@ export default function TopClientesPage() {
               <div className="rounded-[22px] border border-amber-500/20 bg-amber-500/5 p-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-amber-400/80">Monitorados</p>
                 <p className="mt-3 text-4xl font-[1000] tracking-[-0.06em] text-amber-400">{stats.total}</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">TOP corp</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">TOP corp</p>
               </div>
-              <div className={`rounded-[22px] border p-4 ${stats.withAlarms > 0 ? 'border-orange-500/25 bg-orange-500/5' : 'border-white/5 bg-white/[0.02]'}`}>
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">Com alarmes</p>
-                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.withAlarms > 0 ? 'text-orange-400' : 'text-stone-600'}`}>
+              <div className={`rounded-[22px] border p-4 ${stats.withAlarms > 0 ? 'border-orange-500/25 bg-orange-500/5' : 'border-white/5 bg-card/[0.02]'}`}>
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">Com alarmes</p>
+                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.withAlarms > 0 ? 'text-orange-400' : 'text-muted-foreground'}`}>
                   {stats.withAlarms}
                 </p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">ativos</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">ativos</p>
               </div>
-              <div className={`rounded-[22px] border p-4 ${stats.offline > 0 ? 'border-red-500/20 bg-red-500/5' : 'border-white/5 bg-white/[0.02]'}`}>
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">Offline</p>
-                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.offline > 0 ? 'text-red-400' : 'text-stone-600'}`}>
+              <div className={`rounded-[22px] border p-4 ${stats.offline > 0 ? 'border-red-500/20 bg-red-500/5' : 'border-white/5 bg-card/[0.02]'}`}>
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">Offline</p>
+                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.offline > 0 ? 'text-red-400' : 'text-muted-foreground'}`}>
                   {stats.offline}
                 </p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">inacessíveis</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">inacessíveis</p>
               </div>
-              <div className={`rounded-[22px] border p-4 ${stats.withDisaster > 0 ? 'border-neon-pink/25 bg-neon-pink/5' : 'border-white/5 bg-white/[0.02]'}`}>
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">Desastres</p>
-                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.withDisaster > 0 ? 'text-neon-pink' : 'text-stone-600'}`}>
+              <div className={`rounded-[22px] border p-4 ${stats.withDisaster > 0 ? 'border-neon-pink/25 bg-neon-pink/5' : 'border-white/5 bg-card/[0.02]'}`}>
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">Desastres</p>
+                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${stats.withDisaster > 0 ? 'text-neon-pink' : 'text-muted-foreground'}`}>
                   {stats.withDisaster}
                 </p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">severity 5</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">severity 5</p>
               </div>
             </div>
           )}
@@ -226,7 +226,7 @@ export default function TopClientesPage() {
           {/* ── LISTA DE CLIENTES ────────────────────────────────────────── */}
           {!loading && clients.length > 0 && (
             <div className="flex flex-col gap-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                 {clients.length} cliente{clients.length !== 1 ? 's' : ''} · ordenado por risco
               </p>
 
@@ -251,7 +251,7 @@ export default function TopClientesPage() {
                           {avail.label}
                         </span>
                         {client.problems.length > 0 && (
-                          <span className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">
+                          <span className="rounded-full border border-white/8 bg-card/[0.04] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                             {client.problems.length} alarme{client.problems.length !== 1 ? 's' : ''}
                           </span>
                         )}
@@ -303,7 +303,7 @@ export default function TopClientesPage() {
                                 {p.name}
                               </span>
                             </div>
-                            <span className="shrink-0 flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.15em] text-stone-500">
+                            <span className="shrink-0 flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">
                               <Clock className="w-3 h-3" />
                               {duration(p.clock)}
                             </span>
@@ -313,7 +313,7 @@ export default function TopClientesPage() {
                     )}
 
                     {/* linha 3: host técnico */}
-                    <p className="text-[10px] font-mono text-stone-600">
+                    <p className="text-[10px] font-mono text-muted-foreground">
                       {client.host}
                     </p>
                   </div>
@@ -324,8 +324,8 @@ export default function TopClientesPage() {
 
           {/* ── FOOTER ──────────────────────────────────────────────────── */}
           {!loading && !error && stats && (
-            <div className="flex items-center justify-between gap-4 rounded-[18px] border border-white/5 bg-white/[0.02] px-5 py-3 flex-wrap">
-              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-stone-600">
+            <div className="flex items-center justify-between gap-4 rounded-[18px] border border-white/5 bg-card/[0.02] px-5 py-3 flex-wrap">
+              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 <span className="flex items-center gap-1.5">
                   <Star className="w-3 h-3 text-amber-500" fill="currentColor" />
                   {stats.total} TOP Corp monitorados
@@ -349,7 +349,7 @@ export default function TopClientesPage() {
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-600 flex items-center gap-1.5">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-1.5">
                 <Activity className="w-3 h-3" />
                 Zabbix · Monitoramento contínuo
               </span>

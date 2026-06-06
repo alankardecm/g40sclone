@@ -176,7 +176,7 @@ const openRouterClient = openRouterApiKey
     baseURL: 'https://openrouter.ai/api/v1',
     defaultHeaders: {
       'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || process.env.HUB_PUBLIC_URL || 'http://localhost:4100',
-      'X-Title': process.env.NEXT_PUBLIC_APP_NAME || 'G4OS',
+      'X-Title': process.env.NEXT_PUBLIC_APP_NAME || 'AM OS',
     },
   })
   : null;

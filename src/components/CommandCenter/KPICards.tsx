@@ -108,7 +108,7 @@ export default function KPICards() {
           transition={{ duration: 0.5, delay: i * 0.1 }}
           className={`${kpi.bg} rounded-pill p-12 relative overflow-hidden group cursor-pointer hover:scale-[1.02] transition-transform active:scale-95 shadow-2xl`}
         >
-          <div className="absolute top-8 right-8 w-16 h-16 rounded-[24px] bg-white/20 backdrop-blur-md flex items-center justify-center shadow-inner group-hover:rotate-12 transition-transform duration-500">
+          <div className="absolute top-8 right-8 w-16 h-16 rounded-[24px] bg-card/20 backdrop-blur-md flex items-center justify-center shadow-inner group-hover:rotate-12 transition-transform duration-500">
             <kpi.icon className="w-8 h-8 text-black/40" strokeWidth={3} />
           </div>
           

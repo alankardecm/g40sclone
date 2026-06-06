@@ -79,7 +79,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
       animate={{ opacity: isDragging ? 0.5 : 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       onClick={() => !viewMode && onInspect?.(widget)}
-      className={`flex flex-col overflow-hidden rounded-[24px] border bg-white/95 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.28)] transition-shadow ${
+      className={`flex flex-col overflow-hidden rounded-[24px] border bg-card/95 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.28)] transition-shadow ${
         isDragging ? 'ring-1 ring-[#379890]/30 shadow-2xl shadow-[#379890]/20' : ''
       } ${viewMode ? 'border-[#143230]/6' : 'border-[#143230]/8'}`}
     >
@@ -89,13 +89,13 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
         style={{ background: `linear-gradient(90deg, ${accentColor}cc 0%, ${accentColor}22 100%)` }}
       />
 
-      <div className={`flex items-start gap-3 border-b border-[#143230]/6 px-5 py-4 ${viewMode ? 'bg-white' : 'bg-[#f9faf7]'}`}>
+      <div className={`flex items-start gap-3 border-b border-[#143230]/6 px-5 py-4 ${viewMode ? 'bg-card' : 'bg-[#f9faf7]'}`}>
         {/* Drag handle — edit mode apenas */}
         {!viewMode && (
           <div
             {...dragHandleProps}
             onClick={(event) => event.stopPropagation()}
-            className="cursor-grab shrink-0 text-stone-400 transition-colors hover:text-[#143230] active:cursor-grabbing mt-0.5"
+            className="cursor-grab shrink-0 text-muted-foreground transition-colors hover:text-[#143230] active:cursor-grabbing mt-0.5"
             title="Arrastar"
           >
             <GripVertical className="h-4 w-4" />
@@ -114,14 +114,14 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
           <p className={`truncate font-black text-[#143230] ${viewMode ? 'text-base' : 'text-sm'}`}>
             {widget.title}
           </p>
-          <p className="truncate text-[10px] font-black uppercase tracking-[0.15em] text-stone-500 mt-0.5">
+          <p className="truncate text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground mt-0.5">
             {getTableSemantic(widget.table).label}
             {widget.xColumn ? ` · ${getColumnSemantic(widget.table, widget.xColumn).label}` : ' · card de metrica'}
             {widget.filterColumn && widget.filterValue ? ` · ${getColumnSemantic(widget.table, widget.filterColumn).label}: ${widget.filterValue}` : ''}
           </p>
           {!viewMode && (
             <>
-              <p className="truncate font-mono text-[9px] text-stone-400">
+              <p className="truncate font-mono text-[9px] text-muted-foreground">
                 {widget.table}
                 {widget.xColumn ? ` · ${widget.xColumn}` : ''}
                 {widget.dateColumn ? ` · periodo: ${widget.dateColumn}` : ''}
@@ -140,7 +140,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
               void fetchData();
             }}
             disabled={loading}
-            className="flex h-8 w-8 items-center justify-center rounded-xl text-stone-500 transition-all hover:bg-[#379890]/10 hover:text-[#379890]"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-muted-foreground transition-all hover:bg-[#379890]/10 hover:text-[#379890]"
             title="Atualizar"
           >
             <RefreshCcw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -151,7 +151,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
                 event.stopPropagation();
                 onInspect?.(widget);
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-xl text-stone-400 transition-all hover:bg-[#379890]/10 hover:text-[#379890]"
+              className="flex h-8 w-8 items-center justify-center rounded-xl text-muted-foreground transition-all hover:bg-[#379890]/10 hover:text-[#379890]"
               title="Expandir"
             >
               <Maximize2 className="h-3.5 w-3.5" />
@@ -162,7 +162,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
                 event.stopPropagation();
                 onRemove(widget.id);
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-xl text-stone-500 transition-all hover:bg-red-400/10 hover:text-red-500"
+              className="flex h-8 w-8 items-center justify-center rounded-xl text-muted-foreground transition-all hover:bg-red-400/10 hover:text-red-500"
               title="Remover"
             >
               <X className="h-3.5 w-3.5" />
@@ -173,7 +173,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
 
       <div className={`${chartMinHeight} flex-1 p-4`}>
         {loading ? (
-          <div className="flex h-full items-center justify-center gap-3 text-stone-500">
+          <div className="flex h-full items-center justify-center gap-3 text-muted-foreground">
             <RefreshCcw className="h-4 w-4 animate-spin" />
             <span className="text-xs">Carregando dados...</span>
           </div>
@@ -183,7 +183,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
             <p className="text-xs">{result.error}</p>
           </div>
         ) : !result?.ok ? (
-          <div className="flex h-full items-center justify-center text-xs text-stone-500">
+          <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
             Sem dados disponiveis
           </div>
         ) : (
@@ -235,7 +235,7 @@ export default function WidgetCard({ widget, onRemove, onInspect, isDragging, dr
 
       {lastFetched && (
         <div className="border-t border-[#143230]/6 bg-[#f9faf7] px-5 py-2">
-          <p className="font-mono text-[9px] text-stone-500">Atualizado as {lastFetched}</p>
+          <p className="font-mono text-[9px] text-muted-foreground">Atualizado as {lastFetched}</p>
         </div>
       )}
     </motion.div>

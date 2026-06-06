@@ -92,3 +92,10 @@ docker-compose.evolution.yml
 # Arquivos de apresentação/PDF grandes (binários locais)
 *.pptx
 *.pdf
+
+# --- Artefatos do mount FUSE (Cowork) — NUNCA versionar ---
+.fuse_hidden*
+
+# --- Backups locais ---
+_backup-*/
+package.json.bak-*

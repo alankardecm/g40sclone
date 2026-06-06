@@ -52,15 +52,15 @@ export default async function UsersPage() {
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <Users className="h-4 w-4 text-[#8DC63F]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                <Users className="h-4 w-4 text-[#3B82F6]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                   Controle de Acesso
                 </span>
               </div>
-              <h1 className="text-2xl font-[900] tracking-[-0.04em] text-[#404040]">
+              <h1 className="text-2xl font-[900] tracking-[-0.04em] text-[#E6EAF3]">
                 Usuários & Permissões
               </h1>
-              <p className="mt-1 text-[12px] text-gray-400">
+              <p className="mt-1 text-[12px] text-muted-foreground">
                 Gerencie quem pode acessar cada módulo do Hub. Alterações entram em vigor no próximo login do usuário.
               </p>
             </div>
@@ -70,13 +70,13 @@ export default async function UsersPage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4">
             {[
-              { label: 'Usuários cadastrados', value: total, Icon: Users,       color: '#8DC63F' },
+              { label: 'Usuários cadastrados', value: total, Icon: Users,       color: '#3B82F6' },
               { label: 'Online agora',          value: online, Icon: Wifi,       color: '#3b82f6' },
               { label: 'Só chat habilitado',    value: soChatCount, Icon: Lock, color: '#f59e0b' },
             ].map(({ label, value, Icon, color }) => (
               <div
                 key={label}
-                className="rounded-2xl border border-gray-200 bg-white px-5 py-4 flex items-center gap-4 shadow-[0_2px_12px_rgba(64,64,64,0.05)]"
+                className="rounded-2xl border border-border bg-card px-5 py-4 flex items-center gap-4 shadow-[0_2px_12px_rgba(64,64,64,0.05)]"
               >
                 <div
                   className="h-10 w-10 flex-shrink-0 rounded-xl flex items-center justify-center"
@@ -86,25 +86,25 @@ export default async function UsersPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-[900] tracking-[-0.04em]" style={{ color }}>{value}</p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-gray-400">{label}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{label}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Tabela */}
-          <div className="rounded-2xl border border-gray-200 bg-white shadow-[0_2px_12px_rgba(64,64,64,0.05)] overflow-hidden">
+          <div className="rounded-2xl border border-border bg-card shadow-[0_2px_12px_rgba(64,64,64,0.05)] overflow-hidden">
 
             {/* Legenda dashboard */}
-            <div className="flex items-center gap-4 px-5 py-3 border-b border-gray-100 bg-gray-50/60">
+            <div className="flex items-center gap-4 px-5 py-3 border-b border-border bg-background/60">
               <div className="flex items-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#8DC63F]" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-gray-500">Legenda Dashboard:</span>
+                <ShieldCheck className="h-3.5 w-3.5 text-[#3B82F6]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Legenda Dashboard:</span>
               </div>
               {[
-                { label: '—  Sem acesso',  cls: 'bg-gray-200 text-gray-500' },
+                { label: '—  Sem acesso',  cls: 'bg-muted text-muted-foreground' },
                 { label: 'VER  Somente visualização', cls: 'bg-blue-500 text-white' },
-                { label: 'EDI  Criar e editar', cls: 'bg-[#8DC63F] text-white' },
+                { label: 'EDI  Criar e editar', cls: 'bg-[#3B82F6] text-white' },
               ].map(({ label, cls }) => (
                 <span key={label} className={`text-[9px] font-black uppercase tracking-wide rounded px-1.5 py-0.5 ${cls}`}>
                   {label}
@@ -115,17 +115,17 @@ export default async function UsersPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="py-3 px-5 text-left text-[10px] font-black uppercase tracking-[0.15em] text-gray-400 min-w-[220px]">
+                  <tr className="border-b border-border">
+                    <th className="py-3 px-5 text-left text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground min-w-[220px]">
                       Usuário
                     </th>
-                    <th className="py-3 px-4 text-left text-[10px] font-black uppercase tracking-[0.15em] text-gray-400 min-w-[110px]">
+                    <th className="py-3 px-4 text-left text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground min-w-[110px]">
                       Status
                     </th>
                     {PAGE_COLS.map(({ label, Icon, colspan }) => (
                       <th
                         key={label}
-                        className="py-3 px-3 text-center text-[10px] font-black uppercase tracking-[0.12em] text-gray-400"
+                        className="py-3 px-3 text-center text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground"
                         style={{ minWidth: colspan ? '110px' : '60px' }}
                       >
                         <div className="flex flex-col items-center gap-1">
@@ -139,7 +139,7 @@ export default async function UsersPage() {
                 <tbody>
                   {users.length === 0 ? (
                     <tr>
-                      <td colSpan={10} className="py-12 text-center text-[12px] text-gray-400">
+                      <td colSpan={10} className="py-12 text-center text-[12px] text-muted-foreground">
                         Nenhum usuário cadastrado ainda. Aguarde o primeiro login.
                       </td>
                     </tr>
@@ -157,8 +157,8 @@ export default async function UsersPage() {
             </div>
 
             {users.length > 0 && (
-              <div className="px-5 py-3 border-t border-gray-100 bg-gray-50/40">
-                <p className="text-[10px] text-gray-400">
+              <div className="px-5 py-3 border-t border-border bg-background/40">
+                <p className="text-[10px] text-muted-foreground">
                   {total} {total === 1 ? 'usuário cadastrado' : 'usuários cadastrados'} · Clique nos ícones para alternar permissões · Alterações entram em vigor no próximo login do usuário
                 </p>
               </div>

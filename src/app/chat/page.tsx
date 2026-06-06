@@ -71,14 +71,14 @@ function CodeBlock({ lang, code }: { lang: string; code: string }) {
     setTimeout(() => setCopied(false), 2000);
   }
   return (
-    <div className="my-2 overflow-hidden rounded-xl border border-[#404040]/15 bg-[#1a1a1a]">
+    <div className="my-2 overflow-hidden rounded-xl border border-[#E6EAF3]/15 bg-[#1a1a1a]">
       <div className="flex items-center justify-between gap-2 border-b border-white/5 px-4 py-2">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
           {lang || 'código'}
         </span>
         <button
           onClick={copy}
-          className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-[10px] font-black uppercase tracking-[0.15em] text-gray-400 transition-all hover:bg-white/10 hover:text-white"
+          className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground transition-all hover:bg-card/10 hover:text-white"
         >
           {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
           {copied ? 'Copiado!' : 'Copiar'}
@@ -98,7 +98,7 @@ function formatInline(text: string): React.ReactNode[] {
     if (part.startsWith('**') && part.endsWith('**'))
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     if (part.startsWith('`') && part.endsWith('`'))
-      return <code key={i} className="rounded bg-[#404040]/15 px-1.5 py-0.5 font-mono text-[11px] text-[#8DC63F]">{part.slice(1, -1)}</code>;
+      return <code key={i} className="rounded bg-[#E6EAF3]/15 px-1.5 py-0.5 font-mono text-[11px] text-[#3B82F6]">{part.slice(1, -1)}</code>;
     return part;
   });
 }
@@ -341,7 +341,7 @@ export default function ChatPage() {
           <div className="relative max-h-[90vh] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setLightbox(null)}
-              className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-lg text-gray-700 hover:bg-gray-100 z-10"
+              className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full bg-card shadow-lg text-foreground hover:bg-muted z-10"
             >
               <X className="h-4 w-4" />
             </button>
@@ -359,25 +359,25 @@ export default function ChatPage() {
 
       {/* Chat conversations sidebar */}
       <div
-        className={`flex flex-col border-r border-[#404040]/8 bg-[#f8f9f5] transition-all duration-200 ${
+        className={`flex flex-col border-r border-[#E6EAF3]/8 bg-[#f8f9f5] transition-all duration-200 ${
           sidebarOpen ? 'w-[260px] min-w-[260px]' : 'w-0 min-w-0 overflow-hidden'
         }`}
       >
         {/* Sidebar header */}
-        <div className="flex items-center justify-between gap-2 border-b border-[#404040]/8 px-4 py-4">
+        <div className="flex items-center justify-between gap-2 border-b border-[#E6EAF3]/8 px-4 py-4">
           <div>
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
               Conversas
             </span>
             <p className={`mt-0.5 text-[9px] font-black uppercase tracking-widest ${
-              isInterno ? 'text-[#8DC63F]' : 'text-gray-400'
+              isInterno ? 'text-[#3B82F6]' : 'text-muted-foreground'
             }`}>
               {isInterno ? 'Consulta Interna' : 'Geral'}
             </p>
           </div>
           <button
             onClick={() => void createConversation()}
-            className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#8DC63F]/15 text-[#8DC63F] transition-all hover:bg-[#8DC63F]/25"
+            className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#3B82F6]/15 text-[#3B82F6] transition-all hover:bg-[#3B82F6]/25"
             title="Nova conversa"
           >
             <Plus className="h-4 w-4" />
@@ -388,16 +388,16 @@ export default function ChatPage() {
         <div className="flex-1 overflow-y-auto py-2">
           {convsLoading ? (
             <div className="flex items-center justify-center py-8">
-              <div className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:0ms]" />
-              <div className="mx-1 h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:150ms]" />
-              <div className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:300ms]" />
+              <div className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:0ms]" />
+              <div className="mx-1 h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:150ms]" />
+              <div className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:300ms]" />
             </div>
           ) : conversations.filter(c => c.mode === mode).length === 0 ? (
             <div className="px-4 py-6 text-center">
-              <p className="text-[11px] text-gray-400">Nenhuma conversa ainda.</p>
+              <p className="text-[11px] text-muted-foreground">Nenhuma conversa ainda.</p>
               <button
                 onClick={() => void createConversation()}
-                className="mt-3 rounded-xl bg-[#8DC63F]/15 px-3 py-2 text-[11px] font-black text-[#8DC63F] transition-all hover:bg-[#8DC63F]/25"
+                className="mt-3 rounded-xl bg-[#3B82F6]/15 px-3 py-2 text-[11px] font-black text-[#3B82F6] transition-all hover:bg-[#3B82F6]/25"
               >
                 Iniciar agora
               </button>
@@ -414,23 +414,23 @@ export default function ChatPage() {
                   onMouseLeave={() => setHoveredConvId(null)}
                   className={`group relative mx-2 flex cursor-pointer items-start justify-between gap-2 rounded-xl px-3 py-3 transition-all ${
                     isActive
-                      ? 'bg-[#8DC63F]/15 text-[#5a8a1f]'
-                      : 'text-gray-600 hover:bg-[#8DC63F]/8'
+                      ? 'bg-[#3B82F6]/15 text-[#5a8a1f]'
+                      : 'text-muted-foreground hover:bg-[#3B82F6]/8'
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#8DC63F]" />
+                    <div className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#3B82F6]" />
                   )}
                   <div className="min-w-0 flex-1 pl-1">
                     <p className={`truncate text-[12px] font-bold leading-snug ${isActive ? 'text-[#3d6b00]' : ''}`}>
                       {conv.title}
                     </p>
-                    <span className="text-[9px] text-gray-400">{formatRelativeDate(conv.updated_at)}</span>
+                    <span className="text-[9px] text-muted-foreground">{formatRelativeDate(conv.updated_at)}</span>
                   </div>
                   {(isHovered || isActive) && (
                     <button
                       onClick={(e) => void deleteConversation(conv.id, e)}
-                      className="shrink-0 flex h-6 w-6 items-center justify-center rounded-lg text-gray-400 transition-all hover:bg-red-100 hover:text-red-500"
+                      className="shrink-0 flex h-6 w-6 items-center justify-center rounded-lg text-muted-foreground transition-all hover:bg-red-100 hover:text-red-500"
                       title="Excluir conversa"
                     >
                       <Trash2 className="h-3 w-3" />
@@ -447,19 +447,19 @@ export default function ChatPage() {
       <main className="flex flex-1 flex-col min-h-0 overflow-hidden">
 
         {/* Header */}
-        <div className="flex items-center justify-between gap-4 border-b border-[#404040]/8 bg-white/80 px-5 py-3 backdrop-blur-xl">
+        <div className="flex items-center justify-between gap-4 border-b border-[#E6EAF3]/8 bg-card/80 px-5 py-3 backdrop-blur-xl">
           <div className="flex items-center gap-3 min-w-0">
             {/* Toggle sidebar */}
             <button
               onClick={() => setSidebarOpen((v) => !v)}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-gray-100 hover:text-gray-600"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition-all hover:bg-muted hover:text-muted-foreground"
               title={sidebarOpen ? 'Ocultar conversas' : 'Mostrar conversas'}
             >
               {sidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
             </button>
 
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-[#8DC63F]/12 ring-1 ring-[#8DC63F]/20">
-              <Bot className="h-4 w-4 text-[#8DC63F]" />
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-[#3B82F6]/12 ring-1 ring-[#3B82F6]/20">
+              <Bot className="h-4 w-4 text-[#3B82F6]" />
             </div>
 
             {/* Título editável inline */}
@@ -474,7 +474,7 @@ export default function ChatPage() {
                     if (e.key === 'Enter') void saveTitle();
                     if (e.key === 'Escape') setEditingTitle(false);
                   }}
-                  className="min-w-0 max-w-xs border-b border-[#8DC63F]/50 bg-transparent text-sm font-black text-[#404040] outline-none"
+                  className="min-w-0 max-w-xs border-b border-[#3B82F6]/50 bg-transparent text-sm font-black text-[#E6EAF3] outline-none"
                   maxLength={120}
                   autoFocus
                 />
@@ -487,18 +487,18 @@ export default function ChatPage() {
                   }}
                   className="group flex min-w-0 items-center gap-1.5"
                 >
-                  <span className="truncate text-sm font-black text-[#404040] max-w-[200px]">
+                  <span className="truncate text-sm font-black text-[#E6EAF3] max-w-[200px]">
                     {activeConv?.title ?? 'Conversa'}
                   </span>
-                  <PenLine className="h-3 w-3 shrink-0 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <PenLine className="h-3 w-3 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               )
             ) : (
               <div>
-                <h1 className="text-sm font-black tracking-[-0.03em] text-[#404040]">
-                  Assistente {process.env.NEXT_PUBLIC_APP_NAME || 'G4OS'}
+                <h1 className="text-sm font-black tracking-[-0.03em] text-[#E6EAF3]">
+                  Assistente {process.env.NEXT_PUBLIC_APP_NAME || 'AM OS'}
                 </h1>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
                   {loading ? 'Consultando...' : 'Selecione ou inicie uma conversa'}
                 </p>
               </div>
@@ -507,13 +507,13 @@ export default function ChatPage() {
 
           <div className="flex shrink-0 items-center gap-2">
             {/* Toggle modo */}
-            <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-gray-50 p-1">
+            <div className="flex items-center gap-1 rounded-xl border border-border bg-background p-1">
               <button
                 onClick={() => void switchMode('geral')}
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.15em] transition-all ${
                   !isInterno
-                    ? 'bg-white text-[#404040] shadow-sm'
-                    : 'text-gray-400 hover:text-gray-600'
+                    ? 'bg-card text-[#E6EAF3] shadow-sm'
+                    : 'text-muted-foreground hover:text-muted-foreground'
                 }`}
               >
                 <MessageSquare className="h-3 w-3" />
@@ -523,8 +523,8 @@ export default function ChatPage() {
                 onClick={() => void switchMode('interno')}
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.15em] transition-all ${
                   isInterno
-                    ? 'bg-[#8DC63F] text-white shadow-sm'
-                    : 'text-gray-400 hover:text-gray-600'
+                    ? 'bg-[#3B82F6] text-white shadow-sm'
+                    : 'text-muted-foreground hover:text-muted-foreground'
                 }`}
               >
                 <BookOpen className="h-3 w-3" />
@@ -536,8 +536,8 @@ export default function ChatPage() {
 
         {/* Faixa de modo interno */}
         {isInterno && (
-          <div className="border-b border-[#8DC63F]/20 bg-[#8DC63F]/6 px-6 py-2">
-            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#8DC63F]">
+          <div className="border-b border-[#3B82F6]/20 bg-[#3B82F6]/6 px-6 py-2">
+            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3B82F6]">
               Consultando Google Drive
             </p>
           </div>
@@ -549,21 +549,21 @@ export default function ChatPage() {
           {/* Estado vazio — nenhuma conversa selecionada */}
           {!activeConvId && (
             <div className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#8DC63F]/12 ring-1 ring-[#8DC63F]/20">
-                <Sparkles className="h-7 w-7 text-[#8DC63F]" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#3B82F6]/12 ring-1 ring-[#3B82F6]/20">
+                <Sparkles className="h-7 w-7 text-[#3B82F6]" />
               </div>
               <div>
-                <h2 className="text-2xl font-[950] tracking-[-0.04em] text-[#404040]">
+                <h2 className="text-2xl font-[950] tracking-[-0.04em] text-[#E6EAF3]">
                   Como posso ajudar?
                 </h2>
-                <p className="mt-2 text-sm text-gray-400">
+                <p className="mt-2 text-sm text-muted-foreground">
                   Selecione uma conversa ou inicie uma nova usando o botão{' '}
-                  <strong className="text-[#8DC63F]">+</strong> na barra lateral.
+                  <strong className="text-[#3B82F6]">+</strong> na barra lateral.
                 </p>
               </div>
               <button
                 onClick={() => void createConversation()}
-                className="flex items-center gap-2 rounded-2xl bg-[#8DC63F] px-6 py-3 text-sm font-black text-white shadow-md transition-all hover:bg-[#7ab030] hover:scale-105 active:scale-95"
+                className="flex items-center gap-2 rounded-2xl bg-[#3B82F6] px-6 py-3 text-sm font-black text-white shadow-md transition-all hover:bg-[#2563EB] hover:scale-105 active:scale-95"
               >
                 <Plus className="h-4 w-4" />
                 Nova conversa
@@ -573,24 +573,24 @@ export default function ChatPage() {
 
           {/* Carregando mensagens */}
           {activeConvId && messagesLoading && (
-            <div className="flex flex-1 items-center justify-center gap-3 text-gray-400">
-              <div className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:0ms]" />
-              <div className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:150ms]" />
-              <div className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:300ms]" />
+            <div className="flex flex-1 items-center justify-center gap-3 text-muted-foreground">
+              <div className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:0ms]" />
+              <div className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:150ms]" />
+              <div className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:300ms]" />
             </div>
           )}
 
           {/* Estado vazio — conversa aberta sem mensagens */}
           {activeConvId && !messagesLoading && messages.length === 0 && (
             <div className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-[#8DC63F]/12 ring-1 ring-[#8DC63F]/20">
-                {isInterno ? <BookOpen className="h-6 w-6 text-[#8DC63F]" /> : <Sparkles className="h-6 w-6 text-[#8DC63F]" />}
+              <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-[#3B82F6]/12 ring-1 ring-[#3B82F6]/20">
+                {isInterno ? <BookOpen className="h-6 w-6 text-[#3B82F6]" /> : <Sparkles className="h-6 w-6 text-[#3B82F6]" />}
               </div>
               <div>
-                <h2 className="text-xl font-[950] tracking-[-0.03em] text-[#404040]">
+                <h2 className="text-xl font-[950] tracking-[-0.03em] text-[#E6EAF3]">
                   {isInterno ? 'Consulta à base interna' : 'Conversa vazia'}
                 </h2>
-                <p className="mt-2 text-sm text-gray-400">
+                <p className="mt-2 text-sm text-muted-foreground">
                   {isInterno
                     ? 'Pergunte sobre procedimentos, configurações e processos documentados no Google Drive.'
                     : 'Digite sua primeira mensagem abaixo para começar.'}
@@ -601,7 +601,7 @@ export default function ChatPage() {
                   <button
                     key={prompt}
                     onClick={() => applyQuickPrompt(prompt)}
-                    className="rounded-2xl border border-[#404040]/10 bg-white px-5 py-4 text-left text-[12px] font-bold text-[#404040] transition-all hover:border-[#8DC63F]/30 hover:bg-[#8DC63F]/5 hover:text-[#8DC63F]"
+                    className="rounded-2xl border border-[#E6EAF3]/10 bg-card px-5 py-4 text-left text-[12px] font-bold text-[#E6EAF3] transition-all hover:border-[#3B82F6]/30 hover:bg-[#3B82F6]/5 hover:text-[#3B82F6]"
                   >
                     {prompt}
                   </button>
@@ -618,7 +618,7 @@ export default function ChatPage() {
             return (
               <div key={msg.id ?? i} className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-black ${
-                  isUser ? 'bg-[#404040] text-white' : 'bg-[#8DC63F]/12 text-[#8DC63F]'
+                  isUser ? 'bg-[#E6EAF3] text-white' : 'bg-[#3B82F6]/12 text-[#3B82F6]'
                 }`}>
                   {isUser ? 'EU' : <Bot className="h-4 w-4" />}
                 </div>
@@ -626,15 +626,15 @@ export default function ChatPage() {
                 <div className="flex max-w-[72%] flex-col gap-2">
                   <div className={`rounded-3xl px-5 py-4 text-sm leading-relaxed shadow-sm ${
                     isUser
-                      ? 'rounded-tr-md bg-[#404040] text-white'
-                      : 'rounded-tl-md border border-[#404040]/8 bg-white text-[#404040]'
+                      ? 'rounded-tr-md bg-[#E6EAF3] text-white'
+                      : 'rounded-tl-md border border-[#E6EAF3]/8 bg-card text-[#E6EAF3]'
                   }`}>
                     {formatMessage(msg.content)}
                   </div>
 
                   {hasSources && (
                     <div className="flex flex-col gap-2 pl-1">
-                      <p className="text-[9px] font-black uppercase tracking-[0.25em] text-gray-400">
+                      <p className="text-[9px] font-black uppercase tracking-[0.25em] text-muted-foreground">
                         Fontes ({msg.sources!.length})
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -644,7 +644,7 @@ export default function ChatPage() {
                             href={src.source}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 rounded-full border border-[#8DC63F]/25 bg-[#8DC63F]/8 px-2.5 py-1 text-[10px] font-bold text-[#8DC63F] transition-colors hover:bg-[#8DC63F]/15"
+                            className="flex items-center gap-1 rounded-full border border-[#3B82F6]/25 bg-[#3B82F6]/8 px-2.5 py-1 text-[10px] font-bold text-[#3B82F6] transition-colors hover:bg-[#3B82F6]/15"
                           >
                             <BookOpen className="h-2.5 w-2.5" />
                             {src.title.length > 30 ? src.title.slice(0, 30) + '…' : src.title}
@@ -657,7 +657,7 @@ export default function ChatPage() {
                           {msg.sources!.filter((s) => s.imageUrl).slice(0, 4).map((src, si) => (
                             <div
                               key={si}
-                              className="group relative cursor-zoom-in overflow-hidden rounded-xl border border-gray-200 bg-gray-50"
+                              className="group relative cursor-zoom-in overflow-hidden rounded-xl border border-border bg-background"
                               style={{ width: 120, height: 80 }}
                               onClick={() => setLightbox({ url: src.imageUrl!, title: src.title })}
                             >
@@ -683,13 +683,13 @@ export default function ChatPage() {
           {/* Loading indicator */}
           {loading && (
             <div className="flex gap-3">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#8DC63F]/12">
-                <Bot className="h-4 w-4 text-[#8DC63F]" />
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#3B82F6]/12">
+                <Bot className="h-4 w-4 text-[#3B82F6]" />
               </div>
-              <div className="flex items-center gap-1.5 rounded-3xl rounded-tl-md border border-[#404040]/8 bg-white px-5 py-4 shadow-sm">
-                <span className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:0ms]" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:150ms]" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-[#8DC63F]/60 [animation-delay:300ms]" />
+              <div className="flex items-center gap-1.5 rounded-3xl rounded-tl-md border border-[#E6EAF3]/8 bg-card px-5 py-4 shadow-sm">
+                <span className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:0ms]" />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:150ms]" />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-[#3B82F6]/60 [animation-delay:300ms]" />
               </div>
             </div>
           )}
@@ -698,12 +698,12 @@ export default function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className="border-t border-[#404040]/8 bg-white/80 px-6 py-5 backdrop-blur-xl lg:px-10">
+        <div className="border-t border-[#E6EAF3]/8 bg-card/80 px-6 py-5 backdrop-blur-xl lg:px-10">
           <div className={`flex items-end gap-3 rounded-3xl border p-3 shadow-[0_8px_30px_rgba(64,64,64,0.08)] transition-all ${
             isInterno
-              ? 'border-[#8DC63F]/30 focus-within:border-[#8DC63F]/60 focus-within:shadow-[0_8px_30px_rgba(141,198,63,0.15)]'
-              : 'border-[#404040]/12 focus-within:border-[#8DC63F]/40 focus-within:shadow-[0_8px_30px_rgba(141,198,63,0.12)]'
-          } bg-white`}>
+              ? 'border-[#3B82F6]/30 focus-within:border-[#3B82F6]/60 focus-within:shadow-[0_8px_30px_rgba(141,198,63,0.15)]'
+              : 'border-[#E6EAF3]/12 focus-within:border-[#3B82F6]/40 focus-within:shadow-[0_8px_30px_rgba(141,198,63,0.12)]'
+          } bg-card`}>
             <textarea
               ref={textareaRef}
               value={input}
@@ -719,20 +719,20 @@ export default function ChatPage() {
                   : 'Digite sua mensagem... (Enter para enviar, Shift+Enter para nova linha)'
               }
               rows={1}
-              className="flex-1 resize-none bg-transparent px-3 py-2.5 text-sm text-[#404040] outline-none placeholder:text-gray-400"
+              className="flex-1 resize-none bg-transparent px-3 py-2.5 text-sm text-[#E6EAF3] outline-none placeholder:text-muted-foreground"
             />
             <button
               onClick={() => void send()}
               disabled={loading || !input.trim()}
-              className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[#8DC63F] text-white shadow-md transition-all hover:bg-[#7ab030] hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[#3B82F6] text-white shadow-md transition-all hover:bg-[#2563EB] hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-2 text-center text-[10px] text-gray-400">
+          <p className="mt-2 text-center text-[10px] text-muted-foreground">
             {isInterno
               ? `Consulta Interna · Google Drive · Groq llama-3.3-70b`
-              : `Assistente Geral · Groq llama-3.3-70b · Uso interno ${process.env.NEXT_PUBLIC_APP_NAME || 'G4OS'}`}
+              : `Assistente Geral · Groq llama-3.3-70b · Uso interno ${process.env.NEXT_PUBLIC_APP_NAME || 'AM OS'}`}
           </p>
         </div>
       </main>

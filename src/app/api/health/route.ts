@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const APP_NAME = 'g4os-business-os';
+const APP_NAME = 'am-os-business-os';
 const APP_ENV = process.env.APP_ENV || 'parallel';
 const APP_PORT = Number(process.env.PORT || 4100);
 

@@ -602,7 +602,7 @@ export default function DashboardEditorPage({ params }: Props) {
 
   // ── Save status indicator ──────────────────────────────────────────────────
   const saveIndicator = useMemo(() => {
-    if (saveStatus === 'saving') return { label: 'Salvando...', color: 'text-stone-500', icon: <RefreshCcw className="w-3 h-3 animate-spin" /> };
+    if (saveStatus === 'saving') return { label: 'Salvando...', color: 'text-muted-foreground', icon: <RefreshCcw className="w-3 h-3 animate-spin" /> };
     if (saveStatus === 'saved') return { label: 'Salvo', color: 'text-[#379890]', icon: <Check className="w-3 h-3" /> };
     if (saveStatus === 'error') return { label: 'Erro ao salvar', color: 'text-red-500', icon: <AlertCircle className="w-3 h-3" /> };
     return null;
@@ -617,7 +617,7 @@ export default function DashboardEditorPage({ params }: Props) {
           {/* Header */}
           <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-stone-500">
+              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">
                 <button onClick={() => router.push('/dashboards')} className="flex items-center gap-1.5 hover:text-[#143230] transition-colors">
                   <ArrowLeft className="w-3 h-3" /> Dashboards
                 </button>
@@ -641,7 +641,7 @@ export default function DashboardEditorPage({ params }: Props) {
                     <h1 className="text-2xl sm:text-4xl font-black tracking-[-0.05em] text-[#143230] leading-tight">
                       {dashboardName}
                     </h1>
-                    <Pencil className="w-4 h-4 text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                    <Pencil className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   </button>
                 )}
               </div>
@@ -659,13 +659,13 @@ export default function DashboardEditorPage({ params }: Props) {
               <div className="flex items-center gap-1 rounded-2xl border border-[#143230]/10 bg-[#f7f8f4] p-1">
                 <button
                   onClick={() => setViewMode('edit')}
-                  className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition-all ${viewMode === 'edit' ? 'bg-white text-[#143230] shadow-sm' : 'text-stone-400 hover:text-[#143230]'}`}
+                  className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition-all ${viewMode === 'edit' ? 'bg-card text-[#143230] shadow-sm' : 'text-muted-foreground hover:text-[#143230]'}`}
                 >
                   <Pencil className="w-3 h-3" /> Editar
                 </button>
                 <button
                   onClick={() => setViewMode('view')}
-                  className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition-all ${viewMode === 'view' ? 'bg-[#379890] text-white shadow-sm' : 'text-stone-400 hover:text-[#143230]'}`}
+                  className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition-all ${viewMode === 'view' ? 'bg-[#379890] text-white shadow-sm' : 'text-muted-foreground hover:text-[#143230]'}`}
                 >
                   <LayoutTemplate className="w-3 h-3" /> Visualizar
                 </button>
@@ -686,9 +686,9 @@ export default function DashboardEditorPage({ params }: Props) {
 
           {/* Filtro de data global — view mode apenas */}
           {viewMode === 'view' && (
-            <div className="rounded-[24px] border border-[#143230]/8 bg-white/85 px-5 py-4 shadow-[0_8px_24px_-12px_rgba(20,50,48,0.12)]">
+            <div className="rounded-[24px] border border-[#143230]/8 bg-card/85 px-5 py-4 shadow-[0_8px_24px_-12px_rgba(20,50,48,0.12)]">
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">
+                <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                   <CalendarRange className="w-3.5 h-3.5 text-[#379890]" />
                   Período global
                 </div>
@@ -705,7 +705,7 @@ export default function DashboardEditorPage({ params }: Props) {
                       className={`rounded-xl px-3 py-1.5 text-[10px] font-black uppercase tracking-widest transition-all ${
                         activePreset === preset.label
                           ? 'bg-[#379890] text-white shadow-sm'
-                          : 'border border-[#143230]/10 bg-white text-stone-600 hover:border-[#379890]/30 hover:text-[#143230]'
+                          : 'border border-[#143230]/10 bg-card text-muted-foreground hover:border-[#379890]/30 hover:text-[#143230]'
                       }`}
                     >
                       {preset.label}
@@ -717,19 +717,19 @@ export default function DashboardEditorPage({ params }: Props) {
                     type="date"
                     value={globalDateFrom}
                     onChange={(e) => { setGlobalDateFrom(e.target.value); setActivePreset(null); }}
-                    className="rounded-xl border border-[#143230]/10 bg-white px-3 py-1.5 text-xs outline-none focus:border-[#379890]/50"
+                    className="rounded-xl border border-[#143230]/10 bg-card px-3 py-1.5 text-xs outline-none focus:border-[#379890]/50"
                   />
-                  <span className="text-[10px] text-stone-400">até</span>
+                  <span className="text-[10px] text-muted-foreground">até</span>
                   <input
                     type="date"
                     value={globalDateTo}
                     onChange={(e) => { setGlobalDateTo(e.target.value); setActivePreset(null); }}
-                    className="rounded-xl border border-[#143230]/10 bg-white px-3 py-1.5 text-xs outline-none focus:border-[#379890]/50"
+                    className="rounded-xl border border-[#143230]/10 bg-card px-3 py-1.5 text-xs outline-none focus:border-[#379890]/50"
                   />
                   {(globalDateFrom || globalDateTo) && (
                     <button
                       onClick={() => { setGlobalDateFrom(''); setGlobalDateTo(''); setActivePreset(null); }}
-                      className="rounded-xl border border-[#143230]/10 bg-white px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-stone-500 transition-all hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                      className="rounded-xl border border-[#143230]/10 bg-card px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground transition-all hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                     >
                       Limpar
                     </button>
@@ -743,26 +743,26 @@ export default function DashboardEditorPage({ params }: Props) {
           {viewMode === 'edit' && <section className="grid gap-6 lg:grid-cols-2 xl:grid-cols-[0.9fr_1.2fr_0.9fr]">
 
             {/* Tables */}
-            <div className="rounded-[30px] border border-[#143230]/8 bg-white/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)]">
+            <div className="rounded-[30px] border border-[#143230]/8 bg-card/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)]">
               <div className="flex items-center justify-between gap-3">
-                <div><p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Catalogo</p><h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#143230]">Tabelas</h2></div>
+                <div><p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Catalogo</p><h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#143230]">Tabelas</h2></div>
                 <Table2 className="w-6 h-6 text-[#379890]" />
               </div>
               <div className="mt-5 rounded-2xl border border-[#143230]/10 bg-[#f7f8f4] px-4 py-3 flex items-center gap-3">
-                <Search className="w-4 h-4 text-stone-400" />
-                <input value={explorerSearch} onChange={(e) => setExplorerSearch(e.target.value)} placeholder="Buscar tabela" className="w-full bg-transparent text-sm outline-none placeholder:text-stone-400" />
+                <Search className="w-4 h-4 text-muted-foreground" />
+                <input value={explorerSearch} onChange={(e) => setExplorerSearch(e.target.value)} placeholder="Buscar tabela" className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
               </div>
               <div className="mt-5 space-y-3 max-h-[320px] lg:max-h-[440px] xl:max-h-[560px] overflow-y-auto pr-1">
                 {filteredTables.map((table) => {
                   const active = selectedTable === table.name;
                   const hint = getTableSemantic(table.name);
                   return (
-                    <button key={table.name} onClick={() => setSelectedTable(table.name)} className={`w-full rounded-[22px] border p-4 text-left transition-all ${active ? 'border-[#379890]/30 bg-[#379890]/10 shadow-[0_18px_35px_-25px_rgba(55,152,144,0.45)]' : 'border-[#143230]/8 bg-white hover:border-[#379890]/20'}`}>
+                    <button key={table.name} onClick={() => setSelectedTable(table.name)} className={`w-full rounded-[22px] border p-4 text-left transition-all ${active ? 'border-[#379890]/30 bg-[#379890]/10 shadow-[0_18px_35px_-25px_rgba(55,152,144,0.45)]' : 'border-[#143230]/8 bg-card hover:border-[#379890]/20'}`}>
                       <div className="flex items-start justify-between gap-3">
-                        <div><p className="text-sm font-black text-[#143230]">{hint.label}</p><p className="mt-1 font-mono text-[10px] text-stone-500">{table.name}</p></div>
-                        <span className="rounded-full border border-[#143230]/8 px-2 py-1 text-[10px] font-black text-stone-500">{table.rows?.toLocaleString('pt-BR') ?? '-'} rows</span>
+                        <div><p className="text-sm font-black text-[#143230]">{hint.label}</p><p className="mt-1 font-mono text-[10px] text-muted-foreground">{table.name}</p></div>
+                        <span className="rounded-full border border-[#143230]/8 px-2 py-1 text-[10px] font-black text-muted-foreground">{table.rows?.toLocaleString('pt-BR') ?? '-'} rows</span>
                       </div>
-                      <p className="mt-3 text-xs leading-relaxed text-stone-600">{hint.description}</p>
+                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{hint.description}</p>
                     </button>
                   );
                 })}
@@ -770,22 +770,22 @@ export default function DashboardEditorPage({ params }: Props) {
             </div>
 
             {/* Column explorer + preview */}
-            <div className="lg:col-span-1 xl:col-span-1 rounded-[30px] border border-[#143230]/8 bg-white/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)] flex flex-col">
+            <div className="lg:col-span-1 xl:col-span-1 rounded-[30px] border border-[#143230]/8 bg-card/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)] flex flex-col">
 
               {/* Header */}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Explorador</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Explorador</p>
                   <h2 className="mt-1.5 text-2xl font-black tracking-[-0.05em] text-[#143230] leading-tight">
                     {selectedTableSemantic.label || 'Selecione uma tabela'}
                   </h2>
                   {selectedTable && (
-                    <p className="mt-1 font-mono text-[10px] text-stone-400">{selectedTable}</p>
+                    <p className="mt-1 font-mono text-[10px] text-muted-foreground">{selectedTable}</p>
                   )}
                 </div>
                 <button
                   onClick={() => selectedTable && void loadPreview(selectedTable)}
-                  className="shrink-0 rounded-2xl border border-[#143230]/10 bg-white px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-stone-600 hover:border-[#379890]/20 hover:text-[#143230] transition-colors"
+                  className="shrink-0 rounded-2xl border border-[#143230]/10 bg-card px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:border-[#379890]/20 hover:text-[#143230] transition-colors"
                 >
                   <span className="inline-flex items-center gap-1.5">
                     <RefreshCcw className={`w-3 h-3 ${previewLoading ? 'animate-spin' : ''}`} />
@@ -797,17 +797,17 @@ export default function DashboardEditorPage({ params }: Props) {
               {/* Stats strip */}
               <div className="mt-4 flex gap-2">
                 <div className="flex-1 rounded-2xl bg-[#f7f8f4] border border-[#143230]/6 px-3 py-3">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">Rows</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Rows</p>
                   <p className="mt-1 text-xl font-black text-[#143230]">
                     {overview.tables.find((t) => t.name === selectedTable)?.rows?.toLocaleString('pt-BR') || '—'}
                   </p>
                 </div>
                 <div className="flex-1 rounded-2xl bg-[#f7f8f4] border border-[#143230]/6 px-3 py-3">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">Colunas</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Colunas</p>
                   <p className="mt-1 text-xl font-black text-[#143230]">{columns.length || '—'}</p>
                 </div>
                 <div className="flex-1 rounded-2xl bg-[#f7f8f4] border border-[#143230]/6 px-3 py-3">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">Foco</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Foco</p>
                   <p className="mt-1 text-[11px] font-black text-[#143230] leading-tight">
                     {selectedTableSemantic.focus.slice(0, 2).join(' / ') || 'Geral'}
                   </p>
@@ -818,7 +818,7 @@ export default function DashboardEditorPage({ params }: Props) {
               <div className="mt-4 flex rounded-2xl border border-[#143230]/8 bg-[#f7f8f4] p-1 gap-1">
                 <button
                   onClick={() => setExplorerTab('columns')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 rounded-xl py-2 text-[10px] font-black uppercase tracking-widest transition-all ${explorerTab === 'columns' ? 'bg-white text-[#143230] shadow-sm' : 'text-stone-400 hover:text-[#143230]'}`}
+                  className={`flex-1 flex items-center justify-center gap-1.5 rounded-xl py-2 text-[10px] font-black uppercase tracking-widest transition-all ${explorerTab === 'columns' ? 'bg-card text-[#143230] shadow-sm' : 'text-muted-foreground hover:text-[#143230]'}`}
                 >
                   <Columns3 className="w-3.5 h-3.5" />
                   Colunas
@@ -826,7 +826,7 @@ export default function DashboardEditorPage({ params }: Props) {
                 </button>
                 <button
                   onClick={() => setExplorerTab('preview')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 rounded-xl py-2 text-[10px] font-black uppercase tracking-widest transition-all ${explorerTab === 'preview' ? 'bg-white text-[#143230] shadow-sm' : 'text-stone-400 hover:text-[#143230]'}`}
+                  className={`flex-1 flex items-center justify-center gap-1.5 rounded-xl py-2 text-[10px] font-black uppercase tracking-widest transition-all ${explorerTab === 'preview' ? 'bg-card text-[#143230] shadow-sm' : 'text-muted-foreground hover:text-[#143230]'}`}
                 >
                   <Eye className="w-3.5 h-3.5" />
                   Preview
@@ -837,12 +837,12 @@ export default function DashboardEditorPage({ params }: Props) {
               {explorerTab === 'columns' && (
                 <div className="mt-4 flex flex-col flex-1 min-h-0">
                   <div className="rounded-2xl border border-[#143230]/10 bg-[#f7f8f4] px-4 py-2.5 flex items-center gap-2">
-                    <Filter className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                    <Filter className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                     <input
                       value={columnSearch}
                       onChange={(e) => setColumnSearch(e.target.value)}
                       placeholder="Buscar coluna ou tipo..."
-                      className="w-full bg-transparent text-sm outline-none placeholder:text-stone-400"
+                      className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                     />
                   </div>
                   <div className="mt-3 flex-1 overflow-y-auto max-h-[480px] pr-1 space-y-1">
@@ -853,11 +853,11 @@ export default function DashboardEditorPage({ params }: Props) {
                       return (
                         <div
                           key={col.name}
-                          className="group flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 hover:bg-white border border-transparent hover:border-[#143230]/8 transition-all cursor-default"
+                          className="group flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 hover:bg-card border border-transparent hover:border-[#143230]/8 transition-all cursor-default"
                         >
                           <div className="min-w-0">
                             <p className="text-sm font-semibold text-[#143230] truncate">{semantic.label}</p>
-                            <p className="font-mono text-[10px] text-stone-400 mt-0.5 truncate">{col.name}</p>
+                            <p className="font-mono text-[10px] text-muted-foreground mt-0.5 truncate">{col.name}</p>
                           </div>
                           <div className="flex items-center gap-1.5 shrink-0">
                             {semantic.category && (
@@ -870,7 +870,7 @@ export default function DashboardEditorPage({ params }: Props) {
                                 num
                               </span>
                             )}
-                            <span className="rounded-full bg-[#143230]/5 px-2 py-0.5 text-[10px] font-mono text-stone-400">
+                            <span className="rounded-full bg-[#143230]/5 px-2 py-0.5 text-[10px] font-mono text-muted-foreground">
                               {rawType}
                             </span>
                           </div>
@@ -878,7 +878,7 @@ export default function DashboardEditorPage({ params }: Props) {
                       );
                     })}
                     {filteredColumns.length === 0 && !colsLoading && (
-                      <div className="flex h-32 items-center justify-center text-sm text-stone-400">
+                      <div className="flex h-32 items-center justify-center text-sm text-muted-foreground">
                         {selectedTable ? 'Nenhuma coluna encontrada.' : 'Selecione uma tabela.'}
                       </div>
                     )}
@@ -890,11 +890,11 @@ export default function DashboardEditorPage({ params }: Props) {
               {explorerTab === 'preview' && (
                 <div className="mt-4 flex-1 rounded-2xl border border-[#143230]/8 bg-[#fcfcfb] overflow-auto max-h-[540px]">
                   {previewLoading ? (
-                    <div className="flex h-48 items-center justify-center gap-3 text-sm text-stone-500">
+                    <div className="flex h-48 items-center justify-center gap-3 text-sm text-muted-foreground">
                       <RefreshCcw className="w-4 h-4 animate-spin" /> Carregando amostra...
                     </div>
                   ) : !preview || preview.columns.length === 0 ? (
-                    <div className="flex h-48 flex-col items-center justify-center gap-2 text-sm text-stone-400">
+                    <div className="flex h-48 flex-col items-center justify-center gap-2 text-sm text-muted-foreground">
                       <Eye className="w-6 h-6 opacity-30" />
                       Selecione uma tabela para ver os dados.
                     </div>
@@ -907,7 +907,7 @@ export default function DashboardEditorPage({ params }: Props) {
                             return (
                               <th key={col.name} className="px-3 py-2.5 text-left whitespace-nowrap border-r border-[#143230]/6 last:border-r-0">
                                 <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#143230]">{sem.label}</div>
-                                <div className="mt-0.5 font-mono text-[9px] text-stone-400 normal-case tracking-normal">{col.name}</div>
+                                <div className="mt-0.5 font-mono text-[9px] text-muted-foreground normal-case tracking-normal">{col.name}</div>
                               </th>
                             );
                           })}
@@ -917,7 +917,7 @@ export default function DashboardEditorPage({ params }: Props) {
                         {preview.rows.map((row, i) => (
                           <tr key={i} className={`border-t border-[#143230]/5 ${i % 2 === 0 ? '' : 'bg-[#f9faf8]'} hover:bg-[#f0f6f5] transition-colors`}>
                             {preview.columns.map((col) => (
-                              <td key={col.name} className="max-w-[200px] truncate px-3 py-2 text-stone-600 border-r border-[#143230]/4 last:border-r-0">
+                              <td key={col.name} className="max-w-[200px] truncate px-3 py-2 text-muted-foreground border-r border-[#143230]/4 last:border-r-0">
                                 {String(row[col.name] ?? '')}
                               </td>
                             ))}
@@ -931,16 +931,16 @@ export default function DashboardEditorPage({ params }: Props) {
             </div>
 
             {/* Quick actions + AI suggestions */}
-            <div className="lg:col-span-2 xl:col-span-1 rounded-[30px] border border-[#143230]/8 bg-white/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)]">
+            <div className="lg:col-span-2 xl:col-span-1 rounded-[30px] border border-[#143230]/8 bg-card/85 p-6 shadow-[0_20px_50px_-34px_rgba(20,50,48,0.18)]">
               <div className="flex items-center justify-between gap-3">
-                <div><p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Acoes</p><h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#143230]">Decisao rapida</h2></div>
+                <div><p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Acoes</p><h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#143230]">Decisao rapida</h2></div>
                 <Sparkles className="w-6 h-6 text-[#379890]" />
               </div>
               <div className="mt-5 space-y-3">
                 {quickActions.map((action) => (
                   <button key={action.title} onClick={() => addQuickAction(action)} disabled={!selectedTable || (action.aggregation !== 'none' && !action.xColumn)} className="w-full rounded-[22px] border border-[#143230]/8 bg-[#f7f8f4] p-4 text-left transition-all hover:border-[#379890]/20 disabled:opacity-50">
                     <p className="text-sm font-black text-[#143230]">{action.title}</p>
-                    <p className="mt-2 text-xs leading-relaxed text-stone-600">{action.description}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{action.description}</p>
                   </button>
                 ))}
               </div>
@@ -951,14 +951,14 @@ export default function DashboardEditorPage({ params }: Props) {
                   <Wand2 className="w-4 h-4 text-[#379890]" />
                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2c7f78]">Assistente Inteligente</p>
                 </div>
-                <p className="mt-2 text-[11px] text-stone-600 leading-relaxed">Fale o que voce precisa em linguagem natural e eu monto os widgets para voce.</p>
+                <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed">Fale o que voce precisa em linguagem natural e eu monto os widgets para voce.</p>
                 <div className="mt-4 flex gap-2">
                   <input
                     value={smartPrompt}
                     onChange={(e) => setSmartPrompt(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && runSmartAssistant()}
                     placeholder="Ex: Contratos ativos por cidade..."
-                    className="flex-1 rounded-xl border border-[#379890]/20 bg-white px-3 py-2 text-sm outline-none focus:border-[#379890] transition-all"
+                    className="flex-1 rounded-xl border border-[#379890]/20 bg-card px-3 py-2 text-sm outline-none focus:border-[#379890] transition-all"
                   />
                   <button
                     onClick={runSmartAssistant}
@@ -972,12 +972,12 @@ export default function DashboardEditorPage({ params }: Props) {
                 {smartResult && (
                   <div className="mt-4 space-y-3 animate-in fade-in slide-in-from-top-2">
                     {smartResult.suggestions.length === 0 ? (
-                      <p className="text-[10px] text-stone-500 italic">Nao consegui encontrar widgets para esse pedido. Tente ser mais especifico.</p>
+                      <p className="text-[10px] text-muted-foreground italic">Nao consegui encontrar widgets para esse pedido. Tente ser mais especifico.</p>
                     ) : (
                       smartResult.suggestions.map((suggestion, index) => (
-                        <div key={`smart-${index}`} className="rounded-2xl border border-[#379890]/10 bg-white p-4 shadow-sm">
+                        <div key={`smart-${index}`} className="rounded-2xl border border-[#379890]/10 bg-card p-4 shadow-sm">
                           <p className="text-sm font-black text-[#143230]">{suggestion.title}</p>
-                          <p className="mt-2 text-xs leading-relaxed text-stone-600">{suggestion.rationale}</p>
+                          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{suggestion.rationale}</p>
                           <button
                             onClick={() => addSuggestion(suggestion)}
                             className="mt-4 rounded-full bg-[#379890] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white hover:opacity-90 transition-all shadow-md shadow-[#379890]/10"
@@ -992,20 +992,20 @@ export default function DashboardEditorPage({ params }: Props) {
               </div>
 
               <div className="mt-8 rounded-[24px] border border-[#143230]/8 bg-[#f7f8f4] p-4">
-                <div className="flex items-center gap-2"><Wand2 className="w-4 h-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">Sugestoes por objetivo</p></div>
+                <div className="flex items-center gap-2"><Wand2 className="w-4 h-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Sugestoes por objetivo</p></div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {DECISION_PROMPTS.map((prompt) => (
-                    <button key={prompt} onClick={() => { setSuggestionPrompt(prompt); void loadSuggestions(prompt); }} className={`rounded-full px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] transition-all ${suggestionPrompt === prompt ? 'bg-[#379890] text-white' : 'border border-[#143230]/10 bg-white text-stone-600 hover:border-[#379890]/20'}`}>{prompt.slice(0, 28)}...</button>
+                    <button key={prompt} onClick={() => { setSuggestionPrompt(prompt); void loadSuggestions(prompt); }} className={`rounded-full px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] transition-all ${suggestionPrompt === prompt ? 'bg-[#379890] text-white' : 'border border-[#143230]/10 bg-card text-muted-foreground hover:border-[#379890]/20'}`}>{prompt.slice(0, 28)}...</button>
                   ))}
                 </div>
                 <div className="mt-4 space-y-3">
                   {suggestionsLoading ? (
-                    <div className="rounded-2xl border border-[#143230]/8 bg-white px-4 py-6 text-sm text-stone-500">Gerando sugestoes...</div>
+                    <div className="rounded-2xl border border-[#143230]/8 bg-card px-4 py-6 text-sm text-muted-foreground">Gerando sugestoes...</div>
                   ) : (
                     suggestions?.suggestions.slice(0, 3).map((suggestion, index) => (
-                      <div key={`${suggestion.title}-${index}`} className="rounded-2xl border border-[#143230]/8 bg-white p-4">
+                      <div key={`${suggestion.title}-${index}`} className="rounded-2xl border border-[#143230]/8 bg-card p-4">
                         <p className="text-sm font-black text-[#143230]">{suggestion.title}</p>
-                        <p className="mt-2 text-xs leading-relaxed text-stone-600">{suggestion.rationale}</p>
+                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{suggestion.rationale}</p>
                         <button onClick={() => addSuggestion(suggestion)} className="mt-4 rounded-full bg-[#379890]/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#2c7f78] hover:bg-[#379890]/20">Adicionar ao dashboard</button>
                       </div>
                     ))
@@ -1017,19 +1017,19 @@ export default function DashboardEditorPage({ params }: Props) {
 
           {/* Widget count bar — edit mode apenas */}
           {viewMode === 'edit' && widgets.length > 0 && (
-            <div className="flex items-center gap-6 rounded-[24px] border border-[#143230]/8 bg-white/70 px-5 py-4">
-              <div className="flex items-center gap-2 text-[10px] font-black text-stone-600"><LayoutGrid className="w-4 h-4" /><span>{widgets.length} widget{widgets.length !== 1 ? 's' : ''}</span></div>
-              <div className="text-[10px] font-black text-stone-500">Arraste os cards para reordenar.</div>
+            <div className="flex items-center gap-6 rounded-[24px] border border-[#143230]/8 bg-card/70 px-5 py-4">
+              <div className="flex items-center gap-2 text-[10px] font-black text-muted-foreground"><LayoutGrid className="w-4 h-4" /><span>{widgets.length} widget{widgets.length !== 1 ? 's' : ''}</span></div>
+              <div className="text-[10px] font-black text-muted-foreground">Arraste os cards para reordenar.</div>
             </div>
           )}
 
           {/* Empty widget state */}
           {widgets.length === 0 && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-1 flex-col items-center justify-center gap-6 rounded-[36px] border border-[#379890]/10 bg-white/75 py-24">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-1 flex-col items-center justify-center gap-6 rounded-[36px] border border-[#379890]/10 bg-card/75 py-24">
               <div className="flex h-20 w-20 items-center justify-center rounded-[28px] bg-[#379890]/12 shadow-[0_24px_40px_-24px_rgba(55,152,144,0.45)]"><BarChart2 className="h-9 w-9 text-[#379890]" /></div>
               <div className="text-center">
                 <h2 className="mb-2 text-2xl font-black text-[#143230]">Dashboard vazio</h2>
-                <p className="text-sm text-stone-600">Escolha uma tabela, entenda as colunas e use as acoes rapidas para subir a primeira leitura.</p>
+                <p className="text-sm text-muted-foreground">Escolha uma tabela, entenda as colunas e use as acoes rapidas para subir a primeira leitura.</p>
               </div>
             </motion.div>
           )}
@@ -1090,16 +1090,16 @@ export default function DashboardEditorPage({ params }: Props) {
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closePanel} className="fixed inset-0 z-40 bg-[#143230]/25 backdrop-blur-[2px]" />
             <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 28, stiffness: 300 }} className="fixed right-0 top-0 z-50 flex h-full w-full sm:w-[430px] flex-col border-l border-[#143230]/10 bg-[#f7f8f4] shadow-2xl">
-              <div className="flex items-center justify-between border-b border-[#143230]/8 bg-white/80 px-6 py-5">
-                <div className="flex items-center gap-3"><Plus className="h-5 w-5 text-[#379890]" /><div><h2 className="text-sm font-black uppercase tracking-widest text-[#143230]">{editingWidgetId ? 'Editar Widget' : 'Novo Widget'}</h2><p className="mt-1 text-[11px] text-stone-500">{editingWidgetId ? 'Revise a montagem e salve de novo' : 'Monte uma leitura clara com recorte e pergunta de negocio'}</p></div></div>
-                <button onClick={closePanel} className="text-xl leading-none text-stone-500 transition-colors hover:text-[#143230]">×</button>
+              <div className="flex items-center justify-between border-b border-[#143230]/8 bg-card/80 px-6 py-5">
+                <div className="flex items-center gap-3"><Plus className="h-5 w-5 text-[#379890]" /><div><h2 className="text-sm font-black uppercase tracking-widest text-[#143230]">{editingWidgetId ? 'Editar Widget' : 'Novo Widget'}</h2><p className="mt-1 text-[11px] text-muted-foreground">{editingWidgetId ? 'Revise a montagem e salve de novo' : 'Monte uma leitura clara com recorte e pergunta de negocio'}</p></div></div>
+                <button onClick={closePanel} className="text-xl leading-none text-muted-foreground transition-colors hover:text-[#143230]">×</button>
               </div>
               <div className="flex-1 space-y-5 overflow-y-auto px-6 py-6">
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white p-4">
-                  <div className="flex items-center gap-2"><ScanSearch className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-stone-500">Pergunta</p></div>
-                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Titulo *</label><input type="text" value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Ex: Contratos ativos em janeiro de 2026" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card p-4">
+                  <div className="flex items-center gap-2"><ScanSearch className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Pergunta</p></div>
+                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Titulo *</label><input type="text" value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Ex: Contratos ativos em janeiro de 2026" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
                   <div className="mt-4">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Tabela base *</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Tabela base *</label>
                     <div className="mt-2 space-y-2">
                       {availableTables.map((t) => {
                         const sem = getTableSemantic(t);
@@ -1110,15 +1110,15 @@ export default function DashboardEditorPage({ params }: Props) {
                             key={t}
                             type="button"
                             onClick={() => setForm((f) => ({ ...f, table: t, xColumn: '', metric: '', filterColumn: '', dateColumn: '' }))}
-                            className={`w-full rounded-2xl border px-4 py-3 text-left flex items-center justify-between gap-3 transition-all ${active ? 'border-[#379890]/30 bg-[#379890]/8 shadow-[0_8px_20px_-12px_rgba(55,152,144,0.3)]' : 'border-[#143230]/8 bg-white hover:border-[#379890]/20'}`}
+                            className={`w-full rounded-2xl border px-4 py-3 text-left flex items-center justify-between gap-3 transition-all ${active ? 'border-[#379890]/30 bg-[#379890]/8 shadow-[0_8px_20px_-12px_rgba(55,152,144,0.3)]' : 'border-[#143230]/8 bg-card hover:border-[#379890]/20'}`}
                           >
                             <div className="min-w-0">
                               <p className={`text-sm font-black truncate ${active ? 'text-[#2c7f78]' : 'text-[#143230]'}`}>{sem.label}</p>
-                              <p className="font-mono text-[10px] text-stone-500">{t}</p>
+                              <p className="font-mono text-[10px] text-muted-foreground">{t}</p>
                             </div>
                             <div className="flex items-center gap-2 shrink-0">
                               {tableInfo?.rows != null && (
-                                <span className="text-[10px] font-black text-stone-400">{tableInfo.rows.toLocaleString('pt-BR')} rows</span>
+                                <span className="text-[10px] font-black text-muted-foreground">{tableInfo.rows.toLocaleString('pt-BR')} rows</span>
                               )}
                               {active && <Check className="w-4 h-4 text-[#379890]" />}
                             </div>
@@ -1129,7 +1129,7 @@ export default function DashboardEditorPage({ params }: Props) {
                   </div>
                   <div className="mt-4 rounded-2xl border border-[#379890]/15 bg-[#379890]/6 p-4">
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2c7f78]">Como montar sem confusao</p>
-                    <div className="mt-3 space-y-2 text-xs leading-relaxed text-stone-600">
+                    <div className="mt-3 space-y-2 text-xs leading-relaxed text-muted-foreground">
                       <p><strong className="text-[#143230]">1. Quem aparece no grafico?</strong> Escolha em <strong className="text-[#143230]">Eixo ou categoria</strong>.</p>
                       <p><strong className="text-[#143230]">2. O que sera calculado?</strong> Defina em <strong className="text-[#143230]">Calculo</strong>.</p>
                       <p><strong className="text-[#143230]">3. Qual recorte?</strong> Use <strong className="text-[#143230]">Filtro de negocio</strong>.</p>
@@ -1137,17 +1137,17 @@ export default function DashboardEditorPage({ params }: Props) {
                     </div>
                   </div>
                 </div>
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white p-4">
-                  <div className="flex items-center gap-2"><SlidersHorizontal className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-stone-500">Leitura</p></div>
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card p-4">
+                  <div className="flex items-center gap-2"><SlidersHorizontal className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Leitura</p></div>
                   <div className="mt-4">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Tipo de grafico</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Tipo de grafico</label>
                     <div className="mt-2 grid grid-cols-3 gap-2">
                       {CHART_TYPES.map((ct) => (
                         <button
                           key={ct.value}
                           type="button"
                           onClick={() => handleChartTypeChange(ct.value)}
-                          className={`rounded-2xl border py-3 px-2 flex flex-col items-center gap-1 transition-all ${form.chartType === ct.value ? 'border-[#379890] bg-[#379890]/10 text-[#2c7f78]' : 'border-[#143230]/10 bg-white text-stone-500 hover:border-[#379890]/20'}`}
+                          className={`rounded-2xl border py-3 px-2 flex flex-col items-center gap-1 transition-all ${form.chartType === ct.value ? 'border-[#379890] bg-[#379890]/10 text-[#2c7f78]' : 'border-[#143230]/10 bg-card text-muted-foreground hover:border-[#379890]/20'}`}
                         >
                           <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-black/5">
                             {CHART_SVG[ct.value]}
@@ -1197,15 +1197,15 @@ export default function DashboardEditorPage({ params }: Props) {
                   </div>
 
                   <div className="mt-4">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Calculo</label>
-                    <select value={form.aggregation} onChange={(e) => handleAggregationChange(e.target.value as AggregationType)} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Calculo</label>
+                    <select value={form.aggregation} onChange={(e) => handleAggregationChange(e.target.value as AggregationType)} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none">
                       {AGGREGATIONS.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
                     </select>
                   </div>
 
                   {form.aggregation !== 'none' && (
                     <div className="mt-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Eixo ou categoria</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Eixo ou categoria</label>
                       <div className="mt-2">
                         <ColumnPicker
                           columns={columns}
@@ -1221,11 +1221,11 @@ export default function DashboardEditorPage({ params }: Props) {
                       </div>
                       {form.xColumn && isNumericColumn(columns.find((c) => c.name === form.xColumn)?.type ?? '') && (
                         <div className="mt-3">
-                          <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Agrupar em faixas de valor</label>
+                          <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Agrupar em faixas de valor</label>
                           <select
                             value={form.numericBucketSize}
                             onChange={(e) => setForm((f) => ({ ...f, numericBucketSize: Number(e.target.value) }))}
-                            className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none"
+                            className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none"
                           >
                             <option value={0}>Valor exato (sem faixas)</option>
                             <option value={50}>Faixas de 50</option>
@@ -1236,7 +1236,7 @@ export default function DashboardEditorPage({ params }: Props) {
                             <option value={10000}>Faixas de 10.000</option>
                           </select>
                           {form.numericBucketSize > 0 && (
-                            <p className="mt-1.5 text-[10px] text-stone-500 leading-relaxed">
+                            <p className="mt-1.5 text-[10px] text-muted-foreground leading-relaxed">
                               O eixo vai mostrar intervalos como &ldquo;0 – {form.numericBucketSize - 1}&rdquo;, &ldquo;{form.numericBucketSize} – {form.numericBucketSize * 2 - 1}&rdquo;…
                             </p>
                           )}
@@ -1247,7 +1247,7 @@ export default function DashboardEditorPage({ params }: Props) {
 
                   {['count_distinct', 'sum', 'avg', 'min', 'max'].includes(form.aggregation) && (
                     <div className="mt-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                         {form.aggregation === 'count_distinct' ? 'Coluna para contagem unica' : 'Coluna numerica'}
                       </label>
                       <div className="mt-2">
@@ -1273,13 +1273,13 @@ export default function DashboardEditorPage({ params }: Props) {
                     </div>
                   )}
 
-                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Agrupamento temporal</label><select value={form.timeBucket} onChange={(e) => setForm((f) => ({ ...f, timeBucket: e.target.value as TimeBucket }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none">{TIME_BUCKETS.map((b) => <option key={b.value} value={b.value}>{b.label}</option>)}</select></div>
+                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Agrupamento temporal</label><select value={form.timeBucket} onChange={(e) => setForm((f) => ({ ...f, timeBucket: e.target.value as TimeBucket }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none">{TIME_BUCKETS.map((b) => <option key={b.value} value={b.value}>{b.label}</option>)}</select></div>
                 </div>
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white p-4">
-                  <div className="flex items-center gap-2"><CalendarRange className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-stone-500">Recorte</p></div>
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card p-4">
+                  <div className="flex items-center gap-2"><CalendarRange className="h-4 w-4 text-[#379890]" /><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Recorte</p></div>
                   <div className="mt-4 grid grid-cols-2 gap-3">
                     <div className="col-span-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Filtro de negocio 1</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Filtro de negocio 1</label>
                       <div className="mt-2">
                         <ColumnPicker
                           columns={columns}
@@ -1302,8 +1302,8 @@ export default function DashboardEditorPage({ params }: Props) {
                     </div>
                     {form.filterColumn && (
                       <>
-                        <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Operador 1</label><select value={form.filterOperator} onChange={(e) => setForm((f) => ({ ...f, filterOperator: e.target.value as FilterOperator }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none">{FILTER_OPERATORS.map((op) => <option key={op.value} value={op.value}>{op.label}</option>)}</select></div>
-                        <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Valor 1</label><input type="text" value={form.filterValue} onChange={(e) => setForm((f) => ({ ...f, filterValue: e.target.value }))} placeholder="Ex: NOC" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
+                        <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Operador 1</label><select value={form.filterOperator} onChange={(e) => setForm((f) => ({ ...f, filterOperator: e.target.value as FilterOperator }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none">{FILTER_OPERATORS.map((op) => <option key={op.value} value={op.value}>{op.label}</option>)}</select></div>
+                        <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Valor 1</label><input type="text" value={form.filterValue} onChange={(e) => setForm((f) => ({ ...f, filterValue: e.target.value }))} placeholder="Ex: NOC" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
                       </>
                     )}
 
@@ -1320,7 +1320,7 @@ export default function DashboardEditorPage({ params }: Props) {
                         ) : (
                           <>
                             <div className="mb-3">
-                              <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Filtro de negocio 2</label>
+                              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Filtro de negocio 2</label>
                               <div className="mt-2">
                                 <ColumnPicker
                                   columns={columns}
@@ -1343,8 +1343,8 @@ export default function DashboardEditorPage({ params }: Props) {
                             </div>
                             {form.filter2Column && (
                               <div className="grid grid-cols-2 gap-3">
-                                <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Operador 2</label><select value={form.filter2Operator} onChange={(e) => setForm((f) => ({ ...f, filter2Operator: e.target.value as FilterOperator }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none">{FILTER_OPERATORS.map((op) => <option key={op.value} value={op.value}>{op.label}</option>)}</select></div>
-                                <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Valor 2</label><input type="text" value={form.filter2Value} onChange={(e) => setForm((f) => ({ ...f, filter2Value: e.target.value }))} placeholder="Ex: ativo" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
+                                <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Operador 2</label><select value={form.filter2Operator} onChange={(e) => setForm((f) => ({ ...f, filter2Operator: e.target.value as FilterOperator }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none">{FILTER_OPERATORS.map((op) => <option key={op.value} value={op.value}>{op.label}</option>)}</select></div>
+                                <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Valor 2</label><input type="text" value={form.filter2Value} onChange={(e) => setForm((f) => ({ ...f, filter2Value: e.target.value }))} placeholder="Ex: ativo" className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
                               </div>
                             )}
                           </>
@@ -1353,7 +1353,7 @@ export default function DashboardEditorPage({ params }: Props) {
                     )}
 
                     <div className="col-span-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Coluna de periodo</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Coluna de periodo</label>
                       <div className="mt-2">
                         <ColumnPicker
                           columns={columns}
@@ -1366,19 +1366,19 @@ export default function DashboardEditorPage({ params }: Props) {
                         />
                       </div>
                     </div>
-                    <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Data inicial</label><input type="date" value={form.dateFrom} onChange={(e) => setForm((f) => ({ ...f, dateFrom: e.target.value }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
-                    <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Data final</label><input type="date" value={form.dateTo} onChange={(e) => setForm((f) => ({ ...f, dateTo: e.target.value }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-white px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
+                    <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Data inicial</label><input type="date" value={form.dateFrom} onChange={(e) => setForm((f) => ({ ...f, dateFrom: e.target.value }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
+                    <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Data final</label><input type="date" value={form.dateTo} onChange={(e) => setForm((f) => ({ ...f, dateTo: e.target.value }))} className="mt-2 w-full rounded-2xl border border-[#143230]/10 bg-card px-4 py-3 text-sm outline-none focus:border-[#379890]/50" /></div>
                   </div>
                 </div>
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white p-4">
-                  <div><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Limite de linhas: <span className="text-[#143230]">{form.limit}</span></label><input type="range" min={5} max={100} step={5} value={form.limit} onChange={(e) => setForm((f) => ({ ...f, limit: Number(e.target.value) }))} className="mt-2 w-full accent-[#379890]" /></div>
-                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Cor</label><div className="mt-2 flex flex-wrap gap-2">{WIDGET_COLORS.map((c) => <button key={c} onClick={() => setForm((f) => ({ ...f, color: c }))} className={`h-8 w-8 rounded-xl border border-white/60 transition-all ${form.color === c ? 'scale-110 ring-2 ring-[#143230] ring-offset-2 ring-offset-[#f7f8f4]' : 'hover:scale-110'}`} style={{ background: c }} />)}</div></div>
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card p-4">
+                  <div><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Limite de linhas: <span className="text-[#143230]">{form.limit}</span></label><input type="range" min={5} max={100} step={5} value={form.limit} onChange={(e) => setForm((f) => ({ ...f, limit: Number(e.target.value) }))} className="mt-2 w-full accent-[#379890]" /></div>
+                  <div className="mt-4"><label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Cor</label><div className="mt-2 flex flex-wrap gap-2">{WIDGET_COLORS.map((c) => <button key={c} onClick={() => setForm((f) => ({ ...f, color: c }))} className={`h-8 w-8 rounded-xl border border-white/60 transition-all ${form.color === c ? 'scale-110 ring-2 ring-[#143230] ring-offset-2 ring-offset-[#f7f8f4]' : 'hover:scale-110'}`} style={{ background: c }} />)}</div></div>
                 </div>
               </div>
-              <div className="border-t border-[#143230]/8 bg-white/80 px-6 py-5 space-y-4">
+              <div className="border-t border-[#143230]/8 bg-card/80 px-6 py-5 space-y-4">
                 {/* Seletor de tamanho */}
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Tamanho do widget</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Tamanho do widget</label>
                   <div className="mt-2 grid grid-cols-4 gap-2">
                     {([
                       { value: 'sm' as WidgetSize, label: 'P', hint: 'Compacto' },
@@ -1393,7 +1393,7 @@ export default function DashboardEditorPage({ params }: Props) {
                         className={`flex flex-col items-center rounded-2xl border py-2 px-1 text-[10px] font-black transition-all ${
                           form.size === sz.value
                             ? 'border-[#379890] bg-[#379890]/10 text-[#2c7f78]'
-                            : 'border-[#143230]/10 bg-white text-stone-500 hover:border-[#379890]/20'
+                            : 'border-[#143230]/10 bg-card text-muted-foreground hover:border-[#379890]/20'
                         }`}
                       >
                         <span className="text-sm font-black">{sz.label}</span>

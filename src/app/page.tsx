@@ -2,217 +2,134 @@
 
 import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
-import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import {
-  Activity, Bell, Bot, CheckCircle2,
-  Database, MessageSquare, Settings,
-  TriangleAlert, XCircle, RefreshCw,
-  ArrowRight, Zap,
+  ArrowRight, ArrowUpRight, Sparkles, TrendingUp,
+  Users2, Wallet, Target,
 } from 'lucide-react';
+import { brand } from '@/lib/brand';
+import { modules } from '@/lib/modules';
 
-type HealthStatus = 'loading' | 'ok' | 'degraded' | 'error';
-
-type ServiceHealth = {
-  label: string;
-  status: 'ok' | 'error' | 'unknown';
-};
-
-const QUICK_LINKS = [
-  { label: 'Monitoramento', href: '/dashboard/noc',        icon: Activity,      desc: 'NOC e saúde dos serviços' },
-  { label: 'Zabbix',        href: '/monitoring/zabbix',    icon: Bell,          desc: 'Alarmes em tempo real' },
-  { label: 'IA Comunicação',href: '/dashboard/comunicacao',icon: Bot,           desc: 'WhatsApp e sentimento' },
-  { label: 'DataLake',      href: '/datalake',             icon: Database,      desc: 'Dados e dashboards' },
-  { label: 'Chat',          href: '/chat',                 icon: MessageSquare, desc: 'Assistente interno com IA' },
-  { label: 'Diagnóstico',   href: '/settings',             icon: Settings,      desc: 'Status das conexões' },
+const KPIS = [
+  { label: 'Receita (mês)',     value: 'R$ 184,2k', delta: '+12,4%', up: true,  icon: Wallet,     tint: 'text-primary',  soft: 'bg-primary-soft' },
+  { label: 'Novos clientes',    value: '38',        delta: '+9',     up: true,  icon: Users2,     tint: 'text-info',     soft: 'bg-info-soft' },
+  { label: 'Metas no prazo',    value: '82%',       delta: '+5 p.p.',up: true,  icon: Target,     tint: 'text-success',  soft: 'bg-success-soft' },
+  { label: 'Ticket médio',      value: 'R$ 4,85k',  delta: '-2,1%',  up: false, icon: TrendingUp, tint: 'text-accent',   soft: 'bg-accent-soft' },
 ];
 
-function StatusBadge({ status }: { status: HealthStatus }) {
-  if (status === 'loading') return (
-    <span className="flex items-center gap-1.5 text-gray-400 text-[11px] font-bold">
-      <RefreshCw className="h-3 w-3 animate-spin" /> Verificando...
-    </span>
-  );
-  if (status === 'ok') return (
-    <span className="flex items-center gap-1.5 text-emerald-600 text-[11px] font-black uppercase tracking-[0.15em]">
-      <CheckCircle2 className="h-3.5 w-3.5" /> Tudo operacional
-    </span>
-  );
-  if (status === 'degraded') return (
-    <span className="flex items-center gap-1.5 text-amber-500 text-[11px] font-black uppercase tracking-[0.15em]">
-      <TriangleAlert className="h-3.5 w-3.5" /> Degradado
-    </span>
-  );
-  return (
-    <span className="flex items-center gap-1.5 text-red-500 text-[11px] font-black uppercase tracking-[0.15em]">
-      <XCircle className="h-3.5 w-3.5" /> Falha detectada
-    </span>
-  );
-}
+export default function HomePage() {
+  const { data: session } = useSession();
+  const firstName = (session?.user?.name?.split(' ')[0] ?? brand.defaultUser) || brand.defaultUser;
 
-export default function HubHomePage() {
-  const { data: session } = useSession()
-  const firstName = (session?.user?.name?.split(' ')[0] ?? process.env.NEXT_PUBLIC_APP_DEFAULT_USER) || 'Membro'
-  const [health, setHealth] = useState<HealthStatus>('loading');
-  const [services, setServices] = useState<ServiceHealth[]>([]);
-  const [healthy, setHealthy] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [hora, setHora] = useState('');
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
 
-  useEffect(() => {
-    setHora(new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
-
-    fetch('/api/health/full')
-      .then((r) => r.json())
-      .then((d) => {
-        const svcs: ServiceHealth[] = Object.entries(d?.services ?? {}).map(([key, val]) => ({
-          label: key.charAt(0).toUpperCase() + key.slice(1),
-          status: (val as { status: string }).status === 'ok' ? 'ok' : 'error',
-        }));
-        const okCount = svcs.filter((s) => s.status === 'ok').length;
-        setServices(svcs);
-        setHealthy(okCount);
-        setTotal(svcs.length);
-        setHealth(okCount === svcs.length ? 'ok' : okCount > 0 ? 'degraded' : 'error');
-      })
-      .catch(() => setHealth('error'));
-  }, []);
-
-  const now = new Date();
-  const greeting =
-    now.getHours() < 12 ? 'Bom dia' :
-    now.getHours() < 18 ? 'Boa tarde' : 'Boa noite';
+  const gridModules = modules.filter((m) => m.id !== 'inicio' && m.id !== 'config');
 
   return (
     <div className="flex flex-1 min-h-0 overflow-hidden bg-background text-foreground font-sans">
       <Sidebar />
 
       <main className="flex-1 overflow-y-auto custom-scrollbar">
-        <div className="mx-auto max-w-5xl px-8 py-10 flex flex-col gap-8">
+        <div className="mx-auto max-w-6xl px-6 py-9 lg:px-10 flex flex-col gap-7 animate-fade-in">
 
           {/* ── HERO ── */}
-          <div className="rounded-[36px] border border-gray-200 bg-white p-10 shadow-[0_8px_40px_rgba(64,64,64,0.07)] relative overflow-hidden">
-            <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-[#8DC63F]/8 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-[#8DC63F]/5 blur-2xl" />
-
-            <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <section className="relative overflow-hidden rounded-3xl brand-gradient p-8 lg:p-10 text-white shadow-[0_24px_60px_-30px_rgba(79,70,229,0.7)]">
+            <div className="pointer-events-none absolute -right-10 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <Zap className="h-4 w-4 text-[#8DC63F]" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
-                    {process.env.NEXT_PUBLIC_APP_NAME || "G4OS"} {process.env.NEXT_PUBLIC_APP_SUBTITLE || "Hub Operacional"}
-                  </span>
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 backdrop-blur">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.25em]">{brand.name} · {brand.subtitle}</span>
                 </div>
-                <h1 className="text-4xl font-[1000] tracking-[-0.05em] text-[#404040] lg:text-5xl">
-                  {greeting},<br />
-                  <span className="text-[#8DC63F]">{firstName}.</span>
+                <h1 className="text-3xl lg:text-[2.7rem] font-[900] leading-[1.05] tracking-[-0.03em]">
+                  {greeting}, {firstName}.
                 </h1>
-                <p className="mt-3 text-sm text-gray-400 leading-relaxed max-w-md">
-                  Central de inteligência e automação da empresa. Acesse monitoramento, comunicação, dados e IA em um só lugar.
+                <p className="mt-3 max-w-md text-sm text-white/80 leading-relaxed">
+                  {brand.tagline} Acompanhe indicadores, clientes, metas e comunicação — tudo em um só lugar.
                 </p>
               </div>
-
-              {/* Status summary */}
-              <div className="flex flex-col items-start lg:items-end gap-3">
-                <StatusBadge status={health} />
-                {total > 0 && (
-                  <div className="flex gap-2">
-                    {services.map((svc) => (
-                      <div
-                        key={svc.label}
-                        title={svc.label}
-                        className={`h-2 w-8 rounded-full ${svc.status === 'ok' ? 'bg-[#8DC63F]' : 'bg-red-400'}`}
-                      />
-                    ))}
-                  </div>
-                )}
-                {total > 0 && (
-                  <p className="text-[10px] text-gray-400 font-bold">
-                    {healthy}/{total} serviços operacionais
-                  </p>
-                )}
-                {hora && (
-                  <p className="text-[10px] text-gray-300 font-bold uppercase tracking-[0.2em]">
-                    Verificado às {hora}
-                  </p>
-                )}
+              <div className="flex gap-3">
+                <Link href="/chat" className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-[12px] font-extrabold text-primary shadow-lg transition-all hover:-translate-y-0.5">
+                  <Sparkles className="h-4 w-4" /> Perguntar à IA
+                </Link>
+                <Link href="/dashboards" className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-[12px] font-extrabold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/20">
+                  Ver indicadores <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
+          </section>
 
-            <div className="relative mt-8 flex gap-3">
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-2 rounded-full bg-[#8DC63F] px-6 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_8px_24px_-8px_rgba(141,198,63,0.5)] transition-all hover:-translate-y-0.5 hover:bg-[#7ab030]"
-              >
-                Abrir Workspace
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <Link
-                href="/settings"
-                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-gray-500 transition-all hover:-translate-y-0.5 hover:border-[#8DC63F]/40 hover:text-[#8DC63F]"
-              >
-                <Settings className="h-3.5 w-3.5" />
-                Ver Diagnóstico
-              </Link>
+          {/* ── KPIs (demonstração) ── */}
+          <section>
+            <div className="mb-3 flex items-center justify-between px-1">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Resumo do negócio</p>
+              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">dados de demonstração</span>
             </div>
-          </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {KPIS.map((k) => (
+                <div key={k.label} className="surface surface-hover p-5">
+                  <div className="flex items-center justify-between">
+                    <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${k.soft}`}>
+                      <k.icon className={`h-4.5 w-4.5 ${k.tint}`} />
+                    </div>
+                    <span className={`inline-flex items-center gap-0.5 text-[11px] font-extrabold ${k.up ? 'text-success' : 'text-danger'}`}>
+                      {k.delta}
+                      <ArrowUpRight className={`h-3 w-3 ${k.up ? '' : 'rotate-90'}`} />
+                    </span>
+                  </div>
+                  <p className="mt-4 text-2xl font-[900] tracking-[-0.02em] text-foreground">{k.value}</p>
+                  <p className="mt-0.5 text-[12px] font-semibold text-muted-foreground">{k.label}</p>
+                </div>
+              ))}
+            </div>
+          </section>
 
-          {/* ── ACESSO RÁPIDO ── */}
-          <div>
-            <p className="mb-4 text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 px-1">
-              Acesso rápido
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {QUICK_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="group flex items-center gap-4 rounded-[24px] border border-gray-200 bg-white p-5 shadow-[0_2px_12px_rgba(64,64,64,0.05)] transition-all hover:-translate-y-0.5 hover:border-[#8DC63F]/30 hover:shadow-[0_8px_24px_rgba(141,198,63,0.10)]"
-                >
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-[#8DC63F]/10 transition-colors group-hover:bg-[#8DC63F]/20">
-                    <link.icon className="h-4.5 w-4.5 text-[#8DC63F]" />
+          {/* ── MÓDULOS ── */}
+          <section>
+            <p className="mb-3 px-1 text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Seus módulos</p>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {gridModules.map((m) => (
+                <Link key={m.id} href={m.href} className="surface surface-hover group flex items-start gap-4 p-5">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                    <m.icon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-black uppercase tracking-[0.04em] text-[#404040]">{link.label}</p>
-                    <p className="mt-0.5 text-[11px] text-gray-400 truncate">{link.desc}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-[14px] font-extrabold tracking-[-0.01em] text-foreground">{m.label}</p>
+                      {m.status === 'soon' && (
+                        <span className="rounded-full bg-accent-soft px-1.5 py-px text-[8px] font-black uppercase tracking-[0.12em] text-accent">Em breve</span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground">{m.desc}</p>
                   </div>
-                  <ArrowRight className="h-3.5 w-3.5 text-gray-300 opacity-0 transition-all group-hover:text-[#8DC63F] group-hover:opacity-100" />
+                  <ArrowRight className="h-4 w-4 flex-shrink-0 text-slate-300 opacity-0 transition-all group-hover:text-primary group-hover:opacity-100" />
                 </Link>
               ))}
             </div>
-          </div>
+          </section>
 
-          {/* ── STATUS COMPACTO ── */}
-          {services.length > 0 && (
-            <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-[0_2px_12px_rgba(64,64,64,0.05)]">
-              <div className="flex items-center justify-between mb-5">
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
-                  Status das conexões
-                </p>
-                <Link
-                  href="/settings"
-                  className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8DC63F] hover:underline"
-                >
-                  Ver detalhes →
-                </Link>
+          {/* ── DESTAQUE IA ── */}
+          <section className="surface relative overflow-hidden p-7 lg:p-8">
+            <div className="pointer-events-none absolute -right-8 -top-10 h-44 w-44 rounded-full bg-primary/10 blur-3xl" />
+            <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl brand-gradient text-white">
+                  <Sparkles className="h-5.5 w-5.5" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-[900] tracking-[-0.02em] text-foreground">Inteligência nativa</h2>
+                  <p className="mt-1 max-w-lg text-[13px] leading-relaxed text-muted-foreground">
+                    O assistente do {brand.name} lê seus indicadores, resume o que importa e responde em linguagem natural — o diferencial do seu OS.
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {services.map((svc) => (
-                  <div
-                    key={svc.label}
-                    className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] ${
-                      svc.status === 'ok'
-                        ? 'border-emerald-200 bg-emerald-50 text-emerald-600'
-                        : 'border-red-200 bg-red-50 text-red-500'
-                    }`}
-                  >
-                    <span className={`h-1.5 w-1.5 rounded-full ${svc.status === 'ok' ? 'bg-emerald-500' : 'bg-red-400 animate-pulse'}`} />
-                    {svc.label}
-                  </div>
-                ))}
-              </div>
+              <Link href="/chat" className="btn-primary inline-flex flex-shrink-0 items-center gap-2 px-5 py-3 text-[12px] font-extrabold">
+                Abrir assistente <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          )}
+          </section>
 
         </div>
       </main>

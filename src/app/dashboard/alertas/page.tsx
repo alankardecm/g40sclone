@@ -90,16 +90,16 @@ function formatDuration(minutes: number): string {
 const slaStyle: Record<SlaLevel, { dot: string; text: string; label: string }> = {
   red: { dot: 'bg-red-500', text: 'text-red-600', label: 'Crítico' },
   yellow: { dot: 'bg-yellow-400', text: 'text-yellow-700', label: 'Atenção' },
-  ok: { dot: 'bg-stone-600', text: 'text-stone-600', label: 'Ok' },
+  ok: { dot: 'bg-stone-600', text: 'text-muted-foreground', label: 'Ok' },
 };
 
 function SentimentBadge({ sentiment }: { sentiment: Sentiment }) {
   if (!sentiment) {
-    return <span className="text-[10px] text-stone-600">—</span>;
+    return <span className="text-[10px] text-muted-foreground">—</span>;
   }
   const map = {
     positive: { Icon: Smile, cls: 'text-emerald-600 border-emerald-500/20 bg-emerald-500/8', label: 'Positivo' },
-    neutral: { Icon: Meh, cls: 'text-stone-700 border-black/10 bg-white/5', label: 'Neutro' },
+    neutral: { Icon: Meh, cls: 'text-foreground border-black/10 bg-card/5', label: 'Neutro' },
     negative: { Icon: Frown, cls: 'text-red-600 border-red-500/20 bg-red-500/8', label: 'Negativo' },
   }[sentiment.sentiment];
   const { Icon } = map;
@@ -174,11 +174,11 @@ export default function CockpitConversas() {
     {
       label: 'Aguardando resposta',
       value: summary?.waiting_total ?? 0,
-      color: (summary?.waiting_total ?? 0) > 0 ? 'text-red-600' : 'text-stone-600',
+      color: (summary?.waiting_total ?? 0) > 0 ? 'text-red-600' : 'text-muted-foreground',
     },
     { label: 'Crítico (sem resposta)', value: summary?.waiting_red ?? 0, color: 'text-red-600' },
     { label: 'Em atenção', value: summary?.waiting_yellow ?? 0, color: 'text-yellow-700' },
-    { label: 'Conversas abertas', value: summary?.open_total ?? 0, color: 'text-stone-700' },
+    { label: 'Conversas abertas', value: summary?.open_total ?? 0, color: 'text-foreground' },
   ];
 
   return (
@@ -195,9 +195,9 @@ export default function CockpitConversas() {
           >
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <MessageSquare className="h-5 w-5 text-[#8DC63F]" />
+                <MessageSquare className="h-5 w-5 text-[#3B82F6]" />
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-600">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                     Hub Operacional
                   </p>
                   <h1 className="mt-0.5 text-xl font-[950] uppercase tracking-[-0.03em]">
@@ -210,7 +210,7 @@ export default function CockpitConversas() {
                 <button
                   onClick={() => load(period)}
                   disabled={loading}
-                  className="flex items-center gap-1.5 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.18em] text-stone-600 hover:text-stone-900 transition disabled:opacity-50"
+                  className="flex items-center gap-1.5 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition disabled:opacity-50"
                 >
                   <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
                   Atualizar
@@ -221,7 +221,7 @@ export default function CockpitConversas() {
                       key={d}
                       onClick={() => setPeriod(d)}
                       className={`rounded-[16px] px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all ${
-                        period === d ? 'bg-[#8DC63F] text-black shadow-md' : 'text-stone-600 hover:text-stone-900'
+                        period === d ? 'bg-[#3B82F6] text-black shadow-md' : 'text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       {d === 1 ? 'Hoje' : `${d}d`}
@@ -235,14 +235,14 @@ export default function CockpitConversas() {
             <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {kpis.map((kpi) => (
                 <div key={kpi.label} className="rounded-[22px] border border-black/5 bg-black/[0.03] p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-600">{kpi.label}</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">{kpi.label}</p>
                   <p className={`mt-2 text-2xl font-[1000] tracking-[-0.05em] ${kpi.color}`}>{kpi.value}</p>
                 </div>
               ))}
             </div>
 
             {sla && (
-              <p className="mt-3 text-[10px] text-stone-600">
+              <p className="mt-3 text-[10px] text-muted-foreground">
                 SLA de resposta: <span className="text-yellow-700 font-black">atenção &gt; {sla.yellow_minutes} min</span>
                 {' · '}
                 <span className="text-red-600 font-black">crítico &gt; {sla.red_minutes} min</span> sem resposta
@@ -253,19 +253,19 @@ export default function CockpitConversas() {
           {/* Filtros */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1.5 flex-1 min-w-[220px]">
-              <Search className="h-3.5 w-3.5 text-stone-600" />
+              <Search className="h-3.5 w-3.5 text-muted-foreground" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Buscar por cliente, protocolo, grupo, participante..."
-                className="bg-transparent text-[12px] text-stone-800 placeholder:text-stone-600 outline-none flex-1"
+                className="bg-transparent text-[12px] text-foreground placeholder:text-muted-foreground outline-none flex-1"
               />
             </div>
             {groups.length > 0 && (
               <select
                 value={groupId}
                 onChange={(e) => setGroupId(e.target.value)}
-                className="rounded-full border border-black/10 bg-black/[0.03] px-4 py-1.5 text-[11px] font-bold text-stone-700 outline-none"
+                className="rounded-full border border-black/10 bg-black/[0.03] px-4 py-1.5 text-[11px] font-bold text-foreground outline-none"
               >
                 <option value="todos">Todos os grupos</option>
                 {groups.map((g) => (
@@ -281,8 +281,8 @@ export default function CockpitConversas() {
           {loading && !data ? (
             <div className="flex items-center justify-center py-20">
               <div className="text-center">
-                <RefreshCw className="h-8 w-8 text-stone-600 mx-auto mb-3 animate-spin" />
-                <p className="text-sm text-stone-600">Carregando conversas...</p>
+                <RefreshCw className="h-8 w-8 text-muted-foreground mx-auto mb-3 animate-spin" />
+                <p className="text-sm text-muted-foreground">Carregando conversas...</p>
               </div>
             </div>
           ) : filtered.length === 0 ? (
@@ -292,9 +292,9 @@ export default function CockpitConversas() {
               className="rounded-[28px] border border-dashed border-black/10 bg-black/[0.02] flex items-center justify-center py-20"
             >
               <div className="text-center">
-                <AlertCircle className="h-8 w-8 text-stone-600 mx-auto mb-3" />
-                <p className="text-sm text-stone-600">Nenhuma conversa no período / filtro.</p>
-                <p className="text-xs text-stone-600 mt-1">
+                <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground">Nenhuma conversa no período / filtro.</p>
+                <p className="text-xs text-muted-foreground mt-1">
                   {period === 1 ? 'Tente expandir para 7 ou 30 dias.' : 'Tudo tranquilo por aqui.'}
                 </p>
               </div>
@@ -328,7 +328,7 @@ export default function CockpitConversas() {
                           <span className={`h-2 w-2 rounded-full ${style.dot}`} />
                           {style.label}
                         </span>
-                        <span className="text-[10px] font-black text-stone-800 uppercase tracking-[0.12em]">
+                        <span className="text-[10px] font-black text-foreground uppercase tracking-[0.12em]">
                           {c.group_name}
                         </span>
                         {c.status === 'open' ? (
@@ -336,14 +336,14 @@ export default function CockpitConversas() {
                             <CircleDot className="h-3 w-3" /> aberta
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.14em] text-stone-600">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.14em] text-muted-foreground">
                             <CheckCircle2 className="h-3 w-3" /> encerrada
                           </span>
                         )}
                         {c.protocols.map((p) => (
                           <span
                             key={p}
-                            className="inline-flex items-center gap-1 rounded-full border border-[#8DC63F]/25 bg-[#8DC63F]/8 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-[#8DC63F]"
+                            className="inline-flex items-center gap-1 rounded-full border border-[#3B82F6]/25 bg-[#3B82F6]/8 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-[#3B82F6]"
                           >
                             <Hash className="h-2.5 w-2.5" />
                             {p}
@@ -362,13 +362,13 @@ export default function CockpitConversas() {
                     )}
 
                     {/* Última mensagem */}
-                    <p className="text-sm text-stone-700 leading-relaxed line-clamp-3">
-                      <span className="text-stone-600">{c.last_sender}: </span>
+                    <p className="text-sm text-foreground leading-relaxed line-clamp-3">
+                      <span className="text-muted-foreground">{c.last_sender}: </span>
                       {c.last_text}
                     </p>
 
                     {/* Rodapé */}
-                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-stone-600">
+                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-muted-foreground">
                       <span>{c.message_count} msgs · {c.participant_count} pessoas</span>
                       <span>início {formatClock(c.started_ts)}</span>
                       <span>última {formatClock(lastActivityTs)}</span>
@@ -384,7 +384,7 @@ export default function CockpitConversas() {
               })}
 
               {lastUpdated && (
-                <p className="text-center text-[10px] text-stone-600 pt-2">
+                <p className="text-center text-[10px] text-muted-foreground pt-2">
                   Última atualização: {lastUpdated.toLocaleTimeString('pt-BR')} · {filtered.length} conversas
                 </p>
               )}

@@ -177,7 +177,7 @@ export default async function CustosDashboard({
 
           {/* Header + seletor de período */}
           <section className="rounded-[40px] border border-black/5 bg-card p-10 shadow-2xl">
-            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] text-stone-600 mb-3">
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground mb-3">
               <Activity className="w-4 h-4 text-neon-cyan" />
               <span>Custos de IA · consumo real (Supabase)</span>
             </div>
@@ -186,9 +186,9 @@ export default async function CustosDashboard({
                 <h1 className="text-4xl lg:text-5xl font-[1000] tracking-[-0.07em] leading-[0.95] uppercase">
                   Painel de custos das APIs de IA
                 </h1>
-                <p className="text-sm lg:text-base text-stone-600 leading-relaxed">
-                  Consumo real registrado a cada chamada de IA. A arquitetura usa uma <strong className="text-stone-800">cascata
-                  de provedores gratuitos</strong> (NVIDIA → Groq → Gemini → OpenRouter) e só cai na <strong className="text-stone-800">OpenAI
+                <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                  Consumo real registrado a cada chamada de IA. A arquitetura usa uma <strong className="text-foreground">cascata
+                  de provedores gratuitos</strong> (NVIDIA → Groq → Gemini → OpenRouter) e só cai na <strong className="text-foreground">OpenAI
                   (paga)</strong> como último recurso ou para serviços exclusivos (transcrição, visão, embeddings).
                 </p>
               </div>
@@ -200,7 +200,7 @@ export default async function CustosDashboard({
                     className={`rounded-full px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] border transition-colors ${
                       periodo === key
                         ? 'border-neon-cyan/40 bg-neon-cyan/10 text-neon-cyan'
-                        : 'border-black/10 bg-black/[0.03] text-stone-600 hover:text-stone-800'
+                        : 'border-black/10 bg-black/[0.03] text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {p.label}
@@ -222,13 +222,13 @@ export default async function CustosDashboard({
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/[0.04] mb-5">
                   <c.icon className={`w-5 h-5 ${c.tone}`} />
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-600">{c.label}</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{c.label}</p>
                 <p className="mt-2 text-3xl font-[950] tracking-[-0.06em]">{c.value}</p>
-                <p className="mt-1 text-[11px] text-stone-600 font-mono">{c.sub}</p>
+                <p className="mt-1 text-[11px] text-muted-foreground font-mono">{c.sub}</p>
               </div>
             ))}
           </section>
-          <p className="-mt-4 text-[11px] text-stone-600 flex items-center gap-1.5">
+          <p className="-mt-4 text-[11px] text-muted-foreground flex items-center gap-1.5">
             <Gift className="w-3.5 h-3.5 text-emerald-600" /> Provedores gratuitos (free-tier) não geram cobrança — o custo real vem essencialmente da OpenAI.
           </p>
 
@@ -236,7 +236,7 @@ export default async function CustosDashboard({
           <section className="rounded-[34px] border border-black/5 bg-card p-8 shadow-2xl">
             <div className="flex items-center justify-between gap-4 mb-7">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-600 mb-1">Por API</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground mb-1">Por API</p>
                 <h2 className="text-2xl font-[950] tracking-[-0.05em] uppercase">Provedores e onde são usados</h2>
               </div>
               <Layers3 className="w-6 h-6 text-neon-cyan" />
@@ -253,26 +253,26 @@ export default async function CustosDashboard({
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <h3 className="text-lg font-black uppercase tracking-[-0.03em]">{cat?.label ?? key}</h3>
-                        <p className="mt-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-stone-600">{cat?.role ?? '—'}</p>
+                        <p className="mt-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-muted-foreground">{cat?.role ?? '—'}</p>
                       </div>
                       <span className={`shrink-0 rounded-full px-3 py-1 text-[9px] font-black uppercase tracking-[0.18em] border ${
                         paid ? 'border-neon-orange/40 bg-neon-orange/10 text-neon-orange' : 'border-emerald-400/30 bg-emerald-400/10 text-emerald-600'
                       }`}>{paid ? 'Pago' : 'Grátis'}</span>
                     </div>
 
-                    <p className="text-[12px] text-stone-600 leading-relaxed">{cat?.where ?? 'Uso registrado nas chamadas de IA.'}</p>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">{cat?.where ?? 'Uso registrado nas chamadas de IA.'}</p>
 
                     <div className="grid grid-cols-3 gap-2 rounded-[18px] border border-black/5 bg-black/[0.03] px-4 py-3 text-center">
                       <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-stone-600">Chamadas</p>
-                        <p className="text-sm font-black text-stone-900">{int(agg?.calls ?? 0)}</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-muted-foreground">Chamadas</p>
+                        <p className="text-sm font-black text-foreground">{int(agg?.calls ?? 0)}</p>
                       </div>
                       <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-stone-600">Tokens</p>
-                        <p className="text-sm font-black text-stone-900">{int((agg?.tIn ?? 0) + (agg?.tOut ?? 0))}</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-muted-foreground">Tokens</p>
+                        <p className="text-sm font-black text-foreground">{int((agg?.tIn ?? 0) + (agg?.tOut ?? 0))}</p>
                       </div>
                       <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-stone-600">Custo</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-muted-foreground">Custo</p>
                         <p className={`text-sm font-black ${paid ? 'text-neon-orange' : 'text-emerald-600'}`}>
                           {paid ? money(agg?.cost ?? 0, 'USD') : 'grátis'}
                         </p>
@@ -282,11 +282,11 @@ export default async function CustosDashboard({
                     {ops.length > 0 && (
                       <div className="flex flex-wrap gap-1.5">
                         {ops.slice(0, 6).map((o, i) => (
-                          <span key={i} className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-1 text-[9px] font-bold text-stone-600">{o}</span>
+                          <span key={i} className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-1 text-[9px] font-bold text-muted-foreground">{o}</span>
                         ))}
                       </div>
                     )}
-                    {!agg && <p className="text-[10px] text-stone-600 italic">Sem uso no período selecionado.</p>}
+                    {!agg && <p className="text-[10px] text-muted-foreground italic">Sem uso no período selecionado.</p>}
                   </div>
                 );
               })}
@@ -297,19 +297,19 @@ export default async function CustosDashboard({
           <section className="rounded-[34px] border border-black/5 bg-card p-8 shadow-2xl">
             <div className="flex flex-wrap items-end justify-between gap-4 mb-7">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-600 mb-1">Governança</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground mb-1">Governança</p>
                 <h2 className="text-2xl font-[950] tracking-[-0.05em] uppercase">Chaves &amp; cotas (status de conexão)</h2>
-                <p className="mt-1 text-[12px] text-stone-600">
+                <p className="mt-1 text-[12px] text-muted-foreground">
                   Status capturado automaticamente dos limites estourados (429). O tempo de renovação vem da própria resposta do provedor.
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="rounded-[18px] border border-black/5 bg-black/[0.03] px-4 py-2.5 text-center">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-600">Chaves ativas</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Chaves ativas</p>
                   <p className="mt-1 text-lg font-[950] text-neon-cyan">{keysAtivas}/{keyOverview.length}</p>
                 </div>
                 <div className="rounded-[18px] border border-black/5 bg-black/[0.03] px-4 py-2.5 text-center">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-600">Sem cota agora</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Sem cota agora</p>
                   <p className={`mt-1 text-lg font-[950] ${keysSemCota > 0 ? 'text-red-600' : 'text-emerald-600'}`}>{keysSemCota}</p>
                 </div>
                 <KeyRound className="w-6 h-6 text-neon-cyan" />
@@ -327,10 +327,10 @@ export default async function CustosDashboard({
                   <div key={k.id} className={`rounded-[24px] border ${tone} p-5 flex flex-col gap-3`}>
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black/[0.05] text-[10px] font-black text-stone-700">{k.cascadeOrder}</span>
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black/[0.05] text-[10px] font-black text-foreground">{k.cascadeOrder}</span>
                         <div className="min-w-0">
                           <h3 className="text-base font-black uppercase tracking-[-0.03em] truncate">{k.label}</h3>
-                          <p className="font-mono text-[10px] text-stone-600">{k.envKey}</p>
+                          <p className="font-mono text-[10px] text-muted-foreground">{k.envKey}</p>
                         </div>
                       </div>
                       <span className={`shrink-0 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.15em] border ${
@@ -340,7 +340,7 @@ export default async function CustosDashboard({
 
                     <div className="flex flex-wrap items-center gap-2">
                       {!k.configured ? (
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-600/40 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-stone-600">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-600/40 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">
                           <ShieldAlert className="w-3.5 h-3.5" /> Sem chave
                         </span>
                       ) : k.outOfQuota ? (
@@ -353,7 +353,7 @@ export default async function CustosDashboard({
                         </span>
                       )}
                       {k.outOfQuota && (
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 px-3 py-1 text-[10px] font-bold text-stone-700">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 px-3 py-1 text-[10px] font-bold text-foreground">
                           <Clock className="w-3.5 h-3.5 text-neon-orange" />
                           renova {formatRenew(k.minutesToRenew)}{k.renewAt ? ` (${formatClock(k.renewAt)})` : ''}
                         </span>
@@ -361,13 +361,13 @@ export default async function CustosDashboard({
                     </div>
 
                     {k.tier === 'free' && k.freeLimit && (
-                      <p className="inline-flex items-center gap-1.5 text-[11px] text-stone-600">
+                      <p className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
                         <Zap className="w-3 h-3 text-neon-cyan" /> Limite free:{' '}
-                        <span className="font-bold text-stone-800">{int(k.freeLimit.value)} {k.freeLimit.unit}/{k.freeLimit.window}</span>
+                        <span className="font-bold text-foreground">{int(k.freeLimit.value)} {k.freeLimit.unit}/{k.freeLimit.window}</span>
                       </p>
                     )}
                     {k.hits24h > 0 && (
-                      <p className="text-[10px] text-stone-600">
+                      <p className="text-[10px] text-muted-foreground">
                         {k.hits24h} estouro(s) de cota em 24h{k.lastHitAt ? ` · último ${formatClock(k.lastHitAt)}` : ''}
                       </p>
                     )}
@@ -376,10 +376,10 @@ export default async function CustosDashboard({
               })}
             </div>
 
-            <p className="mt-6 text-[11px] text-stone-600 leading-relaxed">
-              Status de cota gravado em <code className="text-stone-600">ai_provider_quota_events</code> (Supabase) a partir dos 429 capturados em{' '}
-              <code className="text-stone-600">src/lib/ai.ts</code>. Limites do free-tier são estimativas configuráveis em{' '}
-              <code className="text-stone-600">src/lib/ai-providers.ts</code>.
+            <p className="mt-6 text-[11px] text-muted-foreground leading-relaxed">
+              Status de cota gravado em <code className="text-muted-foreground">ai_provider_quota_events</code> (Supabase) a partir dos 429 capturados em{' '}
+              <code className="text-muted-foreground">src/lib/ai.ts</code>. Limites do free-tier são estimativas configuráveis em{' '}
+              <code className="text-muted-foreground">src/lib/ai-providers.ts</code>.
             </p>
           </section>
 
@@ -387,7 +387,7 @@ export default async function CustosDashboard({
           <section className="rounded-[34px] border border-black/5 bg-card p-8 shadow-2xl mb-16">
             <div className="flex items-center justify-between gap-4 mb-7">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-600 mb-1">Por funcionalidade</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground mb-1">Por funcionalidade</p>
                 <h2 className="text-2xl font-[950] tracking-[-0.05em] uppercase">Onde a IA é consumida</h2>
               </div>
               <Bot className="w-6 h-6 text-neon-orange" />
@@ -397,7 +397,7 @@ export default async function CustosDashboard({
               <div className="overflow-x-auto">
                 <table className="min-w-full text-left text-sm">
                   <thead>
-                    <tr className="border-b border-black/5 text-[10px] font-black uppercase tracking-[0.25em] text-stone-600">
+                    <tr className="border-b border-black/5 text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">
                       <th className="px-3 py-3">Funcionalidade</th>
                       <th className="px-3 py-3">Módulo</th>
                       <th className="px-3 py-3">Provedores usados</th>
@@ -412,8 +412,8 @@ export default async function CustosDashboard({
                       const paidCost = [...agg.provs].some(isPaid) ? agg.cost : 0;
                       return (
                         <tr key={op} className="border-b border-black/5 last:border-b-0">
-                          <td className="px-3 py-4 font-semibold text-stone-900">{cat?.label ?? op}</td>
-                          <td className="px-3 py-4 text-stone-600">{cat?.modulo ?? '—'}</td>
+                          <td className="px-3 py-4 font-semibold text-foreground">{cat?.label ?? op}</td>
+                          <td className="px-3 py-4 text-muted-foreground">{cat?.modulo ?? '—'}</td>
                           <td className="px-3 py-4">
                             <div className="flex flex-wrap gap-1.5">
                               {[...agg.provs].map((p) => (
@@ -423,9 +423,9 @@ export default async function CustosDashboard({
                               ))}
                             </div>
                           </td>
-                          <td className="px-3 py-4 text-right text-stone-700 font-mono">{int(agg.calls)}</td>
-                          <td className="px-3 py-4 text-right text-stone-700 font-mono">{int(agg.tIn + agg.tOut)}</td>
-                          <td className="px-3 py-4 text-right font-mono font-black text-stone-800">
+                          <td className="px-3 py-4 text-right text-foreground font-mono">{int(agg.calls)}</td>
+                          <td className="px-3 py-4 text-right text-foreground font-mono">{int(agg.tIn + agg.tOut)}</td>
+                          <td className="px-3 py-4 text-right font-mono font-black text-foreground">
                             {paidCost > 0 ? money(paidCost, 'USD') : <span className="text-emerald-600">grátis</span>}
                           </td>
                         </tr>
@@ -436,14 +436,14 @@ export default async function CustosDashboard({
               </div>
             ) : (
               <div className="rounded-[24px] border border-dashed border-black/10 bg-black/[0.02] px-8 py-12 text-center">
-                <Bot className="h-8 w-8 text-stone-600 mx-auto mb-3" />
-                <p className="text-sm text-stone-600">Nenhuma chamada de IA registrada em {PERIODS[periodo].label.toLowerCase()}.</p>
-                <p className="mt-1 text-xs text-stone-600">Os registros são gravados automaticamente em <code className="text-stone-600">ai_token_usage</code> (Supabase) a cada uso.</p>
+                <Bot className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground">Nenhuma chamada de IA registrada em {PERIODS[periodo].label.toLowerCase()}.</p>
+                <p className="mt-1 text-xs text-muted-foreground">Os registros são gravados automaticamente em <code className="text-muted-foreground">ai_token_usage</code> (Supabase) a cada uso.</p>
               </div>
             )}
 
-            <p className="mt-6 text-[11px] text-stone-600 leading-relaxed">
-              Fonte: tabela <code className="text-stone-600">ai_token_usage</code> (registro automático em <code className="text-stone-600">src/lib/ai.ts</code>).
+            <p className="mt-6 text-[11px] text-muted-foreground leading-relaxed">
+              Fonte: tabela <code className="text-muted-foreground">ai_token_usage</code> (registro automático em <code className="text-muted-foreground">src/lib/ai.ts</code>).
               Câmbio estimado: 1 USD ≈ R$ {BRL_RATE.toFixed(2)}.
             </p>
           </section>

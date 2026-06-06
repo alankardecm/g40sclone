@@ -369,7 +369,7 @@ export default function InfraDashboard() {
       <main className="custom-scrollbar flex flex-1 flex-col overflow-y-auto px-10 py-10">
         <header className="mb-8 flex items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">
+            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">
               <span>Infraestrutura</span>
               <ChevronRight className="h-3 w-3" />
               <span className="text-[#379890]">Infra</span>
@@ -377,15 +377,15 @@ export default function InfraDashboard() {
             <h1 className="mt-4 text-4xl font-[950] uppercase tracking-[-0.07em] text-[#143230]">
               Monitoramento de Infra do HUB
             </h1>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-500">
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
               Esta tela saiu do NOC generico e agora acompanha a sustentacao real do HUB:
               Zabbix, Data Lake, Outlook corporativo e o sink operacional que alimenta as trilhas do sistema.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="rounded-[24px] border border-[#143230]/8 bg-white px-5 py-4 text-right shadow-[0_18px_40px_-34px_rgba(20,50,48,0.28)]">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500">Ultimo sync</p>
+            <div className="rounded-[24px] border border-[#143230]/8 bg-card px-5 py-4 text-right shadow-[0_18px_40px_-34px_rgba(20,50,48,0.28)]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Ultimo sync</p>
               <p className="mt-1 text-xs font-semibold text-[#143230]">
                 {refreshing ? 'Atualizando...' : formatTimestamp(lastSync)}
               </p>
@@ -403,12 +403,12 @@ export default function InfraDashboard() {
 
         <section className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-[30px] border border-[#143230]/8 bg-card p-6 shadow-2xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Hosts monitorados</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Hosts monitorados</p>
             <div className="mt-4 flex items-end justify-between">
               <h2 className="text-3xl font-[950] text-[#143230]">{zabbixSummary?.totalHosts ?? '-'}</h2>
               <Server className="h-6 w-6 text-[#379890]" />
             </div>
-            <p className="mt-3 text-sm text-stone-500">
+            <p className="mt-3 text-sm text-muted-foreground">
               {zabbixSummary
                 ? `${zabbixSummary.hostsUp} up · ${zabbixSummary.hostsDown} down · ${zabbixSummary.hostsUnknown} unknown`
                 : 'Resumo do Zabbix indisponivel no momento'}
@@ -416,12 +416,12 @@ export default function InfraDashboard() {
           </div>
 
           <div className="rounded-[30px] border border-[#143230]/8 bg-card p-6 shadow-2xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Problemas criticos</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Problemas criticos</p>
             <div className="mt-4 flex items-end justify-between">
               <h2 className="text-3xl font-[950] text-[#143230]">{criticalProblems.length}</h2>
               <AlertTriangle className="h-6 w-6 text-[#f59e0b]" />
             </div>
-            <p className="mt-3 text-sm text-stone-500">
+            <p className="mt-3 text-sm text-muted-foreground">
               {zabbixSummary
                 ? `${zabbixSummary.disasters} desastre(s) e ${zabbixSummary.highSeverity} alta(s) no Zabbix`
                 : 'Sem leitura consolidada de severidade'}
@@ -429,12 +429,12 @@ export default function InfraDashboard() {
           </div>
 
           <div className="rounded-[30px] border border-[#143230]/8 bg-card p-6 shadow-2xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Data Lake</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Data Lake</p>
             <div className="mt-4 flex items-end justify-between">
               <h2 className="text-3xl font-[950] text-[#143230]">{datalake?.tableCount ?? '-'}</h2>
               <Database className="h-6 w-6 text-[#379890]" />
             </div>
-            <p className="mt-3 text-sm text-stone-500">
+            <p className="mt-3 text-sm text-muted-foreground">
               {datalake?.ok
                 ? `${datalake.database || 'base'} em ${datalake.host || 'host nao informado'}`
                 : datalake?.message || 'Sem validacao do MySQL agora'}
@@ -442,14 +442,14 @@ export default function InfraDashboard() {
           </div>
 
           <div className="rounded-[30px] border border-[#143230]/8 bg-card p-6 shadow-2xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Cobertura infra</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Cobertura infra</p>
             <div className="mt-4 flex items-end justify-between">
               <h2 className="text-3xl font-[950] text-[#143230]">
                 {infraCoverage.healthy}/{infraCoverage.total}
               </h2>
               <ShieldCheck className="h-6 w-6 text-[#7ce5dc]" />
             </div>
-            <p className="mt-3 text-sm text-stone-500">
+            <p className="mt-3 text-sm text-muted-foreground">
               Componentes-base validados no momento de leitura do dashboard
             </p>
           </div>
@@ -459,12 +459,12 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Servicos-base</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Servicos-base</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   Camada de sustentacao do HUB
                 </h3>
               </div>
-              <Activity className="h-5 w-5 text-stone-500" />
+              <Activity className="h-5 w-5 text-muted-foreground" />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -495,7 +495,7 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Alertas</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Alertas</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   Incidentes que merecem atencao
                 </h3>
@@ -510,14 +510,14 @@ export default function InfraDashboard() {
                 </div>
               ) : (
                 problems.map((problem) => (
-                  <div key={problem.eventid} className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-4">
+                  <div key={problem.eventid} className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-4">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-sm font-semibold text-[#143230]">{problem.name}</p>
-                        <p className="mt-2 text-xs text-stone-500">
+                        <p className="mt-2 text-xs text-muted-foreground">
                           {(problem.hosts || []).map((host) => host.name).join(', ') || 'Host nao informado'}
                         </p>
-                        <p className="mt-2 text-[11px] text-stone-500">
+                        <p className="mt-2 text-[11px] text-muted-foreground">
                           Desde {formatTimestamp(problem.clock ? new Date(Number(problem.clock) * 1000).toISOString() : null)}
                         </p>
                       </div>
@@ -536,28 +536,28 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Inventario</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Inventario</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   Hosts acompanhados pelo Zabbix
                 </h3>
               </div>
-              <Server className="h-5 w-5 text-stone-500" />
+              <Server className="h-5 w-5 text-muted-foreground" />
             </div>
 
             <div className="space-y-3">
               {hosts.length === 0 ? (
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5 text-sm text-stone-500">
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5 text-sm text-muted-foreground">
                   Nenhum host foi carregado do Zabbix. Se isso nao era esperado, revisar grupos liberados e conectividade.
                 </div>
               ) : (
                 hosts.map((host) => (
-                  <div key={host.hostid} className="flex items-center justify-between rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-4">
+                  <div key={host.hostid} className="flex items-center justify-between rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-4">
                     <div>
                       <p className="text-sm font-semibold text-[#143230]">{host.name}</p>
-                      <p className="mt-1 text-xs text-stone-500">
+                      <p className="mt-1 text-xs text-muted-foreground">
                         {host.interfaces?.find((item) => item.main === '1')?.ip || host.host}
                       </p>
-                      <p className="mt-2 text-[11px] text-stone-400">
+                      <p className="mt-2 text-[11px] text-muted-foreground">
                         {(host.groups || []).map((group) => group.name).join(' · ') || 'Sem grupo informado'}
                       </p>
                     </div>
@@ -573,32 +573,32 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Data Lake</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Data Lake</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   Tabelas mais relevantes agora
                 </h3>
               </div>
-              <HardDrive className="h-5 w-5 text-stone-500" />
+              <HardDrive className="h-5 w-5 text-muted-foreground" />
             </div>
 
             <div className="space-y-3">
               {topTables.length === 0 ? (
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5 text-sm text-stone-500">
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5 text-sm text-muted-foreground">
                   O overview do Data Lake nao retornou tabelas visiveis neste momento.
                 </div>
               ) : (
                 topTables.map((table) => (
-                  <div key={table.name} className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-4">
+                  <div key={table.name} className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-4">
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-sm font-semibold text-[#143230]">{table.name}</p>
-                        <p className="mt-2 text-[11px] text-stone-500">
+                        <p className="mt-2 text-[11px] text-muted-foreground">
                           Engine: {table.engine || '-'} · Atualizacao: {formatTimestamp(table.updatedAt)}
                         </p>
                       </div>
                       <div className="text-right">
                         <p className="text-lg font-[900] text-[#7ce5dc]">{formatCompactNumber(table.rows)}</p>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-stone-500">linhas</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">linhas</p>
                       </div>
                     </div>
                   </div>
@@ -612,25 +612,25 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Sink operacional</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Sink operacional</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   Trilhas recentes do ambiente
                 </h3>
               </div>
-              <Wifi className="h-5 w-5 text-stone-500" />
+              <Wifi className="h-5 w-5 text-muted-foreground" />
             </div>
 
             <div className="space-y-3">
               {connections.length === 0 ? (
-                <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5 text-sm text-stone-500">
+                <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5 text-sm text-muted-foreground">
                   Nenhuma conexao recente apareceu aqui. Isso pode significar sink vazio ou leitura indisponivel.
                 </div>
               ) : (
                 connections.map((connection, index) => (
-                  <div key={`${connection.mac || 'conn'}-${index}`} className="flex items-center justify-between rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-4">
+                  <div key={`${connection.mac || 'conn'}-${index}`} className="flex items-center justify-between rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-4">
                     <div>
                       <p className="text-sm font-semibold text-[#143230]">{connection.usuario || 'Usuario nao identificado'}</p>
-                      <p className="mt-1 text-xs text-stone-500">{connection.mac || 'MAC indisponivel'}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{connection.mac || 'MAC indisponivel'}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs font-semibold text-stone-300">{connection.cidade || '-'}</p>
@@ -647,22 +647,22 @@ export default function InfraDashboard() {
           <div className="rounded-[34px] border border-[#143230]/8 bg-card p-8 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-stone-500">Leitura executiva</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-muted-foreground">Leitura executiva</p>
                 <h3 className="mt-2 text-xl font-[900] uppercase tracking-[-0.04em]">
                   O que acompanhar nesta camada
                 </h3>
               </div>
-              <Mail className="h-5 w-5 text-stone-500" />
+              <Mail className="h-5 w-5 text-muted-foreground" />
             </div>
 
-            <div className="space-y-4 text-sm leading-relaxed text-stone-500">
-              <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5">
+            <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
+              <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5">
                 Zabbix entra aqui como fonte primaria de saude da infraestrutura. Se host down, problema critico ou permissao falhar, o dashboard precisa acusar isso sem maquiagem.
               </div>
-              <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5">
+              <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5">
                 Data Lake entra como base operacional do analytics. Se a conexao MySQL cair, a cadeia de dashboards e consultas perde sustentacao.
               </div>
-              <div className="rounded-[24px] border border-[#143230]/8 bg-white/[0.55] p-5">
+              <div className="rounded-[24px] border border-[#143230]/8 bg-card/[0.55] p-5">
                 Outlook e sink operacional nao sao “servidores” no sentido classico, mas sao componentes de sustentacao do HUB e precisam ser vistos na mesma camada de Infra.
               </div>
 

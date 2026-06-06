@@ -1,119 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+/* ============================================================
+   AM OS — Design System  ·  Dark Tech
+   Marca: AM Consultoria · Azul-escuro + Azul elétrico + Ciano
+   ============================================================ */
 @theme {
-  --color-background: #f5f6f3;
-  --color-foreground: #404040;
+  /* Superfícies */
+  --color-background: #0a0f1e;
+  --color-foreground: #e6eaf3;
 
-  --color-card: #ffffff;
-  --color-card-foreground: #404040;
+  --color-card: #101728;
+  --color-card-foreground: #e6eaf3;
 
-  --color-primary: #8DC63F;
+  /* Primária — azul elétrico */
+  --color-primary: #3b82f6;
   --color-primary-foreground: #ffffff;
+  --color-primary-soft: #15233f;
+  --color-primary-hover: #2563eb;
 
-  --color-secondary: #edf5da;
-  --color-secondary-foreground: #404040;
+  /* Secundária / neutros escuros */
+  --color-secondary: #16203a;
+  --color-secondary-foreground: #c5cde0;
 
-  --color-muted: #f3f4f0;
-  --color-muted-foreground: #6b7280;
+  --color-muted: #1a2336;
+  --color-muted-foreground: #8893a7;
 
-  --color-accent: #e8f5c8;
-  --color-accent-foreground: #404040;
+  /* Acento — ciano tech */
+  --color-accent: #22d3ee;
+  --color-accent-foreground: #06131c;
+  --color-accent-soft: #0e2a33;
 
-  --color-border: #e2e5de;
+  --color-border: #1e2740;
 
-  --color-neon-cyan: #8DC63F;
+  /* Semânticos */
+  --color-success: #22c55e;
+  --color-success-soft: #11261c;
+  --color-warning: #f59e0b;
+  --color-warning-soft: #2a2110;
+  --color-danger: #f87171;
+  --color-danger-soft: #2a1718;
+  --color-info: #38bdf8;
+  --color-info-soft: #0e2536;
+
+  /* Compat: nomes antigos repontados p/ a marca dark */
+  --color-neon-cyan: #22d3ee;
   --color-neon-orange: #f59e0b;
-  --color-neon-pink: #bf6f8d;
-  --color-neon-blue: #5b90c7;
+  --color-neon-pink: #f472b6;
+  --color-neon-blue: #3b82f6;
 
   --radius-pill: 2.5rem;
+
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   body {
-    background:
-      radial-gradient(circle at top left, rgba(141, 198, 63, 0.10), transparent 26%),
-      linear-gradient(180deg, #f8f9f5 0%, #eff1ea 100%);
-    color: #404040;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #0a0f1e;
+    background-image:
+      radial-gradient(900px circle at 12% -8%, rgba(59, 130, 246, 0.16), transparent 46%),
+      radial-gradient(720px circle at 100% 0%, rgba(34, 211, 238, 0.08), transparent 42%),
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: auto, auto, 46px 46px, 46px 46px;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(59, 130, 246, 0.35);
+    color: #fff;
   }
 }
 
 @layer utilities {
+  /* Superfície de cartão (dark) */
+  .surface {
+    background-color: #101728;
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 18px 44px -28px rgba(0, 0, 0, 0.85);
+  }
+
+  .surface-hover {
+    transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1),
+      box-shadow 0.25s cubic-bezier(0.19, 1, 0.22, 1),
+      border-color 0.25s ease;
+  }
+  .surface-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 0 0 1px rgba(59, 130, 246, 0.12),
+      0 24px 52px -26px rgba(59, 130, 246, 0.40);
+  }
+
+  /* Botão primário */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 0.9rem;
+    box-shadow: 0 10px 26px -10px rgba(59, 130, 246, 0.7);
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 32px -10px rgba(59, 130, 246, 0.85);
+  }
+
+  /* Gradiente da marca (azul → ciano) */
+  .brand-gradient {
+    background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 58%, #38bdf8 118%);
+  }
+  .brand-text-gradient {
+    background: linear-gradient(120deg, #60a5fa 0%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Compat com classes antigas */
   .card {
-    background-color: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(64, 64, 64, 0.08);
-    border-radius: 2.5rem;
+    background-color: #101728;
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
   }
-
   .neon-card {
-    background-color: rgba(255, 255, 255, 0.94);
-    border: 1px solid rgba(141, 198, 63, 0.18);
-    border-radius: 2.5rem;
-    box-shadow: 0 24px 60px -30px rgba(64, 64, 64, 0.16);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: #101728;
+    border: 1px solid rgba(59, 130, 246, 0.18);
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 60px -32px rgba(0, 0, 0, 0.9);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   }
-  
-  .rounded-pill {
-    border-radius: 2.5rem;
-  }
-  
-  .pill {
-    border-radius: 2.5rem;
-  }
+  .rounded-pill, .pill { border-radius: 2.5rem; }
+  .glow-cyan { box-shadow: 0 0 18px rgba(34, 211, 238, 0.25), 0 0 42px rgba(59, 130, 246, 0.12); }
+  .pop-card-cyan { background-color: #3b82f6; color: #fff !important; box-shadow: 0 15px 30px -8px rgba(59, 130, 246, 0.4); }
+  .pop-card-orange { background-color: #f59e0b; color: #0a0f1e !important; box-shadow: 0 15px 30px -8px rgba(245, 158, 11, 0.3); }
+  .pop-card-pink { background-color: #f472b6; color: #0a0f1e !important; box-shadow: 0 15px 30px -8px rgba(244, 114, 182, 0.3); }
 
-  .glow-cyan {
-    box-shadow: 0 0 18px rgba(141, 198, 63, 0.22), 0 0 40px rgba(141, 198, 63, 0.10);
-  }
-
-  .pop-card-cyan {
-    background-color: #8DC63F;
-    color: #fff !important;
-    box-shadow: 0 15px 30px -5px rgba(141, 198, 63, 0.28);
-  }
-  
-  .pop-card-orange {
-    background-color: #d4a23a;
-    color: #fff !important;
-    box-shadow: 0 15px 30px -5px rgba(212, 162, 58, 0.24);
-  }
-  
-  .pop-card-pink {
-    background-color: #bf6f8d;
-    color: #fff !important;
-    box-shadow: 0 15px 30px -5px rgba(191, 111, 141, 0.24);
-  }
-
-  /* Custom Scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #d1d5c8;
-    border-radius: 10px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #b8c0ae;
-  }
+  /* Scrollbar (dark) */
+  .custom-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #273350; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #34436a; }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.animate-slide-up { animation: slide-up 0.5s ease-out forwards; }
 
-.animate-slide-up {
-  animation: slide-up 0.5s ease-out forwards;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
 
-/* Login page — cyber green theme */
+/* Login */
 .signin-btn:hover {
-  box-shadow: 0 0 20px rgba(172,208,0,0.2), inset 0 0 20px rgba(172,208,0,0.03);
-  border-color: #ACD000 !important;
+  border-color: rgba(59, 130, 246, 0.6) !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }

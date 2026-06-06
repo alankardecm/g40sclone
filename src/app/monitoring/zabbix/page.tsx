@@ -67,7 +67,7 @@ const CATEGORY_CONFIG: Record<AlarmCategory, { label: string; Icon: React.Elemen
   optical:    { label: 'Óptica',      Icon: Eye,          color: 'text-purple-400'  },
   onu:        { label: 'ONU/GPON',    Icon: Layers,       color: 'text-teal-400'    },
   quality:    { label: 'Qualidade',   Icon: TrendingDown, color: 'text-rose-400'    },
-  other:      { label: 'Outros',      Icon: HelpCircle,   color: 'text-stone-400'   },
+  other:      { label: 'Outros',      Icon: HelpCircle,   color: 'text-muted-foreground'   },
 };
 
 type GroupKey = 'backbone' | 'pop' | 'rede-acesso' | 'clientes' | 'outros';
@@ -77,7 +77,7 @@ const GROUP_META: Record<GroupKey, { label: string; impactLabel: string; color: 
   pop:         { label: 'POP',            impactLabel: 'Impacto médio — afeta clientes do POP', color: 'text-orange-400',  bg: 'bg-orange-500/8',  border: 'border-orange-500/20'  },
   'rede-acesso': { label: 'Rede de Acesso', impactLabel: 'Impacto localizado',                  color: 'text-amber-400',   bg: 'bg-amber-500/8',   border: 'border-amber-500/20'   },
   clientes:    { label: 'Clientes',       impactLabel: 'Impacto em clientes específicos',       color: 'text-sky-400',     bg: 'bg-sky-500/8',     border: 'border-sky-500/20'     },
-  outros:      { label: 'Outros',         impactLabel: '',                                       color: 'text-stone-400',   bg: 'bg-stone-500/5',   border: 'border-stone-500/15'   },
+  outros:      { label: 'Outros',         impactLabel: '',                                       color: 'text-muted-foreground',   bg: 'bg-stone-500/5',   border: 'border-stone-500/15'   },
 };
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -188,25 +188,25 @@ export default function ZabbixImpactPage() {
           {/* ── HEADER STATUS ──────────────────────────────────────────── */}
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-stone-500">
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
                 Monitoramento de rede
               </p>
               <h1 className="mt-2 text-3xl font-[950] tracking-[-0.05em] uppercase">
                 Alertas Críticos
               </h1>
-              <p className="mt-1 text-sm text-stone-400">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Apenas eventos de impacto operacional — DESASTRE e ALTA severidade.
               </p>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
               {lastUpdate && (
-                <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">
+                <span className="flex items-center gap-1.5 rounded-full border border-white/8 bg-card/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                   <Clock className="w-3 h-3" />
                   {formatTime(lastUpdate)}
                 </span>
               )}
-              <span className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">
+              <span className="rounded-full border border-white/8 bg-card/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 Auto · 60s
               </span>
             </div>
@@ -224,7 +224,7 @@ export default function ZabbixImpactPage() {
 
           {/* ── LOADING ─────────────────────────────────────────────────── */}
           {loading && (
-            <div className="flex items-center gap-3 text-stone-500 text-sm py-8">
+            <div className="flex items-center gap-3 text-muted-foreground text-sm py-8">
               <div className="w-4 h-4 border-2 border-stone-600 border-t-neon-cyan rounded-full animate-spin" />
               Conectando ao Zabbix...
             </div>
@@ -244,19 +244,19 @@ export default function ZabbixImpactPage() {
                   Nenhum evento crítico ativo no momento.
                 </p>
               </div>
-              <div className="flex items-center gap-6 mt-2 text-[11px] font-black uppercase tracking-[0.2em] text-stone-500">
+              <div className="flex items-center gap-6 mt-2 text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 <span className="flex items-center gap-1.5">
                   <Wifi className="w-3.5 h-3.5 text-green-400" />
                   {summary?.hostsUp ?? '—'} hosts online
                 </span>
                 {summary?.hostsDown ? (
                   <span className="flex items-center gap-1.5">
-                    <WifiOff className="w-3.5 h-3.5 text-stone-500" />
+                    <WifiOff className="w-3.5 h-3.5 text-muted-foreground" />
                     {summary.hostsDown} offline
                   </span>
                 ) : null}
                 {lowerCount > 0 && (
-                  <span className="text-stone-600">
+                  <span className="text-muted-foreground">
                     {lowerCount} alarme{lowerCount > 1 ? 's' : ''} de baixa prioridade omitido{lowerCount > 1 ? 's' : ''}
                   </span>
                 )}
@@ -270,24 +270,24 @@ export default function ZabbixImpactPage() {
               <div className="rounded-[22px] border border-neon-pink/25 bg-neon-pink/6 p-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-neon-pink/70">Desastres</p>
                 <p className="mt-3 text-4xl font-[1000] tracking-[-0.06em] text-neon-pink">{disasters.length}</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">severity 5</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">severity 5</p>
               </div>
               <div className="rounded-[22px] border border-red-500/20 bg-red-500/6 p-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-red-400">Alta</p>
                 <p className="mt-3 text-4xl font-[1000] tracking-[-0.06em] text-red-400">{high.length}</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">severity 4</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">severity 4</p>
               </div>
               <div className="rounded-[22px] border border-green-500/15 bg-green-500/5 p-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">Hosts online</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">Hosts online</p>
                 <p className="mt-3 text-4xl font-[1000] tracking-[-0.06em] text-green-400">{summary?.hostsUp ?? '—'}</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">de {summary?.totalHosts ?? '?'}</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">de {summary?.totalHosts ?? '?'}</p>
               </div>
-              <div className={`rounded-[22px] border p-4 ${summary?.hostsDown ? 'border-red-500/20 bg-red-500/5' : 'border-white/5 bg-white/[0.02]'}`}>
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">Hosts offline</p>
-                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${summary?.hostsDown ? 'text-red-400' : 'text-stone-600'}`}>
+              <div className={`rounded-[22px] border p-4 ${summary?.hostsDown ? 'border-red-500/20 bg-red-500/5' : 'border-white/5 bg-card/[0.02]'}`}>
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">Hosts offline</p>
+                <p className={`mt-3 text-4xl font-[1000] tracking-[-0.06em] ${summary?.hostsDown ? 'text-red-400' : 'text-muted-foreground'}`}>
                   {summary?.hostsDown ?? '—'}
                 </p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500">inacessíveis</p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-muted-foreground">inacessíveis</p>
               </div>
             </div>
           )}
@@ -295,7 +295,7 @@ export default function ZabbixImpactPage() {
           {/* ── LISTA DE ALARMES CRÍTICOS ──────────────────────────────── */}
           {!loading && criticalProblems.length > 0 && (
             <div className="flex flex-col gap-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                 {criticalProblems.length} evento{criticalProblems.length > 1 ? 's' : ''} crítico{criticalProblems.length > 1 ? 's' : ''} ativo{criticalProblems.length > 1 ? 's' : ''}
               </p>
 
@@ -333,7 +333,7 @@ export default function ZabbixImpactPage() {
                         </span>
 
                         {/* categoria */}
-                        <span className={`inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] ${catCfg.color}`}>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-card/[0.04] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] ${catCfg.color}`}>
                           <CatIcon className="w-3 h-3" />
                           {catCfg.label}
                         </span>
@@ -345,14 +345,14 @@ export default function ZabbixImpactPage() {
 
                         {/* ack */}
                         {p.acknowledged === '1' && (
-                          <span className="rounded-full border border-stone-500/20 bg-stone-500/8 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">
+                          <span className="rounded-full border border-stone-500/20 bg-stone-500/8 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                             Reconhecido
                           </span>
                         )}
                       </div>
 
                       {/* duração */}
-                      <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 shrink-0">
+                      <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground shrink-0">
                         <Clock className="w-3 h-3" />
                         há {duration(p.clock)}
                       </div>
@@ -364,7 +364,7 @@ export default function ZabbixImpactPage() {
                         {p.name}
                       </p>
                       {p.hosts && p.hosts.length > 0 && (
-                        <p className="mt-1.5 text-xs text-stone-500 font-mono">
+                        <p className="mt-1.5 text-xs text-muted-foreground font-mono">
                           {p.hosts.map((h) => h.name).join(' · ')}
                         </p>
                       )}
@@ -382,7 +382,7 @@ export default function ZabbixImpactPage() {
 
               {/* rodapé com alarmes omitidos */}
               {lowerCount > 0 && (
-                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-600 text-center pt-2">
+                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground text-center pt-2">
                   + {lowerCount} alarme{lowerCount > 1 ? 's' : ''} de baixa prioridade omitido{lowerCount > 1 ? 's' : ''} — visíveis no Zabbix
                 </p>
               )}
@@ -391,22 +391,22 @@ export default function ZabbixImpactPage() {
 
           {/* ── STATUS DE MONITORAMENTO ─────────────────────────────────── */}
           {!loading && !error && (
-            <div className="flex items-center justify-between gap-4 rounded-[18px] border border-white/5 bg-white/[0.02] px-5 py-3 flex-wrap">
-              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-stone-600">
+            <div className="flex items-center justify-between gap-4 rounded-[18px] border border-white/5 bg-card/[0.02] px-5 py-3 flex-wrap">
+              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 <span className="flex items-center gap-1.5">
                   <Wifi className="w-3 h-3 text-green-500" />
                   {summary?.hostsUp ?? '—'} online
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <WifiOff className="w-3 h-3 text-stone-600" />
+                  <WifiOff className="w-3 h-3 text-muted-foreground" />
                   {summary?.hostsDown ?? '—'} offline
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <AlertTriangle className="w-3 h-3 text-stone-600" />
+                  <AlertTriangle className="w-3 h-3 text-muted-foreground" />
                   {allProblems.length} alarme{allProblems.length !== 1 ? 's' : ''} total
                 </span>
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-600">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                 Zabbix 6.2 · Monitoramento contínuo
               </span>
             </div>

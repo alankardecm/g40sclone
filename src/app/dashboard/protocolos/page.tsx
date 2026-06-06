@@ -51,9 +51,9 @@ function WeekTooltip({ active, label, payload, anomalies, isCurrent }: TooltipPr
   const isAnomaly = isCurrent && anomalies[label];
 
   return (
-    <div className="rounded-lg border border-stone-200 bg-white px-3 py-2 shadow-lg text-xs">
-      <p className="font-bold text-stone-700">{label}</p>
-      <p className="text-stone-500 mt-0.5">
+    <div className="rounded-lg border border-border bg-card px-3 py-2 shadow-lg text-xs">
+      <p className="font-bold text-foreground">{label}</p>
+      <p className="text-muted-foreground mt-0.5">
         {val} protocolo{val !== 1 ? 's' : ''}
       </p>
       {isAnomaly && (
@@ -81,24 +81,24 @@ function WeekCard({ week, anomalies, index }: WeekCardProps) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.07 }}
-      className={`rounded-2xl border bg-white shadow-sm overflow-hidden ${
+      className={`rounded-2xl border bg-card shadow-sm overflow-hidden ${
         week.isCurrent
-          ? 'border-[#8DC63F]/40 ring-1 ring-[#8DC63F]/20'
-          : 'border-stone-200'
+          ? 'border-[#3B82F6]/40 ring-1 ring-[#3B82F6]/20'
+          : 'border-border'
       }`}
     >
       {/* Cabeçalho do card */}
       <div className={`flex items-center justify-between px-5 py-3 border-b ${
-        week.isCurrent ? 'border-[#8DC63F]/20 bg-[#8DC63F]/5' : 'border-stone-100 bg-stone-50'
+        week.isCurrent ? 'border-[#3B82F6]/20 bg-[#3B82F6]/5' : 'border-border bg-background'
       }`}>
         <div>
           <p className={`text-[11px] font-bold uppercase tracking-widest ${
-            week.isCurrent ? 'text-[#8DC63F]' : 'text-stone-500'
+            week.isCurrent ? 'text-[#3B82F6]' : 'text-muted-foreground'
           }`}>
             {week.label}
             {week.isCurrent && <span className="ml-2 normal-case tracking-normal font-semibold">(atual)</span>}
           </p>
-          <p className="text-xs text-stone-400 mt-0.5">
+          <p className="text-xs text-muted-foreground mt-0.5">
             {total} protocolo{total !== 1 ? 's' : ''} no período
           </p>
         </div>
@@ -149,7 +149,7 @@ function WeekCard({ week, anomalies, index }: WeekCardProps) {
                       p.anomaly
                         ? '#ef4444'
                         : week.isCurrent
-                        ? '#8DC63F'
+                        ? '#3B82F6'
                         : '#d6d3d1'
                     }
                     fillOpacity={week.isCurrent ? 1 : 0.7}
@@ -207,21 +207,21 @@ export default function ProtocolosSemanalPage() {
   const weeksDesc = [...weeks].reverse();
 
   return (
-    <div className="flex h-screen bg-stone-50">
+    <div className="flex h-screen bg-background">
       <Sidebar />
 
       <main className="flex flex-1 flex-col overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-stone-200 bg-white px-6 py-4">
+        <div className="flex items-center justify-between border-b border-border bg-card px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#8DC63F]/10">
-              <TrendingUp className="h-5 w-5 text-[#8DC63F]" strokeWidth={2} />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3B82F6]/10">
+              <TrendingUp className="h-5 w-5 text-[#3B82F6]" strokeWidth={2} />
             </div>
             <div>
-              <h1 className="text-sm font-bold uppercase tracking-widest text-stone-800">
+              <h1 className="text-sm font-bold uppercase tracking-widest text-foreground">
                 Protocolos Semanais
               </h1>
-              <p className="text-[11px] text-stone-400">
+              <p className="text-[11px] text-muted-foreground">
                 Últimas 4 semanas · Dom → Sáb · anomalia &gt;20% acima da média
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function ProtocolosSemanalPage() {
 
           <div className="flex items-center gap-3">
             <select
-              className="rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8DC63F]/40"
+              className="rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/40"
               value={equipe}
               onChange={(e) => setEquipe(e.target.value)}
             >
@@ -242,7 +242,7 @@ export default function ProtocolosSemanalPage() {
             <button
               onClick={() => fetchData(equipe)}
               disabled={loading}
-              className="flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-600 shadow-sm hover:bg-stone-50 disabled:opacity-40 transition"
+              className="flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm hover:bg-background disabled:opacity-40 transition"
             >
               <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
               Atualizar
@@ -287,7 +287,7 @@ export default function ProtocolosSemanalPage() {
           )}
 
           {!loading && !error && weeks.length === 0 && (
-            <div className="flex h-48 items-center justify-center text-sm text-stone-400">
+            <div className="flex h-48 items-center justify-center text-sm text-muted-foreground">
               Nenhum dado encontrado para o período.
             </div>
           )}

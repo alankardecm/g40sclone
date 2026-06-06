@@ -15,7 +15,7 @@ export default function AnalyticsWidgets() {
         <div className="w-16 h-16 rounded-[24px] bg-neon-cyan/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
            <BarChart3 className="w-8 h-8 text-neon-cyan" />
         </div>
-        <h4 className="text-[10px] font-black text-stone-600 uppercase tracking-widest mb-1">Crescimento Rede</h4>
+        <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Crescimento Rede</h4>
         <p className="text-2xl font-black text-foreground">+24.8%</p>
       </motion.div>
 
@@ -28,7 +28,7 @@ export default function AnalyticsWidgets() {
         <div className="w-16 h-16 rounded-[24px] bg-neon-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
            <TrendingUp className="w-8 h-8 text-neon-orange" />
         </div>
-        <h4 className="text-[10px] font-black text-stone-600 uppercase tracking-widest mb-1">Conversão Leads</h4>
+        <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Conversão Leads</h4>
         <p className="text-2xl font-black text-foreground">18%</p>
       </motion.div>
 
@@ -41,7 +41,7 @@ export default function AnalyticsWidgets() {
         <div className="w-16 h-16 rounded-[24px] bg-neon-pink/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
            <Activity className="w-8 h-8 text-neon-pink" />
         </div>
-        <h4 className="text-[10px] font-black text-stone-600 uppercase tracking-widest mb-1">Latência Média</h4>
+        <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Latência Média</h4>
         <p className="text-2xl font-black text-foreground">12ms</p>
       </motion.div>
 
@@ -54,7 +54,7 @@ export default function AnalyticsWidgets() {
         <div className="w-16 h-16 rounded-[24px] bg-neon-blue/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
            <PieChart className="w-8 h-8 text-neon-blue" />
         </div>
-        <h4 className="text-[10px] font-black text-stone-600 uppercase tracking-widest mb-1">Market Share</h4>
+        <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Market Share</h4>
         <p className="text-2xl font-black text-foreground">42%</p>
       </motion.div>
     </div>

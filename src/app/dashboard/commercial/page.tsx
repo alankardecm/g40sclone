@@ -36,7 +36,7 @@ const fmtFull = (v: number) => new Intl.NumberFormat('pt-BR', { style: 'currency
 function KpiSmall({ label, val, trend, neg }: { label: string, val: string, trend: string, neg?: boolean }) {
   return (
     <div className="p-4 rounded-2xl glass border border-white/5 flex flex-col gap-1">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-stone-500">{label}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{label}</span>
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-black">{val}</h3>
         <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${neg ? 'bg-red-500/10 text-red-400' : 'bg-green-500/10 text-green-400'}`}>
@@ -118,13 +118,13 @@ export default function CommercialDashboard() {
       <main className="flex-1 flex flex-col overflow-y-auto custom-scrollbar px-8 py-8">
         {/* Breadcrumb & Top Bar */}
         <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-stone-500">
+          <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             <span className="hover:text-white cursor-pointer transition-colors">Painel Central</span>
             <ChevronRight className="w-3 h-3" />
             <span className="text-white">Performance Comercial</span>
           </div>
           <div className="flex items-center gap-2">
-            <button className="px-4 py-2 rounded-xl glass border-white/5 text-xs font-semibold flex items-center gap-2 hover:bg-white/5 transition-all">
+            <button className="px-4 py-2 rounded-xl glass border-white/5 text-xs font-semibold flex items-center gap-2 hover:bg-card/5 transition-all">
               <Filter className="w-3 h-3" /> Filtrar Período
             </button>
             <button 
@@ -140,10 +140,10 @@ export default function CommercialDashboard() {
         <div className="mb-10 flex items-end justify-between">
           <div>
             <h1 className="text-4xl font-black tracking-tighter mb-1">Performance Comercial</h1>
-            <p className="text-stone-500 text-sm">Análise granular de receita, churn e produtividade da força de vendas.</p>
+            <p className="text-muted-foreground text-sm">Análise granular de receita, churn e produtividade da força de vendas.</p>
           </div>
           <div className="text-right">
-             <span className="text-[10px] font-bold uppercase tracking-widest text-stone-600 block mb-1">Total em Carteira</span>
+             <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Total em Carteira</span>
              <h2 className="text-4xl font-black text-white">{fmt(totalVal)}</h2>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function CommercialDashboard() {
               <div className="flex items-center justify-between mb-10">
                 <div>
                   <h3 className="text-lg font-bold">Distribuição Geográfica de Receita</h3>
-                  <p className="text-xs text-stone-500">Top cidades por volume de faturamento ativo</p>
+                  <p className="text-xs text-muted-foreground">Top cidades por volume de faturamento ativo</p>
                 </div>
                 <TrendingUp className="w-5 h-5 text-accent" />
               </div>
@@ -196,7 +196,7 @@ export default function CommercialDashboard() {
                          if (active && payload?.length) {
                            return (
                              <div className="p-3 glass rounded-xl border border-white/10 shadow-2xl">
-                               <p className="text-[10px] uppercase font-bold text-stone-500 mb-1">{label}</p>
+                               <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1">{label}</p>
                                <p className="text-sm font-black text-white">{fmtFull(Number(payload[0].value))}</p>
                              </div>
                            )
@@ -221,7 +221,7 @@ export default function CommercialDashboard() {
            <div className="glass rounded-3xl border border-white/5 p-8">
               <div className="flex items-center justify-between mb-8">
                  <h3 className="text-lg font-bold">Liderança Comercial</h3>
-                 <Target className="w-5 h-5 text-stone-600" />
+                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <div className="space-y-6">
                 {sellers.map((s, i) => (
@@ -230,7 +230,7 @@ export default function CommercialDashboard() {
                        <span className="text-xs font-semibold text-stone-300 group-hover:text-white transition-colors">{s[0]}</span>
                        <span className="text-xs font-black text-accent">{fmt(s[1])}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-white/[0.03] rounded-full overflow-hidden">
+                    <div className="h-1.5 w-full bg-card/[0.03] rounded-full overflow-hidden">
                        <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: `${(s[1] / topSellerValue) * 100}%` }}
@@ -241,7 +241,7 @@ export default function CommercialDashboard() {
                   </div>
                 ))}
               </div>
-              <button className="w-full mt-10 py-3 rounded-xl border border-white/5 text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-white hover:bg-white/5 transition-all">
+              <button className="w-full mt-10 py-3 rounded-xl border border-white/5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-white hover:bg-card/5 transition-all">
                 Ver Ranking Completo
               </button>
            </div>
@@ -275,17 +275,17 @@ export default function CommercialDashboard() {
 
         {/* Bottom Section: Recent Activities */}
         <div className="glass rounded-3xl border border-white/5 p-8 mb-12">
-           <h3 className="text-sm font-bold uppercase tracking-widest text-stone-500 mb-6">Últimos Contratos Auditados</h3>
+           <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-6">Últimos Contratos Auditados</h3>
            <div className="space-y-1">
              {active.slice(0, 5).map((c, i) => (
-               <div key={i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/[0.02] transition-colors group">
+               <div key={i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-card/[0.02] transition-colors group">
                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-white/[0.03] flex items-center justify-center text-[10px] font-bold">
+                    <div className="w-10 h-10 rounded-full bg-card/[0.03] flex items-center justify-center text-[10px] font-bold">
                        {c.cliente?.[0] || 'C'}
                     </div>
                     <div>
                        <p className="text-sm font-semibold">{c.cliente}</p>
-                       <p className="text-[10px] text-stone-600 uppercase tracking-tighter">{c.vendedor_1} · {c.cidade_do_cliente}</p>
+                       <p className="text-[10px] text-muted-foreground uppercase tracking-tighter">{c.vendedor_1} · {c.cidade_do_cliente}</p>
                     </div>
                  </div>
                  <div className="flex items-center gap-8">
@@ -293,7 +293,7 @@ export default function CommercialDashboard() {
                        <p className="text-sm font-black">{fmtFull(parseCurrency(c.valor))}</p>
                        <p className="text-[10px] text-green-500 font-bold uppercase tracking-widest">Aprovado</p>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-stone-700 group-hover:text-accent transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-foreground group-hover:text-accent transition-colors" />
                  </div>
                </div>
              ))}

@@ -226,7 +226,7 @@ export async function POST(req: Request) {
       const email = emailMatch[0].toLowerCase()
       // Verifica se o email existe no Hub (logado ou pré-cadastrado)
       if (!(await isEmailKnown(email))) {
-        const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+        const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
         sendText(instance, replyTo,
           `❌ Email *${email}* não encontrado no ${appName}.\n\nPeça ao administrador para cadastrá-lo ou acesse ${process.env.NEXTAUTH_URL ?? 'o portal'} para fazer login.`
         ).catch(() => {})

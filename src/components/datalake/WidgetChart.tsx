@@ -62,19 +62,19 @@ function ChartTooltip({ active, payload, label, valueUnit = '', meta }: {
   const p = payload[0].payload;
   const hasBreakdown = p && p.base != null;
   return (
-    <div className="rounded-xl border border-[#143230]/8 bg-white px-4 py-2.5 text-xs shadow-2xl">
-      <p className="font-black text-stone-500">{label ? formatAxisLabel(label) : ''}</p>
+    <div className="rounded-xl border border-[#143230]/8 bg-card px-4 py-2.5 text-xs shadow-2xl">
+      <p className="font-black text-muted-foreground">{label ? formatAxisLabel(label) : ''}</p>
       <p className="mt-0.5 font-mono text-base font-black" style={{ color: meta != null ? (value >= meta ? GOOD : BAD) : '#379890' }}>
         {isPct ? fmtPct(value) : value.toLocaleString('pt-BR')}
       </p>
       {hasBreakdown && (
         <div className="mt-1.5 space-y-0.5 border-t border-[#143230]/6 pt-1.5 text-[11px]">
-          <p className="text-stone-600"><span className="font-black">{p!.base!.toLocaleString('pt-BR')}</span> pesquisas válidas</p>
+          <p className="text-muted-foreground"><span className="font-black">{p!.base!.toLocaleString('pt-BR')}</span> pesquisas válidas</p>
           <p className="text-[#2f9e6f]">▲ {(p!.promotores ?? 0).toLocaleString('pt-BR')} promotores</p>
-          <p className="text-stone-400">● {(p!.neutros ?? 0).toLocaleString('pt-BR')} neutros</p>
+          <p className="text-muted-foreground">● {(p!.neutros ?? 0).toLocaleString('pt-BR')} neutros</p>
           <p className="text-[#d4574e]">▼ {(p!.detratores ?? 0).toLocaleString('pt-BR')} detratores</p>
           {meta != null && (
-            <p className="pt-0.5 text-stone-500">Meta {meta}% — {value >= meta ? 'atingida' : `faltam ${fmtPct(meta - value)}`}</p>
+            <p className="pt-0.5 text-muted-foreground">Meta {meta}% — {value >= meta ? 'atingida' : `faltam ${fmtPct(meta - value)}`}</p>
           )}
         </div>
       )}
@@ -103,12 +103,12 @@ export default function WidgetChart({ chartType, data, rawRows, rawColumns, colo
         </p>
         {point?.base != null ? (
           <>
-            <p className="text-[10px] font-black uppercase tracking-widest text-stone-500">
+            <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
               {point.base.toLocaleString('pt-BR')} pesquisas válidas
             </p>
             <div className="mt-1 flex items-center gap-3 text-[11px] font-bold">
               <span className="text-[#2f9e6f]">▲ {(point.promotores ?? 0).toLocaleString('pt-BR')}</span>
-              <span className="text-stone-400">● {(point.neutros ?? 0).toLocaleString('pt-BR')}</span>
+              <span className="text-muted-foreground">● {(point.neutros ?? 0).toLocaleString('pt-BR')}</span>
               <span className="text-[#d4574e]">▼ {(point.detratores ?? 0).toLocaleString('pt-BR')}</span>
             </div>
             {meta != null && (
@@ -118,7 +118,7 @@ export default function WidgetChart({ chartType, data, rawRows, rawColumns, colo
             )}
           </>
         ) : (
-          <p className="text-[10px] font-black uppercase tracking-widest text-stone-500">
+          <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
             {data.length === 1 ? 'resultado' : `${data.length} series somadas`}
           </p>
         )}
@@ -131,16 +131,16 @@ export default function WidgetChart({ chartType, data, rawRows, rawColumns, colo
     const rows = rawRows ?? data.map((d) => ({ label: d.label, value: d.value }));
 
     if (cols.length === 0) {
-      return <p className="py-8 text-center text-xs text-stone-500">Sem dados</p>;
+      return <p className="py-8 text-center text-xs text-muted-foreground">Sem dados</p>;
     }
 
     return (
-      <div className="max-h-[220px] overflow-auto rounded-xl border border-[#143230]/8 bg-white">
+      <div className="max-h-[220px] overflow-auto rounded-xl border border-[#143230]/8 bg-card">
         <table className="w-full text-xs">
           <thead className="sticky top-0 z-10 bg-[#f5f7f3]">
             <tr>
               {cols.map((col) => (
-                <th key={col} className="px-3 py-2 text-left font-black uppercase tracking-wider text-stone-500">
+                <th key={col} className="px-3 py-2 text-left font-black uppercase tracking-wider text-muted-foreground">
                   {col}
                 </th>
               ))}
@@ -150,7 +150,7 @@ export default function WidgetChart({ chartType, data, rawRows, rawColumns, colo
             {rows.map((row, i) => (
               <tr key={i} className="border-t border-[#143230]/6 hover:bg-[#f6faf8]">
                 {cols.map((col) => (
-                  <td key={col} className="max-w-[140px] truncate px-3 py-2 text-stone-700">
+                  <td key={col} className="max-w-[140px] truncate px-3 py-2 text-foreground">
                     {String((row as Record<string, unknown>)[col] ?? '')}
                   </td>
                 ))}

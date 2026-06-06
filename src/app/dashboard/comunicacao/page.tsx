@@ -217,7 +217,7 @@ function detectUnanswered(conv: ConversationItem): { flagged: boolean; minutesAg
 
 const sentimentStyle: Record<string, string> = {
   positive: 'text-green-400 bg-green-500/10 border-green-500/20',
-  neutral: 'text-stone-400 bg-white/5 border-white/10',
+  neutral: 'text-muted-foreground bg-card/5 border-white/10',
   negative: 'text-red-400 bg-red-500/10 border-red-500/20',
 };
 
@@ -231,7 +231,7 @@ const urgencyStyle: Record<string, string> = {
   critica: 'text-red-400',
   alta: 'text-orange-400',
   media: 'text-yellow-400',
-  baixa: 'text-stone-500',
+  baixa: 'text-muted-foreground',
 };
 
 // ── Componente MsgBubble ──────────────────────────────────────────────────────
@@ -246,14 +246,14 @@ function MsgBubble({ msg }: { msg: MsgItem }) {
           <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#364642] truncate max-w-[180px]">
             {msg.sender}
           </span>
-          <span className="text-[10px] font-semibold text-stone-700">{formatTime(msg.timestamp)}</span>
+          <span className="text-[10px] font-semibold text-foreground">{formatTime(msg.timestamp)}</span>
           {msg.urgency && msg.urgency !== 'baixa' && (
-            <span className={`text-[9px] font-black uppercase tracking-[0.15em] ${urgencyStyle[msg.urgency] || 'text-stone-500'}`}>
+            <span className={`text-[9px] font-black uppercase tracking-[0.15em] ${urgencyStyle[msg.urgency] || 'text-muted-foreground'}`}>
               {msg.urgency}
             </span>
           )}
         </div>
-        <p className="mt-0.5 text-[12px] text-stone-800 leading-relaxed break-words">{msg.text}</p>
+        <p className="mt-0.5 text-[12px] text-foreground leading-relaxed break-words">{msg.text}</p>
       </div>
     </div>
   );
@@ -274,7 +274,7 @@ function ConversationCard({ conv, onBrief, briefLoading }: {
 
   return (
     <div className={`rounded-[28px] border overflow-hidden transition-all ${
-      hasNeg ? 'border-red-300 bg-red-50/90' : unanswered ? 'border-yellow-300 bg-yellow-50/90' : 'border-[#d8e9e6] bg-white/90'
+      hasNeg ? 'border-red-300 bg-red-50/90' : unanswered ? 'border-yellow-300 bg-yellow-50/90' : 'border-[#d8e9e6] bg-card/90'
     }`}>
       {/* Header */}
       <div className="w-full flex items-center justify-between gap-3 px-5 py-4 hover:bg-[#f3faf8] transition-colors">
@@ -286,7 +286,7 @@ function ConversationCard({ conv, onBrief, briefLoading }: {
           <div className={`h-2.5 w-2.5 rounded-full shrink-0 ${hasNeg ? 'bg-red-400 animate-pulse' : unanswered ? 'bg-yellow-400 animate-pulse' : (conv.count || 0) > 0 ? 'bg-green-400' : 'bg-stone-600'}`} />
           <div className="min-w-0">
             <p className="text-sm font-black uppercase tracking-[0.12em] text-[#243b38] leading-tight truncate">{name}</p>
-            <div className="flex flex-wrap items-center gap-2 mt-0.5 text-[10px] font-medium text-stone-700">
+            <div className="flex flex-wrap items-center gap-2 mt-0.5 text-[10px] font-medium text-foreground">
               <span>{conv.count || 0} msgs</span>
               {conv.last_ts ? <span>· última às {formatTime(conv.last_ts)}</span> : null}
               {hasNeg ? (
@@ -314,7 +314,7 @@ function ConversationCard({ conv, onBrief, briefLoading }: {
             className="rounded-full p-1 hover:bg-[#e8f4f2] transition"
             aria-label={expanded ? 'Recolher conversa' : 'Expandir conversa'}
           >
-            {expanded ? <ChevronUp className="h-4 w-4 text-stone-700" /> : <ChevronDown className="h-4 w-4 text-stone-700" />}
+            {expanded ? <ChevronUp className="h-4 w-4 text-foreground" /> : <ChevronDown className="h-4 w-4 text-foreground" />}
           </button>
         </div>
       </div>
@@ -329,7 +329,7 @@ function ConversationCard({ conv, onBrief, briefLoading }: {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-4 space-y-3 border-t border-[#e1eeeb] bg-white/70 pt-3 max-h-[320px] overflow-y-auto custom-scrollbar">
+            <div className="px-5 pb-4 space-y-3 border-t border-[#e1eeeb] bg-card/70 pt-3 max-h-[320px] overflow-y-auto custom-scrollbar">
               {msgs.map((msg) => (
                 <MsgBubble key={msg.id} msg={msg} />
               ))}
@@ -345,7 +345,7 @@ function ConversationCard({ conv, onBrief, briefLoading }: {
           </motion.div>
         )}
         {expanded && msgs.length === 0 && (
-          <div className="px-5 pb-4 pt-3 border-t border-[#e1eeeb] text-[11px] text-stone-700">
+          <div className="px-5 pb-4 pt-3 border-t border-[#e1eeeb] text-[11px] text-foreground">
             Sem mensagens no período selecionado.
           </div>
         )}
@@ -683,8 +683,8 @@ export default function ComunicacaoDashboard() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-2">
                 <div className="flex items-center gap-2">
-                  <Bot className="h-4 w-4 text-stone-500" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">IA Comunicacao</span>
+                  <Bot className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">IA Comunicacao</span>
                 </div>
                 <span className="rounded-full border border-[#379890]/25 bg-[#379890]/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.2em] text-[#379890]">NOC</span>
                 <span className="rounded-full border border-red-500/25 bg-red-500/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.2em] text-red-400">Suporte</span>
@@ -694,11 +694,11 @@ export default function ComunicacaoDashboard() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setNewMsgCount(0)}
-                  className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 transition hover:bg-white/[0.06]"
+                  className="flex items-center gap-1.5 rounded-full border border-white/10 bg-card/[0.03] px-3 py-1.5 transition hover:bg-card/[0.06]"
                   title="Atualizar feed"
                 >
                   <div className={`h-1.5 w-1.5 rounded-full ${liveConnected ? 'bg-green-400 animate-pulse' : 'bg-stone-600'}`} />
-                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-stone-500">
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">
                     {liveConnected ? 'ao vivo' : 'offline'}
                   </span>
                   {newMsgCount > 0 && (
@@ -707,13 +707,13 @@ export default function ComunicacaoDashboard() {
                     </span>
                   )}
                 </button>
-                <div className="flex items-center gap-1 rounded-[20px] border border-white/10 bg-white/[0.03] p-1">
+                <div className="flex items-center gap-1 rounded-[20px] border border-white/10 bg-card/[0.03] p-1">
                   {([1, 7, 30] as const).map((d) => (
                     <button
                       key={d}
                       onClick={() => setInsightDays(d)}
                       className={`rounded-[16px] px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all ${
-                        insightDays === d ? 'bg-[#379890] text-white shadow-md' : 'text-stone-400 hover:text-white'
+                        insightDays === d ? 'bg-[#379890] text-white shadow-md' : 'text-muted-foreground hover:text-white'
                       }`}
                     >
                       {d === 1 ? 'Hoje' : `${d}d`}
@@ -742,7 +742,7 @@ export default function ComunicacaoDashboard() {
                   label: 'Urgências',
                   value: summary?.urgent ?? 0,
                   sub: 'termos críticos',
-                  color: (summary?.urgent || 0) > 0 ? 'text-orange-400' : 'text-stone-400',
+                  color: (summary?.urgent || 0) > 0 ? 'text-orange-400' : 'text-muted-foreground',
                 },
                 {
                   label: 'Grupos monitorados',
@@ -751,10 +751,10 @@ export default function ComunicacaoDashboard() {
                   color: 'text-[#379890]',
                 },
               ].map((kpi) => (
-                <div key={kpi.label} className="rounded-[22px] border border-white/5 bg-white/[0.03] p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-500">{kpi.label}</p>
+                <div key={kpi.label} className="rounded-[22px] border border-white/5 bg-card/[0.03] p-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">{kpi.label}</p>
                   <p className={`mt-2 text-2xl font-[1000] tracking-[-0.05em] ${kpi.color}`}>{kpi.value}</p>
-                  <p className="mt-1 text-[10px] text-stone-600 uppercase tracking-[0.18em]">{kpi.sub}</p>
+                  <p className="mt-1 text-[10px] text-muted-foreground uppercase tracking-[0.18em]">{kpi.sub}</p>
                 </div>
               ))}
             </div>
@@ -763,12 +763,12 @@ export default function ComunicacaoDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-[28px] border border-[#b7d8d4] bg-white/80 p-6 shadow-lg"
+            className="rounded-[28px] border border-[#b7d8d4] bg-card/80 p-6 shadow-lg"
           >
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#379890]">Ciclo de conversas</p>
-                <p className="mt-1 text-xs text-stone-700">
+                <p className="mt-1 text-xs text-foreground">
                   Inicio, fechamento, protocolo e tempo sem resposta por conversa detectada.
                 </p>
               </div>
@@ -784,7 +784,7 @@ export default function ComunicacaoDashboard() {
                 className={`rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] transition ${
                   aiLifecycleReview
                     ? 'border-orange-500/35 bg-orange-500/10 text-orange-600'
-                    : 'border-[#379890]/35 bg-white px-4 text-[#1f7f78] hover:bg-[#eef8f7]'
+                    : 'border-[#379890]/35 bg-card px-4 text-[#1f7f78] hover:bg-[#eef8f7]'
                 }`}
               >
                 {aiLifecycleLoading ? 'IA revisando' : aiLifecycleReview ? 'IA revisou' : 'Revisar com IA'}
@@ -799,10 +799,10 @@ export default function ComunicacaoDashboard() {
                 { label: 'Sem resposta', value: sessionSummary?.sessions_without_response ?? 0, sub: 'sem retorno', color: 'text-red-400' },
                 { label: 'Maior espera', value: `${sessionSummary?.max_unanswered_minutes ?? 0}m`, sub: 'sem resposta', color: 'text-orange-400' },
               ].map((item) => (
-                <div key={item.label} className="rounded-[20px] border border-[#d8e9e6] bg-white/90 p-4 shadow-sm">
-                  <p className="text-[9px] font-black uppercase tracking-[0.22em] text-stone-700">{item.label}</p>
+                <div key={item.label} className="rounded-[20px] border border-[#d8e9e6] bg-card/90 p-4 shadow-sm">
+                  <p className="text-[9px] font-black uppercase tracking-[0.22em] text-foreground">{item.label}</p>
                   <p className={`mt-2 text-2xl font-[1000] tracking-[-0.04em] ${item.color}`}>{item.value}</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-stone-700">{item.sub}</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-foreground">{item.sub}</p>
                 </div>
               ))}
             </div>
@@ -810,17 +810,17 @@ export default function ComunicacaoDashboard() {
             {visibleSessions.length > 0 && (
               <div className="mt-5 grid gap-2">
                 {visibleSessions.map((session) => (
-                  <div key={session.id} className="flex flex-wrap items-center justify-between gap-3 rounded-[18px] border border-[#d8e9e6] bg-white/95 px-4 py-3 shadow-sm">
+                  <div key={session.id} className="flex flex-wrap items-center justify-between gap-3 rounded-[18px] border border-[#d8e9e6] bg-card/95 px-4 py-3 shadow-sm">
                     <div className="min-w-0">
                       <p className="truncate text-[11px] font-black uppercase tracking-[0.14em] text-[#243b38]">
                         {session.group_name || 'Grupo'} · {session.status === 'open' ? 'Aberta' : 'Fechada'}
                       </p>
-                      <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-stone-700">
+                      <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-foreground">
                         {session.protocol_registered ? `Protocolo ${session.protocols?.join(', ') || ''}` : 'Sem protocolo'} · {session.message_count || 0} msgs
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.12em]">
-                      <span className="rounded-full border border-[#d8e9e6] bg-[#f5faf9] px-3 py-1 text-stone-700">
+                      <span className="rounded-full border border-[#d8e9e6] bg-[#f5faf9] px-3 py-1 text-foreground">
                         1a resposta: {typeof session.first_response_minutes === 'number' ? `${session.first_response_minutes}m` : 'sem resposta'}
                       </span>
                       <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 text-orange-400">
@@ -832,11 +832,11 @@ export default function ComunicacaoDashboard() {
               </div>
             )}
 
-            <div className="mt-5 rounded-[22px] border border-[#d8e9e6] bg-white/95 p-4 shadow-sm">
+            <div className="mt-5 rounded-[22px] border border-[#d8e9e6] bg-card/95 p-4 shadow-sm">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#1f7f78]">Protocolos detectados</p>
-                  <p className="mt-1 text-xs text-stone-700">
+                  <p className="mt-1 text-xs text-foreground">
                     {protocolMentions.length} protocolo{protocolMentions.length !== 1 ? 's' : ''} vinculado{protocolMentions.length !== 1 ? 's' : ''} a conversas neste recorte.
                   </p>
                 </div>
@@ -858,7 +858,7 @@ export default function ComunicacaoDashboard() {
                     <div key={`${session.id}-${mention.protocol}-${mention.message_id || 'sem-msg'}-${mention.source || 'fonte'}-${index}`} className="grid gap-3 rounded-[16px] border border-[#e2efed] bg-[#f8fbfa] px-4 py-3 lg:grid-cols-[180px_1fr_140px]">
                       <div>
                         <p className="text-sm font-[1000] uppercase tracking-[0.08em] text-[#243b38]">{mention.protocol}</p>
-                        <p className="mt-1 text-[10px] font-black uppercase tracking-[0.14em] text-stone-600">
+                        <p className="mt-1 text-[10px] font-black uppercase tracking-[0.14em] text-muted-foreground">
                           {mention.source === 'ai' ? 'IA' : 'Regra'}{typeof mention.confidence === 'number' ? ` · ${Math.round(mention.confidence * 100)}%` : ''}
                         </p>
                       </div>
@@ -866,18 +866,18 @@ export default function ComunicacaoDashboard() {
                         <p className="truncate text-[11px] font-black uppercase tracking-[0.14em] text-[#1f7f78]">
                           {session.group_name || 'Grupo'} · {session.status === 'open' ? 'Aberta' : 'Fechada'}
                         </p>
-                        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-stone-700">
+                        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-foreground">
                           {mention.evidence || 'Sem evidência textual capturada.'}
                         </p>
                       </div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.12em] text-stone-600 lg:text-right">
+                      <div className="text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground lg:text-right">
                         {typeof mention.timestamp === 'number' ? formatTime(mention.timestamp) : 'sem hora'}
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="mt-4 rounded-[16px] border border-dashed border-[#d8e9e6] bg-[#f8fbfa] px-4 py-3 text-sm text-stone-700">
+                <div className="mt-4 rounded-[16px] border border-dashed border-[#d8e9e6] bg-[#f8fbfa] px-4 py-3 text-sm text-foreground">
                   Nenhum protocolo apareceu nas conversas exibidas. Acione a revisão com IA para procurar padrões menos óbvios.
                 </div>
               )}
@@ -917,19 +917,19 @@ export default function ComunicacaoDashboard() {
               className="rounded-[28px] border border-white/5 bg-card p-5 shadow-lg flex flex-col gap-4 self-start"
             >
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Grupos</p>
-                <p className="mt-1 text-xs text-stone-600">{selectedGroupKeys.length} de {allGroups.length} selecionados</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Grupos</p>
+                <p className="mt-1 text-xs text-muted-foreground">{selectedGroupKeys.length} de {allGroups.length} selecionados</p>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => { setHasStoredGroupSelection(true); setSelectedGroupKeys(allGroups.map((g) => g.key)); }}
-                  className="flex-1 rounded-[18px] border border-white/10 bg-white/[0.03] py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-stone-400 hover:text-white transition"
+                  className="flex-1 rounded-[18px] border border-white/10 bg-card/[0.03] py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-white transition"
                 >
                   Todos
                 </button>
                 <button
                   onClick={() => { setHasStoredGroupSelection(true); setSelectedGroupKeys([]); }}
-                  className="flex-1 rounded-[18px] border border-white/10 bg-white/[0.03] py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-stone-400 hover:text-white transition"
+                  className="flex-1 rounded-[18px] border border-white/10 bg-card/[0.03] py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-white transition"
                 >
                   Limpar
                 </button>
@@ -949,7 +949,7 @@ export default function ComunicacaoDashboard() {
                           ? hasNeg
                             ? 'border-red-500/30 bg-red-500/10 text-red-300'
                             : 'border-[#379890]/25 bg-[#379890]/10 text-[#379890]'
-                          : 'border-white/5 bg-white/[0.02] text-stone-500 hover:text-stone-300'
+                          : 'border-white/5 bg-card/[0.02] text-muted-foreground hover:text-stone-300'
                       }`}
                     >
                       <div className="flex items-center gap-2 min-w-0">
@@ -957,7 +957,7 @@ export default function ComunicacaoDashboard() {
                         <span className="text-[10px] font-black uppercase tracking-[0.12em] truncate">{g.name}</span>
                       </div>
                       {g.todayCount > 0 && (
-                        <span className="text-[9px] font-black text-stone-500 shrink-0">{g.todayCount}</span>
+                        <span className="text-[9px] font-black text-muted-foreground shrink-0">{g.todayCount}</span>
                       )}
                     </button>
                   );
@@ -967,17 +967,17 @@ export default function ComunicacaoDashboard() {
               {/* Sentimento compacto */}
               {(pos + neu + neg) > 0 && (
                 <div className="mt-2 pt-4 border-t border-white/5 space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-500">Sentimento</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">Sentimento</p>
                   {[
                     { label: 'Positivo', value: Math.round((pos / total) * 100), color: 'bg-green-400' },
                     { label: 'Neutro', value: Math.round((neu / total) * 100), color: 'bg-stone-500' },
                     { label: 'Negativo', value: Math.round((neg / total) * 100), color: 'bg-red-400' },
                   ].map((b) => (
                     <div key={b.label}>
-                      <div className="flex justify-between text-[10px] text-stone-500 mb-1">
+                      <div className="flex justify-between text-[10px] text-muted-foreground mb-1">
                         <span>{b.label}</span><span>{b.value}%</span>
                       </div>
-                      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                      <div className="h-1.5 rounded-full bg-card/5 overflow-hidden">
                         <div className={`h-full rounded-full ${b.color}`} style={{ width: `${b.value}%` }} />
                       </div>
                     </div>
@@ -993,11 +993,11 @@ export default function ComunicacaoDashboard() {
               className="flex flex-col gap-4"
             >
               {filteredConversations.length === 0 ? (
-                <div className="rounded-[28px] border border-dashed border-white/10 bg-white/[0.02] flex items-center justify-center py-20">
+                <div className="rounded-[28px] border border-dashed border-white/10 bg-card/[0.02] flex items-center justify-center py-20">
                   <div className="text-center">
-                    <MessageSquareText className="h-8 w-8 text-stone-600 mx-auto mb-3" />
-                    <p className="text-sm text-stone-500">Nenhuma conversa no período selecionado.</p>
-                    <p className="text-xs text-stone-600 mt-1">Selecione grupos ao lado ou mude a janela de tempo.</p>
+                    <MessageSquareText className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+                    <p className="text-sm text-muted-foreground">Nenhuma conversa no período selecionado.</p>
+                    <p className="text-xs text-muted-foreground mt-1">Selecione grupos ao lado ou mude a janela de tempo.</p>
                   </div>
                 </div>
               ) : (
@@ -1025,7 +1025,7 @@ export default function ComunicacaoDashboard() {
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Brief — {selectedBriefGroupName}</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Brief — {selectedBriefGroupName}</p>
                   <h3 className="mt-2 text-xl font-[950] tracking-[-0.04em] uppercase">{selectedBrief.title || 'Resumo do período'}</h3>
                 </div>
                 <span className={`rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] ${sentimentStyle[selectedBrief.sentiment || 'neutral']}`}>
@@ -1036,7 +1036,7 @@ export default function ComunicacaoDashboard() {
               {(selectedBrief.highlights?.length || 0) > 0 && (
                 <div className="mt-4 flex flex-col gap-2">
                   {selectedBrief.highlights!.slice(0, 3).map((h) => (
-                    <div key={h} className="rounded-[16px] border border-white/5 bg-white/[0.03] px-4 py-2.5 text-sm text-stone-300">{h}</div>
+                    <div key={h} className="rounded-[16px] border border-white/5 bg-card/[0.03] px-4 py-2.5 text-sm text-stone-300">{h}</div>
                   ))}
                 </div>
               )}
@@ -1064,22 +1064,22 @@ export default function ComunicacaoDashboard() {
           <div className="rounded-[28px] border border-white/5 bg-card overflow-hidden">
             <button
               onClick={() => setShowExport((v) => !v)}
-              className="w-full flex items-center justify-between px-8 py-5 hover:bg-white/[0.02] transition"
+              className="w-full flex items-center justify-between px-8 py-5 hover:bg-card/[0.02] transition"
             >
               <div className="flex items-center gap-3">
-                <Download className="h-4 w-4 text-stone-500" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-400">Exportar dados por grupo</span>
+                <Download className="h-4 w-4 text-muted-foreground" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Exportar dados por grupo</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="flex gap-1 rounded-[18px] border border-white/10 bg-white/[0.03] p-0.5">
+                <div className="flex gap-1 rounded-[18px] border border-white/10 bg-card/[0.03] p-0.5">
                   {([7, 15, 30] as const).map((d) => (
                     <span key={d} role="button" tabIndex={0} onClick={(e) => { e.stopPropagation(); setExportDays(d); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); setExportDays(d); } }}
-                      className={`rounded-[14px] px-3 py-1 text-[9px] font-black transition cursor-pointer ${exportDays === d ? 'bg-[#379890] text-white' : 'text-stone-400 hover:text-white'}`}>
+                      className={`rounded-[14px] px-3 py-1 text-[9px] font-black transition cursor-pointer ${exportDays === d ? 'bg-[#379890] text-white' : 'text-muted-foreground hover:text-white'}`}>
                       {d}d
                     </span>
                   ))}
                 </div>
-                {showExport ? <ChevronUp className="h-4 w-4 text-stone-500" /> : <ChevronDown className="h-4 w-4 text-stone-500" />}
+                {showExport ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
               </div>
             </button>
 
@@ -1093,7 +1093,7 @@ export default function ComunicacaoDashboard() {
                     {allGroups
                       .filter((g) => selectedKeySet.has(g.key))
                       .map((g) => (
-                        <div key={g.name} className="rounded-[24px] border border-white/5 bg-white/[0.02] p-5 flex flex-col gap-3">
+                        <div key={g.name} className="rounded-[24px] border border-white/5 bg-card/[0.02] p-5 flex flex-col gap-3">
                           <p className="text-[11px] font-black uppercase tracking-[0.14em] text-white truncate">{g.name}</p>
                           <div className="flex flex-col gap-2">
                             {(
@@ -1123,16 +1123,16 @@ export default function ComunicacaoDashboard() {
           <div className="rounded-[28px] border border-white/5 bg-card overflow-hidden">
             <button
               onClick={() => setShowOutlook((v) => !v)}
-              className="w-full flex items-center justify-between px-8 py-5 hover:bg-white/[0.02] transition"
+              className="w-full flex items-center justify-between px-8 py-5 hover:bg-card/[0.02] transition"
             >
               <div className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-stone-500" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-400">Outlook corporativo</span>
+                <Mail className="h-4 w-4 text-muted-foreground" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Outlook corporativo</span>
                 {outlookStatus?.connected && (
                   <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2 py-0.5 text-[9px] font-black text-green-400">Conectado</span>
                 )}
               </div>
-              {showOutlook ? <ChevronUp className="h-4 w-4 text-stone-500" /> : <ChevronDown className="h-4 w-4 text-stone-500" />}
+              {showOutlook ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
             </button>
             <AnimatePresence>
               {showOutlook && (
@@ -1141,7 +1141,7 @@ export default function ComunicacaoDashboard() {
                   className="overflow-hidden"
                 >
                   <div className="px-8 pb-6 pt-4 border-t border-white/5 space-y-4">
-                    <p className="text-sm text-stone-400">
+                    <p className="text-sm text-muted-foreground">
                       {outlookStatus?.connected
                         ? `Conta: ${outlookStatus.account?.name || 'desconhecida'} (${outlookStatus.account?.email || ''})`
                         : outlookStatus?.configured
@@ -1156,7 +1156,7 @@ export default function ComunicacaoDashboard() {
                         <ExternalLink className="h-3.5 w-3.5" /> Conectar
                       </button>
                       <button onClick={switchOutlookAccount} disabled={!outlookStatus?.connected || outlookSwitching}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[10px] font-black uppercase text-stone-400 hover:text-white transition disabled:opacity-40">
+                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-card/[0.03] px-5 py-2.5 text-[10px] font-black uppercase text-muted-foreground hover:text-white transition disabled:opacity-40">
                         {outlookSwitching ? <LoaderCircle className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />} Trocar conta
                       </button>
                       <button onClick={syncOutlookEmails} disabled={!outlookStatus?.connected || outlookSyncing}
@@ -1178,8 +1178,8 @@ export default function ComunicacaoDashboard() {
               className="rounded-[28px] border border-white/5 bg-card p-6 shadow-lg"
             >
               <div className="flex items-center gap-3 mb-5">
-                <BadgeInfo className="h-4 w-4 text-stone-500" />
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Resumos diários</p>
+                <BadgeInfo className="h-4 w-4 text-muted-foreground" />
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Resumos diários</p>
                 <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2 py-0.5 text-[9px] font-black text-red-400">Suporte</span>
                 <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-2 py-0.5 text-[9px] font-black text-orange-400">CS</span>
               </div>
@@ -1188,7 +1188,7 @@ export default function ComunicacaoDashboard() {
                   .filter((i) => selectedKeySet.has(normalizeGroup(i.group_name || i.group || '')))
                   .slice(0, 9)
                   .map((item, idx) => (
-                    <div key={item.id || idx} className="rounded-[20px] border border-white/5 bg-white/[0.03] p-4">
+                    <div key={item.id || idx} className="rounded-[20px] border border-white/5 bg-card/[0.03] p-4">
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <p className="text-[10px] font-black uppercase tracking-[0.14em] text-white truncate">
                           {item.group_name || item.group || 'Grupo'}
@@ -1197,11 +1197,11 @@ export default function ComunicacaoDashboard() {
                           {item.sentiment_label || 'neutro'}
                         </span>
                       </div>
-                      <p className="text-[11px] text-stone-400 leading-relaxed line-clamp-3">
+                      <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-3">
                         {item.executive_summary || 'Sem resumo.'}
                       </p>
                       {item.primary_keyword && (
-                        <p className="mt-2 text-[10px] text-stone-600 uppercase tracking-[0.15em]">
+                        <p className="mt-2 text-[10px] text-muted-foreground uppercase tracking-[0.15em]">
                           Palavra: {item.primary_keyword} · Urgência: {item.urgency_label || 'baixa'}
                         </p>
                       )}
@@ -1219,18 +1219,18 @@ export default function ComunicacaoDashboard() {
               className="rounded-[28px] border border-white/5 bg-card px-6 py-5"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="h-4 w-4 text-stone-500" />
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Termos recorrentes</p>
+                <Sparkles className="h-4 w-4 text-muted-foreground" />
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Termos recorrentes</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 {(liveData?.top_keywords || []).map((kw) => (
                   <span
                     key={kw.term}
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-stone-300"
+                    className="rounded-full border border-white/10 bg-card/[0.03] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-stone-300"
                     title={`${kw.count} ocorrências`}
                   >
                     {kw.term}
-                    <span className="ml-1.5 text-stone-600">{kw.count}</span>
+                    <span className="ml-1.5 text-muted-foreground">{kw.count}</span>
                   </span>
                 ))}
               </div>

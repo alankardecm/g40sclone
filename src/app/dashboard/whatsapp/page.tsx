@@ -170,14 +170,14 @@ export default function WhatsAppPage() {
       <main className="flex flex-1 flex-col overflow-hidden">
 
         {/* Header */}
-        <header className="flex items-center justify-between border-b border-[#404040]/8 bg-white px-6 py-4">
+        <header className="flex items-center justify-between border-b border-[#E6EAF3]/8 bg-card px-6 py-4">
           <div>
-            <h1 className="text-base font-bold text-[#404040]">WhatsApp — Evolution API</h1>
-            <p className="text-[11px] text-stone-400 mt-0.5">Gerencie instâncias e configure webhooks</p>
+            <h1 className="text-base font-bold text-[#E6EAF3]">WhatsApp — Evolution API</h1>
+            <p className="text-[11px] text-muted-foreground mt-0.5">Gerencie instâncias e configure webhooks</p>
           </div>
           <button
             onClick={fetchInstances}
-            className="flex items-center gap-1.5 rounded-lg bg-[#8DC63F]/10 px-3 py-1.5 text-[11px] font-bold text-[#8DC63F] hover:bg-[#8DC63F]/20 transition"
+            className="flex items-center gap-1.5 rounded-lg bg-[#3B82F6]/10 px-3 py-1.5 text-[11px] font-bold text-[#3B82F6] hover:bg-[#3B82F6]/20 transition"
           >
             <RefreshCw className="h-3.5 w-3.5" /> Atualizar
           </button>
@@ -186,22 +186,22 @@ export default function WhatsAppPage() {
         <div className="flex flex-1 overflow-hidden">
 
           {/* Lista de instâncias */}
-          <aside className="w-72 flex-shrink-0 border-r border-[#404040]/8 bg-white flex flex-col">
+          <aside className="w-72 flex-shrink-0 border-r border-[#E6EAF3]/8 bg-card flex flex-col">
             {/* Criar nova instância */}
-            <div className="p-4 border-b border-[#404040]/8">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-2">Nova instância</p>
+            <div className="p-4 border-b border-[#E6EAF3]/8">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">Nova instância</p>
               <div className="flex gap-2">
                 <input
                   value={newName}
                   onChange={e => setNewName(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleCreate()}
                   placeholder="nome-da-instancia"
-                  className="flex-1 rounded-lg border border-[#404040]/15 px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-[#8DC63F]/30"
+                  className="flex-1 rounded-lg border border-[#E6EAF3]/15 px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
                 />
                 <button
                   onClick={handleCreate}
                   disabled={creating || !newName.trim()}
-                  className="flex items-center gap-1 rounded-lg bg-[#8DC63F] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#7ab030] disabled:opacity-50 transition"
+                  className="flex items-center gap-1 rounded-lg bg-[#3B82F6] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#2563EB] disabled:opacity-50 transition"
                 >
                   {creating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
                 </button>
@@ -212,11 +212,11 @@ export default function WhatsAppPage() {
             <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-1">
               {loading && (
                 <div className="flex items-center justify-center py-8">
-                  <Loader2 className="h-5 w-5 animate-spin text-[#8DC63F]" />
+                  <Loader2 className="h-5 w-5 animate-spin text-[#3B82F6]" />
                 </div>
               )}
               {!loading && instances.length === 0 && (
-                <p className="text-center text-xs text-stone-400 py-8">Nenhuma instância criada.</p>
+                <p className="text-center text-xs text-muted-foreground py-8">Nenhuma instância criada.</p>
               )}
               {instances.map((inst) => (
                 <div
@@ -224,14 +224,14 @@ export default function WhatsAppPage() {
                   onClick={() => openDetail(inst.name)}
                   className={`group flex items-center justify-between rounded-xl px-3 py-2.5 cursor-pointer transition ${
                     selected?.name === inst.name
-                      ? 'bg-[#8DC63F]/10 ring-1 ring-[#8DC63F]/30'
-                      : 'hover:bg-stone-50'
+                      ? 'bg-[#3B82F6]/10 ring-1 ring-[#3B82F6]/30'
+                      : 'hover:bg-background'
                   }`}
                 >
                   <div className="min-w-0">
-                    <p className="text-xs font-bold text-[#404040] truncate">{inst.name}</p>
+                    <p className="text-xs font-bold text-[#E6EAF3] truncate">{inst.name}</p>
                     {inst.profileName && (
-                      <p className="text-[10px] text-stone-400 truncate">{inst.profileName}</p>
+                      <p className="text-[10px] text-muted-foreground truncate">{inst.profileName}</p>
                     )}
                     <p className={`text-[10px] font-semibold mt-0.5 ${stateColor(inst.connectionStatus)}`}>
                       {stateLabel(inst.connectionStatus)}
@@ -252,12 +252,12 @@ export default function WhatsAppPage() {
           <section className="flex-1 overflow-y-auto p-6">
             {loadingDetail && (
               <div className="flex items-center justify-center h-48">
-                <Loader2 className="h-6 w-6 animate-spin text-[#8DC63F]" />
+                <Loader2 className="h-6 w-6 animate-spin text-[#3B82F6]" />
               </div>
             )}
 
             {!loadingDetail && !selected && (
-              <div className="flex flex-col items-center justify-center h-48 gap-2 text-stone-400">
+              <div className="flex flex-col items-center justify-center h-48 gap-2 text-muted-foreground">
                 <QrCode className="h-10 w-10 opacity-30" />
                 <p className="text-sm">Selecione uma instância para ver os detalhes</p>
               </div>
@@ -267,10 +267,10 @@ export default function WhatsAppPage() {
               <div className="max-w-xl flex flex-col gap-5">
 
                 {/* Status */}
-                <div className="rounded-2xl border border-[#404040]/8 bg-white p-5 flex items-center justify-between">
+                <div className="rounded-2xl border border-[#E6EAF3]/8 bg-card p-5 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-stone-400 mb-0.5">Instância</p>
-                    <p className="font-bold text-[#404040]">{selected.name}</p>
+                    <p className="text-xs text-muted-foreground mb-0.5">Instância</p>
+                    <p className="font-bold text-[#E6EAF3]">{selected.name}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`text-sm font-bold ${stateColor(selected.state)}`}>
@@ -284,8 +284,8 @@ export default function WhatsAppPage() {
 
                 {/* QR Code */}
                 {selected.state !== 'open' && (
-                  <div className="rounded-2xl border border-[#404040]/8 bg-white p-5 flex flex-col items-center gap-4">
-                    <p className="text-xs font-bold uppercase tracking-wider text-stone-400">Escanear QR Code</p>
+                  <div className="rounded-2xl border border-[#E6EAF3]/8 bg-card p-5 flex flex-col items-center gap-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Escanear QR Code</p>
                     {selected.qrcode ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -294,16 +294,16 @@ export default function WhatsAppPage() {
                         className="w-52 h-52 rounded-xl"
                       />
                     ) : (
-                      <p className="text-xs text-stone-400">QR Code não disponível. Tente reconectar.</p>
+                      <p className="text-xs text-muted-foreground">QR Code não disponível. Tente reconectar.</p>
                     )}
                     {selected.pairingCode && (
-                      <p className="text-xs text-stone-500">
+                      <p className="text-xs text-muted-foreground">
                         Código de pareamento: <span className="font-mono font-bold">{selected.pairingCode}</span>
                       </p>
                     )}
                     <button
                       onClick={() => openDetail(selected.name)}
-                      className="flex items-center gap-1.5 rounded-lg bg-[#8DC63F]/10 px-4 py-2 text-xs font-bold text-[#8DC63F] hover:bg-[#8DC63F]/20 transition"
+                      className="flex items-center gap-1.5 rounded-lg bg-[#3B82F6]/10 px-4 py-2 text-xs font-bold text-[#3B82F6] hover:bg-[#3B82F6]/20 transition"
                     >
                       <RefreshCw className="h-3.5 w-3.5" /> Gerar novo QR
                     </button>
@@ -321,8 +321,8 @@ export default function WhatsAppPage() {
                 )}
 
                 {/* Webhook */}
-                <div className="rounded-2xl border border-[#404040]/8 bg-white p-5 flex flex-col gap-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-stone-400 flex items-center gap-1.5">
+                <div className="rounded-2xl border border-[#E6EAF3]/8 bg-card p-5 flex flex-col gap-3">
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                     <Link2 className="h-3.5 w-3.5" /> Webhook
                   </p>
                   <div className="flex gap-2">
@@ -330,42 +330,42 @@ export default function WhatsAppPage() {
                       value={webhookUrl}
                       onChange={e => setWebhookUrl(e.target.value)}
                       placeholder="https://seu-hub/api/evolution/webhook"
-                      className="flex-1 rounded-lg border border-[#404040]/15 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#8DC63F]/30"
+                      className="flex-1 rounded-lg border border-[#E6EAF3]/15 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
                     />
                     <button
                       onClick={handleSetWebhook}
-                      className="rounded-lg bg-[#8DC63F] px-4 py-2 text-xs font-bold text-white hover:bg-[#7ab030] transition"
+                      className="rounded-lg bg-[#3B82F6] px-4 py-2 text-xs font-bold text-white hover:bg-[#2563EB] transition"
                     >
                       Salvar
                     </button>
                   </div>
-                  <p className="text-[10px] text-stone-400">
+                  <p className="text-[10px] text-muted-foreground">
                     URL que a Evolution API usará para enviar mensagens recebidas ao HUB.
                   </p>
                 </div>
 
                 {/* Enviar mensagem de teste */}
-                <div className="rounded-2xl border border-[#404040]/8 bg-white p-5 flex flex-col gap-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-stone-400 flex items-center gap-1.5">
+                <div className="rounded-2xl border border-[#E6EAF3]/8 bg-card p-5 flex flex-col gap-3">
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                     <Send className="h-3.5 w-3.5" /> Enviar mensagem de teste
                   </p>
                   <input
                     value={sendTo}
                     onChange={e => setSendTo(e.target.value.replace(/\D/g, ''))}
                     placeholder="19999999999 (só números, DDI 55 automático)"
-                    className="rounded-lg border border-[#404040]/15 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#8DC63F]/30"
+                    className="rounded-lg border border-[#E6EAF3]/15 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
                   />
                   <textarea
                     value={sendText}
                     onChange={e => setSendText(e.target.value)}
                     placeholder="Mensagem…"
                     rows={3}
-                    className="rounded-lg border border-[#404040]/15 px-3 py-2 text-xs resize-none focus:outline-none focus:ring-2 focus:ring-[#8DC63F]/30"
+                    className="rounded-lg border border-[#E6EAF3]/15 px-3 py-2 text-xs resize-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
                   />
                   <button
                     onClick={handleSend}
                     disabled={sending || !sendTo || !sendText}
-                    className="self-start flex items-center gap-1.5 rounded-lg bg-[#8DC63F] px-4 py-2 text-xs font-bold text-white hover:bg-[#7ab030] disabled:opacity-50 transition"
+                    className="self-start flex items-center gap-1.5 rounded-lg bg-[#3B82F6] px-4 py-2 text-xs font-bold text-white hover:bg-[#2563EB] disabled:opacity-50 transition"
                   >
                     {sending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
                     Enviar
@@ -374,7 +374,7 @@ export default function WhatsAppPage() {
 
                 {/* Feedback */}
                 {feedback && (
-                  <div className="rounded-xl bg-[#8DC63F]/10 border border-[#8DC63F]/20 px-4 py-3 text-xs font-semibold text-[#8DC63F]">
+                  <div className="rounded-xl bg-[#3B82F6]/10 border border-[#3B82F6]/20 px-4 py-3 text-xs font-semibold text-[#3B82F6]">
                     {feedback}
                   </div>
                 )}

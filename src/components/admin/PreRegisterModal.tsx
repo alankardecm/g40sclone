@@ -51,44 +51,44 @@ export function PreRegisterModal({ onClose, onSave }: Props) {
       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
 
       <div
-        className="relative bg-white rounded-2xl shadow-[0_24px_80px_rgba(64,64,64,0.18)] w-full max-w-sm"
+        className="relative bg-card rounded-2xl shadow-[0_24px_80px_rgba(64,64,64,0.18)] w-full max-w-sm"
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
           <div className="flex items-center gap-2">
-            <UserPlus className="h-4 w-4 text-[#8DC63F]" />
-            <p className="text-[13px] font-bold text-[#404040]">Pré-cadastrar usuário</p>
+            <UserPlus className="h-4 w-4 text-[#3B82F6]" />
+            <p className="text-[13px] font-bold text-[#E6EAF3]">Pré-cadastrar usuário</p>
           </div>
-          <button onClick={onClose} className="h-8 w-8 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors">
-            <X className="h-4 w-4 text-gray-400" />
+          <button onClick={onClose} className="h-8 w-8 flex items-center justify-center rounded-xl hover:bg-muted transition-colors">
+            <X className="h-4 w-4 text-muted-foreground" />
           </button>
         </div>
 
         <div className="px-6 py-5 flex flex-col gap-4">
-          <p className="text-[11px] text-gray-400 leading-relaxed">
+          <p className="text-[11px] text-muted-foreground leading-relaxed">
             O usuário poderá usar o bot do WhatsApp sem precisar acessar o Hub. Ao fazer o primeiro login, será automaticamente ativado.
           </p>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Nome</label>
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Nome</label>
             <input
               type="text"
               placeholder="João Silva"
               value={name}
               onChange={e => setName(e.target.value)}
-              className="w-full px-3 py-2.5 text-[13px] border border-gray-200 rounded-xl focus:outline-none focus:border-[#8DC63F]"
+              className="w-full px-3 py-2.5 text-[13px] border border-border rounded-xl focus:outline-none focus:border-[#3B82F6]"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Email corporativo</label>
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Email corporativo</label>
             <input
               type="email"
               placeholder="joao.silva@netturbo.com.br"
               value={email}
               onChange={e => setEmail(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSave()}
-              className="w-full px-3 py-2.5 text-[13px] border border-gray-200 rounded-xl focus:outline-none focus:border-[#8DC63F] font-mono"
+              className="w-full px-3 py-2.5 text-[13px] border border-border rounded-xl focus:outline-none focus:border-[#3B82F6] font-mono"
             />
           </div>
 
@@ -97,14 +97,14 @@ export function PreRegisterModal({ onClose, onSave }: Props) {
           )}
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 text-[11px] font-black uppercase tracking-wide text-gray-400 rounded-xl border border-gray-200 hover:border-gray-300">
+        <div className="px-6 py-4 border-t border-border flex justify-end gap-2">
+          <button onClick={onClose} className="px-4 py-2 text-[11px] font-black uppercase tracking-wide text-muted-foreground rounded-xl border border-border hover:border-border">
             Cancelar
           </button>
           <button
             onClick={handleSave}
             disabled={saving}
-            className="px-4 py-2 text-[11px] font-black uppercase tracking-wide text-white bg-[#8DC63F] rounded-xl hover:bg-[#7ab030] disabled:opacity-50"
+            className="px-4 py-2 text-[11px] font-black uppercase tracking-wide text-white bg-[#3B82F6] rounded-xl hover:bg-[#2563EB] disabled:opacity-50"
           >
             {saving ? 'Salvando...' : 'Cadastrar'}
           </button>

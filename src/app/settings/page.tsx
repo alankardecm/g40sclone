@@ -58,7 +58,7 @@ function statusLabel(s: ServiceStatus) {
 function statusStyle(s: ServiceStatus) {
   if (s === 'ok')    return 'border-emerald-500/20 bg-emerald-500/8 text-emerald-400';
   if (s === 'error') return 'border-red-500/20 bg-red-500/8 text-red-400';
-  return 'border-white/10 bg-white/[0.03] text-stone-400';
+  return 'border-white/10 bg-card/[0.03] text-muted-foreground';
 }
 
 // ── Componente principal ───────────────────────────────────────────────────────
@@ -188,17 +188,17 @@ export default function SettingsPage() {
           >
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500">Hub Operacional</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Hub Operacional</p>
                 <h1 className="mt-1 text-2xl font-[950] uppercase tracking-[-0.03em]">Diagnóstico & Status</h1>
-                <p className="mt-1 text-xs text-stone-500">
+                <p className="mt-1 text-xs text-muted-foreground">
                   Saúde de todas as conexões do Hub em tempo real.
-                  {lastChecked && <span className="ml-2 text-stone-600">Última verificação: {lastChecked}</span>}
+                  {lastChecked && <span className="ml-2 text-muted-foreground">Última verificação: {lastChecked}</span>}
                 </p>
               </div>
               <button
                 onClick={runChecks}
                 disabled={loading}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-stone-400 hover:text-white transition disabled:opacity-50"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-card/[0.03] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-muted-foreground hover:text-white transition disabled:opacity-50"
               >
                 <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
                 Verificar tudo
@@ -209,11 +209,11 @@ export default function SettingsPage() {
             <div className="mt-5 grid grid-cols-3 gap-3">
               {[
                 { label: 'Saudáveis',     value: healthyCount, color: 'text-emerald-400' },
-                { label: 'Com falha',     value: errorCount,   color: errorCount > 0 ? 'text-red-400' : 'text-stone-500' },
-                { label: 'Indefinidos',   value: unknownCount, color: 'text-stone-400' },
+                { label: 'Com falha',     value: errorCount,   color: errorCount > 0 ? 'text-red-400' : 'text-muted-foreground' },
+                { label: 'Indefinidos',   value: unknownCount, color: 'text-muted-foreground' },
               ].map((k) => (
-                <div key={k.label} className="rounded-[22px] border border-white/5 bg-white/[0.03] p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-stone-500">{k.label}</p>
+                <div key={k.label} className="rounded-[22px] border border-white/5 bg-card/[0.03] p-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">{k.label}</p>
                   <p className={`mt-2 text-2xl font-[1000] tracking-[-0.05em] ${k.color}`}>{k.value}</p>
                 </div>
               ))}
@@ -226,7 +226,7 @@ export default function SettingsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500 mb-3 px-1">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-3 px-1">
               Serviços & Integrações
             </p>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -236,13 +236,13 @@ export default function SettingsPage() {
                   className={`rounded-[26px] border p-5 transition-all ${statusStyle(svc.status)}`}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/[0.04]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-card/[0.04]">
                       <svc.icon className="h-5 w-5" />
                     </div>
                     <StatusDot status={svc.status} />
                   </div>
                   <p className="mt-4 text-sm font-black uppercase tracking-[-0.01em]">{svc.label}</p>
-                  <p className="mt-1 text-[11px] text-stone-500">{svc.detail}</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{svc.detail}</p>
                   {svc.meta && (
                     <p className="mt-2 text-[10px] font-black uppercase tracking-[0.12em] opacity-70 truncate">
                       {svc.meta}
@@ -273,7 +273,7 @@ export default function SettingsPage() {
             transition={{ delay: 0.1 }}
             className="rounded-[28px] border border-white/5 bg-card px-6 py-5"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500 mb-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4">
               Ambiente & Build
             </p>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -283,10 +283,10 @@ export default function SettingsPage() {
                 { label: 'Framework',   value: 'Next.js',      note: 'App Router · TypeScript' },
                 { label: 'Módulos',     value: `${modules.length}`,  note: 'Páginas ativas no Hub' },
               ].map((item) => (
-                <div key={item.label} className="rounded-[20px] border border-white/5 bg-white/[0.03] px-4 py-3">
-                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-stone-600">{item.label}</p>
+                <div key={item.label} className="rounded-[20px] border border-white/5 bg-card/[0.03] px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-muted-foreground">{item.label}</p>
                   <p className="mt-1.5 text-base font-black tracking-[-0.02em]">{item.value}</p>
-                  <p className="mt-0.5 text-[10px] text-stone-600">{item.note}</p>
+                  <p className="mt-0.5 text-[10px] text-muted-foreground">{item.note}</p>
                 </div>
               ))}
             </div>
@@ -299,7 +299,7 @@ export default function SettingsPage() {
             transition={{ delay: 0.15 }}
             className="rounded-[28px] border border-white/5 bg-card px-6 py-5"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500 mb-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4">
               Mapa de Módulos
             </p>
             <div className="flex flex-wrap gap-2">
@@ -307,7 +307,7 @@ export default function SettingsPage() {
                 <a
                   key={mod.href}
                   href={mod.href}
-                  className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] font-black uppercase tracking-[0.14em] text-stone-400 hover:border-[#379890]/30 hover:bg-[#379890]/8 hover:text-[#379890] transition-all"
+                  className="group flex items-center gap-2 rounded-full border border-white/10 bg-card/[0.03] px-3 py-2 text-[10px] font-black uppercase tracking-[0.14em] text-muted-foreground hover:border-[#379890]/30 hover:bg-[#379890]/8 hover:text-[#379890] transition-all"
                 >
                   <mod.icon className="h-3.5 w-3.5" />
                   {mod.label}
@@ -324,22 +324,22 @@ export default function SettingsPage() {
             transition={{ delay: 0.2 }}
             className="rounded-[28px] border border-white/5 bg-card px-6 py-5"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500 mb-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4">
               Arquivos de Configuração
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
               {configFiles.map((f) => (
                 <div
                   key={f.path}
-                  className="flex items-center gap-3 rounded-[18px] border border-white/5 bg-white/[0.03] px-4 py-3"
+                  className="flex items-center gap-3 rounded-[18px] border border-white/5 bg-card/[0.03] px-4 py-3"
                 >
-                  <FileSpreadsheet className="h-4 w-4 text-stone-500 shrink-0" />
+                  <FileSpreadsheet className="h-4 w-4 text-muted-foreground shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[11px] font-black uppercase tracking-[0.12em] text-stone-200 truncate">
                       {f.label}
                     </p>
-                    <p className="text-[10px] text-stone-600 mt-0.5">{f.desc}</p>
-                    <p className="text-[9px] text-stone-700 font-mono mt-0.5 truncate">{f.path}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{f.desc}</p>
+                    <p className="text-[9px] text-foreground font-mono mt-0.5 truncate">{f.path}</p>
                   </div>
                 </div>
               ))}
@@ -353,7 +353,7 @@ export default function SettingsPage() {
             transition={{ delay: 0.25 }}
             className="rounded-[28px] border border-white/5 bg-card px-6 py-5"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-500 mb-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4">
               APIs Internas
             </p>
             <div className="flex flex-wrap gap-2">
@@ -377,7 +377,7 @@ export default function SettingsPage() {
               ].map((route) => (
                 <span
                   key={route}
-                  className="rounded-full border border-white/8 bg-white/[0.02] px-2.5 py-1 font-mono text-[10px] text-stone-500"
+                  className="rounded-full border border-white/8 bg-card/[0.02] px-2.5 py-1 font-mono text-[10px] text-muted-foreground"
                 >
                   {route}
                 </span>

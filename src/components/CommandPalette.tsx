@@ -42,18 +42,18 @@ export default function CommandPalette() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -10 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-2xl overflow-hidden rounded-2xl border border-[#143230]/8 bg-white shadow-[0_30px_70px_-32px_rgba(20,50,48,0.28)]"
+            className="w-full max-w-2xl overflow-hidden rounded-2xl border border-[#143230]/8 bg-card shadow-[0_30px_70px_-32px_rgba(20,50,48,0.28)]"
           >
             <div className="flex items-center gap-4 border-b border-[#143230]/8 bg-[#f7f8f4] px-5 py-4">
-              <Search className="h-5 w-5 text-stone-500" />
+              <Search className="h-5 w-5 text-muted-foreground" />
               <input
                 autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Busca inteligente: manuais, contratos ou comandos..."
-                className="flex-1 bg-transparent text-lg font-medium text-[#143230] outline-none placeholder:text-stone-400"
+                className="flex-1 bg-transparent text-lg font-medium text-[#143230] outline-none placeholder:text-muted-foreground"
               />
-              <div className="flex items-center gap-1.5 rounded-md border border-[#143230]/10 bg-white px-2 py-1 text-[10px] font-bold text-stone-500">
+              <div className="flex items-center gap-1.5 rounded-md border border-[#143230]/10 bg-card px-2 py-1 text-[10px] font-bold text-muted-foreground">
                 <Command className="h-3 w-3" /> K
               </div>
             </div>
@@ -66,7 +66,7 @@ export default function CommandPalette() {
                   </div>
                   <div>
                     <h3 className="mb-1 text-sm font-semibold text-[#143230]">Busca global com RAG</h3>
-                    <p className="mx-auto max-w-xs text-[11px] text-stone-500">
+                    <p className="mx-auto max-w-xs text-[11px] text-muted-foreground">
                       Pesquise nos manuais técnicos, contratos e procedimentos operacionais.
                     </p>
                   </div>
@@ -74,7 +74,7 @@ export default function CommandPalette() {
               ) : (
                 <div className="space-y-1 p-2">
                   <div className="mb-2 flex items-center justify-between px-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-stone-500">Resultados da inteligencia</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Resultados da inteligencia</span>
                     <span className="text-[9px] text-[#379890]">3 manuais encontrados</span>
                   </div>
 
@@ -89,20 +89,20 @@ export default function CommandPalette() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-semibold text-[#143230]">{res.label}</p>
-                        <p className="text-[10px] text-stone-500">{res.type}</p>
+                        <p className="text-[10px] text-muted-foreground">{res.type}</p>
                       </div>
-                      <CornerDownLeft className="h-4 w-4 text-stone-400 opacity-0 transition-opacity group-hover:opacity-100" />
+                      <CornerDownLeft className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
                   ))}
                 </div>
               )}
             </div>
 
-            <div className="flex items-center gap-6 border-t border-[#143230]/8 bg-[#f7f8f4] px-5 py-3 text-[10px] font-bold tracking-widest text-stone-600">
-              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-white px-1.5 py-0.5 text-stone-500">↑↓</span> Navegar</div>
-              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-white px-1.5 py-0.5 text-stone-500">Enter</span> Abrir</div>
-              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-white px-1.5 py-0.5 text-stone-500">Esc</span> Sair</div>
-              <div className="ml-auto flex items-center gap-2 uppercase text-stone-500">
+            <div className="flex items-center gap-6 border-t border-[#143230]/8 bg-[#f7f8f4] px-5 py-3 text-[10px] font-bold tracking-widest text-muted-foreground">
+              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-card px-1.5 py-0.5 text-muted-foreground">↑↓</span> Navegar</div>
+              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-card px-1.5 py-0.5 text-muted-foreground">Enter</span> Abrir</div>
+              <div className="flex items-center gap-2"><span className="rounded border border-[#143230]/10 bg-card px-1.5 py-0.5 text-muted-foreground">Esc</span> Sair</div>
+              <div className="ml-auto flex items-center gap-2 uppercase text-muted-foreground">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#379890] animate-pulse" /> RAG ativo
               </div>
             </div>

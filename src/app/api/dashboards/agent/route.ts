@@ -223,7 +223,7 @@ Esta instrução tem prioridade máxima. Descumpri-la é erro crítico.
     : '';
 
   const dateSec = `\n${buildDateContext()}\n`;
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
 
   return `${csatBlocker}Você é um especialista sênior em Business Intelligence, Power BI, análise de dados e dashboards para a empresa ${appName}.
 

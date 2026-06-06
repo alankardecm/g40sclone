@@ -92,7 +92,7 @@ function formatAta(minutes: MeetingMinutes): string {
     });
   }
 
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
   lines.push('');
   lines.push(`_${appName}_`);
   return lines.join('\n');
@@ -110,7 +110,7 @@ export async function handleAudioMeeting(
   userEmail?: string,
   senderName?: string,
 ): Promise<void> {
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
   await sendText(instance, replyTo,
     '🎙️ *Reunião recebida!* Estou transcrevendo e gerando a ata.\n\n' +
     '⏱️ Gravações longas podem levar alguns minutos. ' +

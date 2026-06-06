@@ -3,10 +3,11 @@ import { Suspense } from "react";
 import "./globals.css";
 import CommandPalette from "@/components/CommandPalette";
 import { SessionProvider } from "@/components/providers/SessionProvider";
+import { brand } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_APP_NAME || "G4 Business OS",
-  description: process.env.NEXT_PUBLIC_APP_DESC || "Sistema Operacional de IA e Automação de Negócios.",
+  title: `${brand.name} — ${brand.subtitle}`,
+  description: brand.description,
 };
 
 export default function RootLayout({

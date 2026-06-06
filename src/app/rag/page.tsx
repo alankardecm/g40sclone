@@ -23,7 +23,7 @@ type RagSession = {
   summary: string;
 };
 
-const CHAT_SESSION_KEY = 'g4os-rag-session-v1';
+const CHAT_SESSION_KEY = 'am-os-rag-session-v1';
 const INITIAL_PROMPT = '';
 
 const BASE_MESSAGES: ChatMessage[] = [
@@ -224,7 +224,7 @@ export default function RagExplorer() {
           >
             <button
               onClick={() => setLightboxImage(null)}
-              className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-lg text-gray-700 hover:bg-gray-100 z-10"
+              className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full bg-card shadow-lg text-foreground hover:bg-muted z-10"
             >
               <X className="h-4 w-4" />
             </button>
@@ -248,19 +248,19 @@ export default function RagExplorer() {
               <span className="text-primary">Google Drive</span>
             </div>
             <h1 className="text-4xl font-[950] leading-tight tracking-[-0.05em] text-foreground">
-              {process.env.NEXT_PUBLIC_APP_NAME || 'G4OS'} <span className="text-primary italic">Assistant</span>
+              {process.env.NEXT_PUBLIC_APP_NAME || 'AM OS'} <span className="text-primary italic">Assistant</span>
             </h1>
             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
               Consulte procedimentos, configurações e processos documentados na wiki interna.
             </p>
           </div>
           <div className="flex flex-col items-end gap-3">
-            <div className="rounded-[28px] border border-border/70 bg-white px-4 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground shadow-sm">
+            <div className="rounded-[28px] border border-border/70 bg-card px-4 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground shadow-sm">
               {headerBadge}
             </div>
             <button
               onClick={clearSession}
-              className="rounded-full border border-border bg-white px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
+              className="rounded-full border border-border bg-card px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
             >
               Limpar sessão
             </button>
@@ -270,13 +270,13 @@ export default function RagExplorer() {
         <section className="grid gap-6 xl:grid-cols-[1.45fr_0.55fr]">
           {/* Chat */}
           <div className="flex min-h-[700px] flex-col rounded-[36px] border border-border/70 bg-card p-5 shadow-[0_28px_70px_rgba(42,57,52,0.10)]">
-            <div className="flex items-center justify-between gap-4 rounded-[28px] border border-border/70 bg-white px-5 py-4">
+            <div className="flex items-center justify-between gap-4 rounded-[28px] border border-border/70 bg-card px-5 py-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 text-primary">
                   <Bot className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="text-base font-black tracking-[-0.03em] text-foreground">{process.env.NEXT_PUBLIC_APP_NAME || 'G4OS'} Assistant</h2>
+                  <h2 className="text-base font-black tracking-[-0.03em] text-foreground">{process.env.NEXT_PUBLIC_APP_NAME || 'AM OS'} Assistant</h2>
                   <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground truncate max-w-xs">{statusDetail}</p>
                 </div>
               </div>
@@ -290,7 +290,7 @@ export default function RagExplorer() {
                 <button
                   key={prompt}
                   onClick={() => setInput(prompt)}
-                  className="rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-bold text-foreground transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                  className="rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-bold text-foreground transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
                 >
                   {prompt}
                 </button>
@@ -306,11 +306,11 @@ export default function RagExplorer() {
                     className={`max-w-[80%] break-words rounded-[24px] border p-4 shadow-sm ${
                       isUser
                         ? 'ml-auto rounded-br-md border-primary/20 bg-primary text-white'
-                        : 'rounded-bl-md border-border bg-white text-foreground'
+                        : 'rounded-bl-md border-border bg-card text-foreground'
                     }`}
                   >
                     <div className={`mb-1.5 text-[9px] font-black uppercase tracking-[0.3em] ${isUser ? 'text-white/70' : 'text-muted-foreground'}`}>
-                      {isUser ? 'Você' : (process.env.NEXT_PUBLIC_APP_NAME || 'G4OS')}
+                      {isUser ? 'Você' : (process.env.NEXT_PUBLIC_APP_NAME || 'AM OS')}
                     </div>
                     <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
                   </div>
@@ -318,8 +318,8 @@ export default function RagExplorer() {
               })}
             </div>
 
-            <div className="mt-4 rounded-[30px] border border-border/70 bg-white/80 p-3 shadow-sm">
-              <div className="flex items-center gap-3 rounded-[26px] border border-border bg-white p-3 shadow-sm focus-within:border-primary/40">
+            <div className="mt-4 rounded-[30px] border border-border/70 bg-card/80 p-3 shadow-sm">
+              <div className="flex items-center gap-3 rounded-[26px] border border-border bg-card p-3 shadow-sm focus-within:border-primary/40">
                 <Search className="ml-3 h-4 w-4 text-muted-foreground" />
                 <input
                   value={input}
@@ -353,21 +353,21 @@ export default function RagExplorer() {
 
               <div className="space-y-3">
                 {sources.length === 0 ? (
-                  <div className="rounded-[20px] border border-border bg-white p-4 text-sm text-muted-foreground">
+                  <div className="rounded-[20px] border border-border bg-card p-4 text-sm text-muted-foreground">
                     As fontes aparecem aqui após cada resposta.
                   </div>
                 ) : (
                   <>
                     {/* Fontes com imagem */}
                     {sourcesWithImages.map((source, index) => (
-                      <div key={`img-${index}`} className="rounded-[20px] border border-border bg-white p-3">
+                      <div key={`img-${index}`} className="rounded-[20px] border border-border bg-card p-3">
                         <p className="text-[11px] font-black uppercase tracking-[0.12em] text-foreground leading-tight">{source.title}</p>
                         {typeof source.score === 'number' && (
                           <p className="mt-0.5 text-[10px] text-primary font-bold">{source.score.toFixed(2)}</p>
                         )}
                         {source.imageUrl && (
                           <div
-                            className="group relative mt-2 cursor-zoom-in overflow-hidden rounded-[14px] border border-border bg-gray-50"
+                            className="group relative mt-2 cursor-zoom-in overflow-hidden rounded-[14px] border border-border bg-background"
                             onClick={() => setLightboxImage({ url: source.imageUrl!, title: source.title })}
                           >
                             <img
@@ -385,7 +385,7 @@ export default function RagExplorer() {
 
                     {/* Fontes sem imagem */}
                     {sourcesTextOnly.map((source, index) => (
-                      <div key={`txt-${index}`} className="rounded-[20px] border border-border bg-white p-3">
+                      <div key={`txt-${index}`} className="rounded-[20px] border border-border bg-card p-3">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             <p className="text-[11px] font-black uppercase tracking-[0.12em] text-foreground leading-tight truncate">{source.title}</p>

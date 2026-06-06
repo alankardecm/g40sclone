@@ -41,7 +41,7 @@ export default function StatusPage() {
   }, []);
 
   const StatusCard = ({ title, status, message }: { title: string; status: string; message: string | null }) => (
-    <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold text-[#143230]">{title}</h3>
         {status === 'ok' ? (
@@ -62,20 +62,20 @@ export default function StatusPage() {
   );
 
   return (
-    <main className="min-h-screen bg-stone-50 text-foreground p-6">
+    <main className="min-h-screen bg-background text-foreground p-6">
       <div className="mx-auto max-w-4xl">
         <header className="mb-8 flex items-center justify-between">
           <div>
-            <Link href="/" className="flex items-center text-sm text-stone-500 hover:text-[#379890] transition-colors">
+            <Link href="/" className="flex items-center text-sm text-muted-foreground hover:text-[#379890] transition-colors">
               <ArrowLeft size={16} className="mr-1" /> Voltar para Home
             </Link>
             <h1 className="mt-2 text-3xl font-black text-[#143230] uppercase">Status do Sistema</h1>
-            <p className="text-stone-500 text-sm">Monitoramento em tempo real das conexões do Hub</p>
+            <p className="text-muted-foreground text-sm">Monitoramento em tempo real das conexões do Hub</p>
           </div>
           <button 
             onClick={fetchStatus}
             disabled={loading}
-            className="flex items-center rounded-full bg-white px-4 py-2 text-sm font-bold border border-stone-200 shadow-sm hover:bg-stone-50 disabled:opacity-50 transition-all"
+            className="flex items-center rounded-full bg-card px-4 py-2 text-sm font-bold border border-border shadow-sm hover:bg-background disabled:opacity-50 transition-all"
           >
             <RefreshCw size={16} className={`mr-2 ${loading ? 'animate-spin' : ''}`} />
             Atualizar
@@ -85,7 +85,7 @@ export default function StatusPage() {
         {loading && !data ? (
           <div className="grid gap-6 md:grid-cols-3">
             {[1, 2, 3].map(i => (
-              <div key={i} className="h-32 rounded-2xl bg-stone-200 animate-pulse" />
+              <div key={i} className="h-32 rounded-2xl bg-muted animate-pulse" />
             ))}
           </div>
         ) : data && (
@@ -96,7 +96,7 @@ export default function StatusPage() {
           </div>
         )}
 
-        <footer className="mt-8 text-center text-xs text-stone-400">
+        <footer className="mt-8 text-center text-xs text-muted-foreground">
           Última verificação: {data ? new Date(data.timestamp).toLocaleString('pt-BR') : '-'}
         </footer>
       </div>

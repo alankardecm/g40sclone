@@ -35,7 +35,7 @@ export async function GET() {
     }
   } else {
     status.services.supabase.status = 'disabled';
-    status.services.supabase.message = 'Supabase nao configurado (modo G4OS local habilitado)';
+    status.services.supabase.message = 'Supabase nao configurado (modo AM OS local habilitado)';
   }
 
   // 2. Test MySQL

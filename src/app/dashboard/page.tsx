@@ -96,36 +96,36 @@ export default function DashboardHub() {
           <motion.section
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-[40px] border border-[#404040]/8 bg-white p-10 shadow-[0_8px_40px_rgba(64,64,64,0.08)]"
+            className="rounded-[40px] border border-[#E6EAF3]/8 bg-card p-10 shadow-[0_8px_40px_rgba(64,64,64,0.08)]"
           >
-            <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.35em] text-gray-400">
-              <span className="px-3 py-1 rounded-full border border-gray-200 bg-gray-50">Workspace</span>
-              <span className="px-3 py-1 rounded-full border border-gray-200 bg-gray-50">Hub</span>
-              <span className="px-3 py-1 rounded-full border border-gray-200 bg-gray-50">Multiusuário</span>
+            <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
+              <span className="px-3 py-1 rounded-full border border-border bg-background">Workspace</span>
+              <span className="px-3 py-1 rounded-full border border-border bg-background">Hub</span>
+              <span className="px-3 py-1 rounded-full border border-border bg-background">Multiusuário</span>
             </div>
 
             <div className="mt-6 grid gap-10 xl:grid-cols-12 items-start">
               <div className="xl:col-span-7 space-y-5">
-                <h1 className="text-4xl lg:text-5xl font-[1000] tracking-[-0.06em] leading-[1] text-[#404040] uppercase">
+                <h1 className="text-4xl lg:text-5xl font-[1000] tracking-[-0.06em] leading-[1] text-[#E6EAF3] uppercase">
                   Selecione sua<br />
-                  <span className="text-[#8DC63F]">área de trabalho</span>
+                  <span className="text-[#3B82F6]">área de trabalho</span>
                 </h1>
-                <p className="max-w-2xl text-base text-gray-500 leading-relaxed">
+                <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
                   Esta página existe para cada usuário entrar no módulo certo e, no futuro,
                   receber apenas os indicadores que forem dele.
                 </p>
               </div>
 
-              <div className="xl:col-span-5 rounded-[32px] border border-gray-200 bg-gray-50 p-6">
+              <div className="xl:col-span-5 rounded-[32px] border border-border bg-background p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Layers3 className="w-5 h-5 text-[#8DC63F]" />
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                  <Layers3 className="w-5 h-5 text-[#3B82F6]" />
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                     Regra da tela
                   </p>
                 </div>
                 <div className="space-y-3">
                   {lanes.map((lane) => (
-                    <div key={lane} className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-500">
+                    <div key={lane} className="rounded-2xl border border-border bg-card px-4 py-3 text-sm text-muted-foreground">
                       {lane}
                     </div>
                   ))}
@@ -142,23 +142,23 @@ export default function DashboardHub() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.06 * index }}
-                className="group rounded-[28px] border border-gray-200 bg-white p-6 shadow-[0_4px_20px_rgba(64,64,64,0.06)] hover:border-[#8DC63F]/40 hover:shadow-[0_8px_30px_rgba(141,198,63,0.12)] transition-all duration-300"
+                className="group rounded-[28px] border border-border bg-card p-6 shadow-[0_4px_20px_rgba(64,64,64,0.06)] hover:border-[#3B82F6]/40 hover:shadow-[0_8px_30px_rgba(141,198,63,0.12)] transition-all duration-300"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#8DC63F]/10 group-hover:bg-[#8DC63F]/20 transition-colors">
-                    <module.icon className="w-5 h-5 text-[#8DC63F]" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3B82F6]/10 group-hover:bg-[#3B82F6]/20 transition-colors">
+                    <module.icon className="w-5 h-5 text-[#3B82F6]" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-300">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
 
-                <h2 className="mt-5 text-lg font-[950] tracking-[-0.03em] uppercase text-[#404040]">{module.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-gray-400">{module.description}</p>
+                <h2 className="mt-5 text-lg font-[950] tracking-[-0.03em] uppercase text-[#E6EAF3]">{module.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{module.description}</p>
 
                 <Link
                   href={module.href}
-                  className="mt-6 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-[#8DC63F] transition-transform group-hover:translate-x-1"
+                  className="mt-6 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-[#3B82F6] transition-transform group-hover:translate-x-1"
                 >
                   Abrir módulo <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -172,33 +172,33 @@ export default function DashboardHub() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="rounded-[34px] border border-gray-200 bg-white p-8 shadow-[0_4px_20px_rgba(64,64,64,0.06)]"
+              className="rounded-[34px] border border-border bg-card p-8 shadow-[0_4px_20px_rgba(64,64,64,0.06)]"
             >
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400">Fluxo</p>
-                  <h3 className="mt-2 text-xl font-[950] tracking-[-0.04em] uppercase text-[#404040]">Como usar a tela</h3>
+                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">Fluxo</p>
+                  <h3 className="mt-2 text-xl font-[950] tracking-[-0.04em] uppercase text-[#E6EAF3]">Como usar a tela</h3>
                 </div>
-                <MonitorSmartphone className="w-6 h-6 text-[#8DC63F]" />
+                <MonitorSmartphone className="w-6 h-6 text-[#3B82F6]" />
               </div>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                <div className="rounded-[24px] border border-gray-200 bg-gray-50 p-5">
+                <div className="rounded-[24px] border border-border bg-background p-5">
                   <div className="flex items-center gap-3">
-                    <LayoutGrid className="w-4 h-4 text-[#8DC63F]" />
-                    <h4 className="text-sm font-black uppercase tracking-[0.2em] text-[#404040]">Escolher módulo</h4>
+                    <LayoutGrid className="w-4 h-4 text-[#3B82F6]" />
+                    <h4 className="text-sm font-black uppercase tracking-[0.2em] text-[#E6EAF3]">Escolher módulo</h4>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     Cada área abre uma função específica do hub. Nada de KPI fixo aqui.
                   </p>
                 </div>
 
-                <div className="rounded-[24px] border border-gray-200 bg-gray-50 p-5">
+                <div className="rounded-[24px] border border-border bg-background p-5">
                   <div className="flex items-center gap-3">
                     <Building2 className="w-4 h-4 text-[#f59e0b]" />
-                    <h4 className="text-sm font-black uppercase tracking-[0.2em] text-[#404040]">Entradas por usuário</h4>
+                    <h4 className="text-sm font-black uppercase tracking-[0.2em] text-[#E6EAF3]">Entradas por usuário</h4>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     A personalização real pode vir depois via perfil, permissão ou regra de negócio.
                   </p>
                 </div>
@@ -209,25 +209,25 @@ export default function DashboardHub() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="rounded-[34px] border border-[#8DC63F]/20 bg-[#8DC63F]/5 p-8"
+              className="rounded-[34px] border border-[#3B82F6]/20 bg-[#3B82F6]/5 p-8"
             >
               <div className="flex items-center gap-3">
-                <Bot className="w-5 h-5 text-[#8DC63F]" />
-                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400">
+                <Bot className="w-5 h-5 text-[#3B82F6]" />
+                <p className="text-[10px] font-black uppercase tracking-[0.35em] text-muted-foreground">
                   Próxima evolução
                 </p>
               </div>
 
               <div className="mt-6 space-y-4">
-                <div className="rounded-[22px] border border-[#8DC63F]/15 bg-white p-5">
-                  <p className="text-sm leading-relaxed text-gray-500">
+                <div className="rounded-[22px] border border-[#3B82F6]/15 bg-card p-5">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     Quando quiser, a tela pode virar apenas um launcher ou ser substituída por visões
                     individuais de usuário.
                   </p>
                 </div>
 
-                <div className="rounded-[22px] border border-[#8DC63F]/15 bg-white p-5">
-                  <p className="text-sm leading-relaxed text-gray-500">
+                <div className="rounded-[22px] border border-[#3B82F6]/15 bg-card p-5">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     O importante agora é evitar um dashboard que sugere um indicador único para todo mundo.
                   </p>
                 </div>

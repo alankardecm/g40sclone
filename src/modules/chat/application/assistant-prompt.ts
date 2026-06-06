@@ -10,7 +10,7 @@ type AssistantPromptInput = {
 };
 
 export function buildAssistantSystemPrompt(input: AssistantPromptInput) {
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
   return `Voce e o Assistente Interno do ${appName} (Motor: ${input.engineLabel}).
 Voce e um assistente de uso geral para colaboradores internos — funciona como um GPT corporativo.
 Responda somente com um JSON valido no formato descrito abaixo.

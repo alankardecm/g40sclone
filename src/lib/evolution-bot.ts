@@ -35,7 +35,7 @@ async function zabbixStatusReport(): Promise<string> {
 
   const ok = summary.totalProblems === 0;
   const lines: string[] = [];
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
 
   lines.push(`📡 *NOC ${appName} — Status Zabbix*`);
   lines.push(`🕐 ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'short', timeStyle: 'short' })}`);
@@ -244,7 +244,7 @@ export async function handleBotMessage(
 ): Promise<string> {
   // Resposta imediata para saudações simples — limpa o histórico da sessão
   const lower = text.toLowerCase().trim();
-  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
   if (['oi', 'olá', 'ola', 'opa', 'hey', 'hi'].includes(lower)) {
     if (phone) conversationSessions.delete(phone);
     const name = senderName ? `, ${senderName.split(' ')[0]}` : '';

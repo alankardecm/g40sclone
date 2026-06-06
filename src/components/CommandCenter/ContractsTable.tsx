@@ -79,13 +79,13 @@ export default function ContractsTable() {
       <div className="flex items-center justify-between mb-10">
         <div className="flex flex-col gap-1">
           <h2 className="text-2xl font-black tracking-tighter text-foreground uppercase">Base Operacional</h2>
-          <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">Contratos Recentes (Real-time)</span>
+          <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Contratos Recentes (Real-time)</span>
         </div>
         <div className="flex items-center gap-4">
-          <div className="bg-background/50 border border-white/5 rounded-2xl px-6 py-3 text-[10px] font-black uppercase text-stone-500 flex items-center gap-2 cursor-pointer hover:bg-white/5 transition-all">
+          <div className="bg-background/50 border border-white/5 rounded-2xl px-6 py-3 text-[10px] font-black uppercase text-muted-foreground flex items-center gap-2 cursor-pointer hover:bg-card/5 transition-all">
             <Filter className="w-3.5 h-3.5" /> Filtrar
           </div>
-          <div className="bg-background/50 border border-white/5 rounded-2xl px-6 py-3 text-[10px] font-black uppercase text-stone-500 flex items-center gap-2 cursor-pointer hover:bg-white/5 transition-all">
+          <div className="bg-background/50 border border-white/5 rounded-2xl px-6 py-3 text-[10px] font-black uppercase text-muted-foreground flex items-center gap-2 cursor-pointer hover:bg-card/5 transition-all">
             Ver Todos <ChevronRight className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function ContractsTable() {
       <div className="overflow-x-auto flex-1 custom-scrollbar">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-[9px] font-black uppercase tracking-[0.3em] text-stone-600 border-b border-white/5">
+            <tr className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground border-b border-white/5">
               <th className="pb-6 pr-4">Cliente / Contrato</th>
               <th className="pb-6 pr-4">Cargo / Plano</th>
               <th className="pb-6 pr-4">Status</th>
@@ -105,24 +105,24 @@ export default function ContractsTable() {
             {loading ? (
               [1, 2, 3, 4, 5].map((i) => (
                 <tr key={i} className="animate-pulse">
-                  <td colSpan={4} className="py-6 h-12 bg-white/5 rounded-[20px] mb-2" />
+                  <td colSpan={4} className="py-6 h-12 bg-card/5 rounded-[20px] mb-2" />
                 </tr>
               ))
             ) : (
               data.map((c, i) => {
                 const situacaoKey = c.situacao || 'Ativo';
                 return (
-                  <tr key={i} className="group hover:bg-white/[0.01] transition-all cursor-pointer">
+                  <tr key={i} className="group hover:bg-card/[0.01] transition-all cursor-pointer">
                     <td className="py-7 pr-4">
                       <div className="flex flex-col">
                         <span className="text-sm font-black text-foreground group-hover:text-neon-cyan transition-colors line-clamp-1">{c.cliente}</span>
-                        <span className="text-[10px] font-bold text-stone-600 uppercase tracking-tighter mt-1">ID: #482{i}</span>
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter mt-1">ID: #482{i}</span>
                       </div>
                     </td>
                     <td className="py-7 pr-4">
                       <div className="flex flex-col">
-                        <span className="text-xs font-semibold text-stone-400">{c.bairro || 'Unidades'}</span>
-                        <span className="text-[10px] font-black text-stone-700 uppercase tracking-widest mt-1">{c.cidade_do_cliente}</span>
+                        <span className="text-xs font-semibold text-muted-foreground">{c.bairro || 'Unidades'}</span>
+                        <span className="text-[10px] font-black text-foreground uppercase tracking-widest mt-1">{c.cidade_do_cliente}</span>
                       </div>
                     </td>
                     <td className="py-7 pr-4">

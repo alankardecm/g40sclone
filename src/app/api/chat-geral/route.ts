@@ -3,7 +3,7 @@ import { buildRagContext } from '@/lib/rag';
 
 export const runtime = 'nodejs';
 
-const appName = process.env.NEXT_PUBLIC_APP_NAME || 'G4OS';
+const appName = process.env.NEXT_PUBLIC_APP_NAME || 'AM OS';
 
 const SYSTEM_GERAL = `Você é o assistente interno do ${appName} — um GPT corporativo para uso exclusivo dos colaboradores.
 
